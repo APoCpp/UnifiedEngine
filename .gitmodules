@@ -1,0 +1,9 @@
+[submodule "vendor/osl"]
+	path = vendor/osl
+	url = https://github.com/beryll1um/osl
+[submodule "vendor/glfw"]
+	path = vendor/glfw
+	url = https://github.com/glfw/glfw
+[submodule "vendor/fmt"]
+	path = vendor/fmt
+	url = https://github.com/fmtlib/fmt
