@@ -7,7 +7,7 @@ class Example : public Application
 public:
 
     bool OnUpdate() override {
-        return false;
+        return poll_events();
     }
 
 };
