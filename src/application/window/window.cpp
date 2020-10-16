@@ -1,6 +1,6 @@
 #include <unified/application/window/window.hpp>
 
-#include <unified/core/runtime/exceptions.hpp>
+#include <unified/core/exceptions.hpp>
 #include <GLFW/glfw3.h>
 
 struct Unified::Window::glfw_wrapper {
