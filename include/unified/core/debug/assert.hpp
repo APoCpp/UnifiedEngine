@@ -5,7 +5,10 @@
 
 namespace Unified
 {
-    void assert_fail(const char *file, u64 line, const char* message);
+    void assert_failed(const char *file, u64 line, const char* message);
 }
+
+#define ASSERT_FAILED(condition, content) \
+    ((condition) ? (void)0 : Unified::assert_failed(__FILE__, __LINE__, content)))
 
 #endif
