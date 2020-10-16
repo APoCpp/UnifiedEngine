@@ -3,7 +3,7 @@
 #include <cstdio>
 #include <exception>
 
-void Unified::assert_fail(const char *file, u64 line, const char* message) {
+void Unified::assert_failed(const char *file, u64 line, const char* message) {
     std::fprintf(stderr, "%s:%llu: assertion failed:\n\t%s\n\t", file, line, message);
     std::terminate();
 }

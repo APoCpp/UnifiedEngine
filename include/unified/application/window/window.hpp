@@ -1,4 +1,5 @@
 #include <unified/core/string.hpp>
+#include <unified/core/size2.hpp>
 
 #ifndef UNIFIED_WINDOW_HPP
 #define UNIFIED_WINDOW_HPP
@@ -31,6 +32,12 @@ namespace Unified
         Window(string title, VideoMode mode, u32 style);
         
         bool poll_events();
+
+        Size2i get_size() const;
+        void set_size(Size2i size);
+
+        Point2i get_position() const;
+        void set_position(Point2i point);
 
     private:
 

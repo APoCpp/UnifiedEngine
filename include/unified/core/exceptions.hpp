@@ -22,7 +22,7 @@ namespace Unified
     };
 }
 
-#define URE_INITIALIZATION_FAILED(content) \
+#define EXCEPTION_INITIALIZATION_FAILED(content) \
     Unified::initialization_failed(content)
 
 #endif
