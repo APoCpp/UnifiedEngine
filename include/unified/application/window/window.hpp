@@ -1,8 +1,8 @@
 #include <unified/core/string.hpp>
-#include <unified/core/size2.hpp>
+#include <unified/core/math/vector2.hpp>
 
-#ifndef UNIFIED_WINDOW_HPP
-#define UNIFIED_WINDOW_HPP
+#ifndef UNIFIED_PLATFORM_WINDOW_HPP
+#define UNIFIED_PLATFORM_WINDOW_HPP
 
 namespace Unified
 {
@@ -31,20 +31,24 @@ namespace Unified
 
         Window(string title, VideoMode mode, u32 style);
         
-        bool poll_events();
+        bool poll_events() _OSL_NOEXCEPT;
 
-        Size2i get_size() const;
-        void set_size(Size2i size);
+        _OSL_NODISCARD Vector2i get_size() const _OSL_NOEXCEPT;
+        void set_size(Vector2i size) _OSL_NOEXCEPT;
 
-        Point2i get_position() const;
-        void set_position(Point2i point);
+        _OSL_NODISCARD Vector2i get_position() const _OSL_NOEXCEPT;
+        void set_position(Vector2i point) _OSL_NOEXCEPT;
 
-    private:
+        _OSL_NODISCARD bool get_vsync() const _OSL_NOEXCEPT;
+        void set_vsync(bool enabled) _OSL_NOEXCEPT;
+
+    protected:
 
         string _title;
         glfw_wrapper *_window;
         
         VideoMode _mode;
+        bool _vsync;
 
     };
 };

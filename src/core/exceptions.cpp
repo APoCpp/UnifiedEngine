@@ -13,6 +13,6 @@ Unified::initialization_failed::~initialization_failed() {
     delete _target;
 }
 
-const char *Unified::initialization_failed::what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW {
+const char *Unified::initialization_failed::what() const _OSL_NOEXCEPT {
     return _target->c_str();
 }

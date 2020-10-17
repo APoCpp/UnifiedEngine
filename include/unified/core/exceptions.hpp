@@ -1,3 +1,4 @@
+#include <defines.hpp>
 #include <exception>
 #include <iosfwd>
 
@@ -13,7 +14,7 @@ namespace Unified
         initialization_failed(const char *target);
         virtual ~initialization_failed();
 
-        virtual const char *what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW;
+        virtual const char *what() const _OSL_NOEXCEPT;
 
     protected:
 

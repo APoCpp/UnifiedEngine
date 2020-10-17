@@ -4,8 +4,6 @@ project(unified VERSION 0.0.1)
 
 message("Building the UnifiedEngine version ${PROJECT_VERSION}")
 
-set(CMAKE_CXX_STANDARD 17)
-
 set(UNIFIED_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
 set(UNIFIED_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set(UNIFIED_VENDOR_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vendor")
@@ -17,6 +15,7 @@ file(GLOB_RECURSE UNIFIED_INCLUDE_FILES "${UNIFIED_INCLUDE_DIR}/*.hpp")
 
 add_library(${PROJECT_NAME} STATIC ${UNIFIED_SRC_FILES})
 target_include_directories(${PROJECT_NAME} PUBLIC "${UNIFIED_INCLUDE_DIR}/")
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
 # Setting of special macro definitions
 target_compile_definitions(${PROJECT_NAME} INTERFACE "UNIFIED_LIBRARY")
