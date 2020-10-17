@@ -11,8 +11,8 @@ class Example : public Application
 {
 public:
 
-    bool OnUpdate() override {
-        return false;
+    virtual bool OnUpdate(Time elapsed) override {
+        return poll_events();
     }
 
 };

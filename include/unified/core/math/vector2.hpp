@@ -1,0 +1,118 @@
+#include <unified/core/math/vector_fwd.hpp>
+
+#ifndef UNIFIED_CORE_VECTOR2_HPP
+#define UNIFIED_CORE_VECTOR2_HPP
+
+namespace Unified
+{
+    template <class _type>
+    struct Vector<_type, 2> 
+    {
+        _type x, y;
+
+        Vector() : x(_type()), y(_type()) { }
+        Vector(_type xy) : x(xy), y(xy) { }
+        Vector(_type x, _type y) : x(x), y(y) { }
+
+        _type operator[](u32 i) const _OSL_NOEXCEPT {
+            _OSL_CONSTEXPR _type Vector::*accessors[] = {
+                &Vector::x,
+                &Vector::y
+            }; return this->*accessors[i];
+        }
+
+        _type &operator[](u32 i) _OSL_NOEXCEPT {
+            _OSL_CONSTEXPR _type Vector::*accessors[] = {
+                &Vector::x,
+                &Vector::y
+            }; return this->*accessors[i];
+        }
+
+        _OSL_CONSTEXPR Vector operator+(const _type &r) const _OSL_NOEXCEPT {
+            return Vector(x + r, y + r);
+        }
+
+        _OSL_CONSTEXPR Vector operator+(const Vector &r) const _OSL_NOEXCEPT {
+            return Vector(x + r.x, y + r.y);
+        }
+
+        _OSL_CONSTEXPR Vector operator-(const _type &r) const _OSL_NOEXCEPT {
+            return Vector(x - r, y - r);
+        }
+
+        _OSL_CONSTEXPR Vector operator-(const Vector &r) const _OSL_NOEXCEPT {
+            return Vector(x - r.x, y - r.y);
+        }
+
+        _OSL_CONSTEXPR Vector operator*(const _type &r) const _OSL_NOEXCEPT {
+            return Vector(x * r, y * r);
+        }
+
+        _OSL_CONSTEXPR Vector operator*(const Vector &r) const _OSL_NOEXCEPT {
+            return Vector(x * r.x, y * r.y);
+        }
+
+        _OSL_CONSTEXPR Vector operator/(const _type &r) const _OSL_NOEXCEPT {
+            return Vector(x / r, y / r);
+        }
+
+        _OSL_CONSTEXPR Vector operator/(const Vector &r) const _OSL_NOEXCEPT {
+            return Vector(x / r.x, y / r.y);
+        }
+
+        _OSL_CONSTEXPR Vector &operator+=(const _type &r) _OSL_NOEXCEPT {
+            x += r, y += r;
+            return *this;
+        }
+
+        _OSL_CONSTEXPR Vector &operator+=(const Vector &r) _OSL_NOEXCEPT {
+            x += r.x, y += r.y;
+            return *this;
+        }
+
+        _OSL_CONSTEXPR Vector &operator-=(const _type &r) _OSL_NOEXCEPT {
+            x -= r, y -= r;
+            return *this;
+        }
+
+        _OSL_CONSTEXPR Vector &operator-=(const Vector &r) _OSL_NOEXCEPT {
+            x -= r.x, y -= r.y;
+            return *this;
+        }
+
+        _OSL_CONSTEXPR Vector &operator*=(const _type &r) _OSL_NOEXCEPT {
+            x *= r, y *= r;
+            return *this;
+        }
+
+        _OSL_CONSTEXPR Vector &operator*=(const Vector &r) _OSL_NOEXCEPT {
+            x *= r.x, y *= r.y;
+            return *this;
+        }
+
+        _OSL_CONSTEXPR Vector &operator/=(const _type &r) _OSL_NOEXCEPT {
+            x /= r, y /= r;
+            return *this;
+        }
+
+        _OSL_CONSTEXPR Vector &operator/=(const Vector &r) _OSL_NOEXCEPT {
+            x /= r.x, y /= r.y;
+            return *this;
+        }
+
+        _OSL_CONSTEXPR float length() const _OSL_NOEXCEPT {
+            return (x * x + y * y);
+        }
+
+        _OSL_CONSTEXPR u32 size() const _OSL_NOEXCEPT {
+            return 2;
+        }
+    };
+    
+    typedef Vector<unsigned, 2> Vector2u;
+    typedef Vector<int,      2> Vector2i;
+    typedef Vector<float,    2> Vector2f;
+    typedef Vector<double,   2> Vector2d;
+}
+
+#endif
