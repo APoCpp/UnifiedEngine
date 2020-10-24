@@ -1,53 +1,55 @@
-#include <inttypes.hpp>
-#include <defines.hpp>
+#include <unified/defines.hpp>
 
 #ifndef UNIFIED_CORE_TIME_HPP
 #define UNIFIED_CORE_TIME_HPP
 
-namespace Unified
-{   
-    class Time
-    {
-    public:
+#include <inttypes.hpp>
+#include <defines.hpp>
 
-        Time() _OSL_NOEXCEPT;
-        explicit Time(u64 microseconds) _OSL_NOEXCEPT;
+UNIFIED_BEGIN_NAMESPACE
 
-        _OSL_NODISCARD double asSeconds() const;
-        _OSL_NODISCARD u32 asMilliseconds() const;
-        _OSL_NODISCARD u64 asMicroseconds() const _OSL_NOEXCEPT;
+class Time
+{
+public:
 
-        _OSL_NODISCARD bool operator==(Time const &object) const _OSL_NOEXCEPT;
-        _OSL_NODISCARD bool operator!=(Time const &object) const _OSL_NOEXCEPT;
+    Time() _OSL_NOEXCEPT;
+    explicit Time(u64 microseconds) _OSL_NOEXCEPT;
 
-        _OSL_NODISCARD bool operator>(Time const &object) _OSL_NOEXCEPT;
-        _OSL_NODISCARD bool operator<(Time const &object) _OSL_NOEXCEPT;
+    _OSL_NODISCARD double asSeconds() const;
+    _OSL_NODISCARD u32 asMilliseconds() const;
+    _OSL_NODISCARD u64 asMicroseconds() const _OSL_NOEXCEPT;
 
-        _OSL_NODISCARD bool operator>=(Time const &object) _OSL_NOEXCEPT;
-        _OSL_NODISCARD bool operator<=(Time const &object) _OSL_NOEXCEPT;
+    _OSL_NODISCARD bool operator==(Time const &object) const _OSL_NOEXCEPT;
+    _OSL_NODISCARD bool operator!=(Time const &object) const _OSL_NOEXCEPT;
 
-        _OSL_NODISCARD Time operator+(Time const &object) _OSL_NOEXCEPT;
-        Time operator+=(Time const &object) _OSL_NOEXCEPT;
+    _OSL_NODISCARD bool operator>(Time const &object) _OSL_NOEXCEPT;
+    _OSL_NODISCARD bool operator<(Time const &object) _OSL_NOEXCEPT;
 
-        _OSL_NODISCARD Time operator-(Time const &object) _OSL_NOEXCEPT;
-        Time operator-=(Time const &object) _OSL_NOEXCEPT;
+    _OSL_NODISCARD bool operator>=(Time const &object) _OSL_NOEXCEPT;
+    _OSL_NODISCARD bool operator<=(Time const &object) _OSL_NOEXCEPT;
 
-        _OSL_NODISCARD Time operator*(Time const &object) _OSL_NOEXCEPT;
-        Time operator*=(Time const &object) _OSL_NOEXCEPT;
+    _OSL_NODISCARD Time operator+(Time const &object) _OSL_NOEXCEPT;
+    Time operator+=(Time const &object) _OSL_NOEXCEPT;
 
-        _OSL_NODISCARD Time operator/(Time const &object) _OSL_NOEXCEPT;
-        Time operator/=(Time const &object) _OSL_NOEXCEPT;
+    _OSL_NODISCARD Time operator-(Time const &object) _OSL_NOEXCEPT;
+    Time operator-=(Time const &object) _OSL_NOEXCEPT;
 
-    protected:
+    _OSL_NODISCARD Time operator*(Time const &object) _OSL_NOEXCEPT;
+    Time operator*=(Time const &object) _OSL_NOEXCEPT;
 
-        u64 _microseconds;
+    _OSL_NODISCARD Time operator/(Time const &object) _OSL_NOEXCEPT;
+    Time operator/=(Time const &object) _OSL_NOEXCEPT;
 
-    };
+protected:
 
-    _OSL_NODISCARD Time seconds(double count);
-    _OSL_NODISCARD Time milliseconds(u32 count);
-    _OSL_NODISCARD Time microseconds(u64 count) _OSL_NOEXCEPT;
+    u64 _microseconds;
 
-}
+};
+
+_OSL_NODISCARD Time seconds(double count);
+_OSL_NODISCARD Time milliseconds(u32 count);
+_OSL_NODISCARD Time microseconds(u64 count) _OSL_NOEXCEPT;
+
+UNIFIED_END_NAMESPACE
 
 #endif

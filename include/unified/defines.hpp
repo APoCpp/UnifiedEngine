@@ -1,0 +1,7 @@
+#ifndef UNIFIED_DEFINES_HPP
+#define UNIFIED_DEFINES_HPP
+
+#define UNIFIED_BEGIN_NAMESPACE namespace Unified {
+#define UNIFIED_END_NAMESPACE }
+
+#endif

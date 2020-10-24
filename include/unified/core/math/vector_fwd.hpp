@@ -1,7 +1,7 @@
 #include <inttypes.hpp>
 
-#ifndef UNIFIED_CORE_VECTOR_FWD_HPP
-#define UNIFIED_CORE_VECTOR_FWD_HPP
+#ifndef UNIFIED_CORE_MATH_VECTOR_FWD_HPP
+#define UNIFIED_CORE_MATH_VECTOR_FWD_HPP
 
 namespace Unified
 {
