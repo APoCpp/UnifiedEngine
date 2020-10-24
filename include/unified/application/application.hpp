@@ -1,8 +1,7 @@
-#include <unified/defines.hpp>
-
 #ifndef UNIFIED_APPLICATION_HPP
 #define UNIFIED_APPLICATION_HPP
 
+#include <unified/defines.hpp>
 #include <unified/application/window/window.hpp>
 #include <unified/core/clock.hpp>
 

@@ -1,8 +1,9 @@
-#include <unified/defines.hpp>
-
 #ifndef UNIFIED_APPLICATION_WINDOW_HPP
 #define UNIFIED_APPLICATION_WINDOW_HPP
 
+#include <unified/defines.hpp>
+
+#include <unified/application/event/window_maximize.hpp>
 #include <unified/application/event/window_resize.hpp>
 #include <unified/application/event/window_close.hpp>
 #include <unified/application/event/window_focus.hpp>

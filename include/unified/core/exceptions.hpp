@@ -1,8 +1,7 @@
-#include <unified/defines.hpp>
-
 #ifndef UNIFIED_CORE_EXCEPTIONS_HPP
 #define UNIFIED_CORE_EXCEPTIONS_HPP
 
+#include <unified/defines.hpp>
 #include <defines.hpp>
 #include <exception>
 

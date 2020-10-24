@@ -1,7 +1,7 @@
-#include <unified/defines.hpp>
-
 #ifndef UNIFIED_CORE_INPUT_MOUSE_HPP
 #define UNIFIED_CORE_INPUT_MOUSE_HPP
+
+#include <unified/defines.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
 

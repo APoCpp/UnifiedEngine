@@ -1,8 +1,7 @@
-#include <unified/defines.hpp>
-
 #ifndef UNIFIED_CORE_DEBUG_ASSERT_HPP
 #define UNIFIED_CORE_DEBUG_ASSERT_HPP
 
+#include <unified/defines.hpp>
 #include <inttypes.hpp>
 
 UNIFIED_BEGIN_NAMESPACE

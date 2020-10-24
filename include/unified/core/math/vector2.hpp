@@ -1,8 +1,7 @@
-#include <unified/defines.hpp>
-
 #ifndef UNIFIED_CORE_MATH_VECTOR2_HPP
 #define UNIFIED_CORE_MATH_VECTOR2_HPP
 
+#include <unified/defines.hpp>
 #include <unified/core/math/vector_fwd.hpp>
 #include <defines.hpp>
 

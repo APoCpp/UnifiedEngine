@@ -1,8 +1,7 @@
-#include <unified/defines.hpp>
-
 #ifndef UNIFIED_APPLICATION_EVENT_WINDOW_MOVE_HPP
 #define UNIFIED_APPLICATION_EVENT_WINDOW_MOVE_HPP
 
+#include <unified/defines.hpp>
 #include <unified/application/event/event.hpp>
 #include <unified/core/math/vector2.hpp>
 

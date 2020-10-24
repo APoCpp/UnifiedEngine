@@ -7,8 +7,8 @@ class Example : public Application
 {
 public:
 
-    void window_resize_event(WindowResizeEvent& event) {
-        printf("horizontal: %i, vertical: %i\n", event.size.x, event.size.y);
+    void window_maximize_event(WindowMaximizeEvent& event) {
+        printf("%i\n", event.maximized);
     }
 
 public:
@@ -26,7 +26,7 @@ public:
     }
 
     virtual void OnEvent(EventDispatcher &dispatcher) override {
-        dispatcher.dispatch<WindowResizeEvent>(BIND_EVENT_FN(&Example::window_resize_event, this));
+        dispatcher.dispatch<WindowMaximizeEvent>(BIND_EVENT_FN(&Example::window_maximize_event, this));
     }
 
 };
