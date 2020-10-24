@@ -1,8 +1,7 @@
-#include <unified/defines.hpp>
-
 #ifndef UNIFIED_CORE_TIME_HPP
 #define UNIFIED_CORE_TIME_HPP
 
+#include <unified/defines.hpp>
 #include <inttypes.hpp>
 #include <defines.hpp>
 

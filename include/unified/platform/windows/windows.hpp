@@ -1,7 +1,7 @@
-#include <unified/application/application.hpp>
-
 #ifndef UNIFIED_PLATFORM_WINDOWS_HPP
 #define UNIFIED_PLATFORM_WINDOWS_HPP
+
+#include <unified/application/application.hpp>
 
 # if defined(_RELEASE_)
 #  if defined(WINAPI)

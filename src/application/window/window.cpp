@@ -69,7 +69,14 @@ Window::Window(string title, VideoMode mode, u32 style) : _title(title), _window
         MousePressEvent mouse_press_event(button, action);
         EventDispatcher event(mouse_press_event);
         dispatch_function(event);
-    });   
+    });
+
+    glfwSetWindowMaximizeCallback(_window->glfw_handle, [](GLFWwindow *window, int maximized) -> void {
+        event_callback_fn &dispatch_function = *reinterpret_cast<event_callback_fn*>(glfwGetWindowUserPointer(window));
+        WindowMaximizeEvent window_maximize_event(maximized);
+        EventDispatcher event(window_maximize_event);
+        dispatch_function(event);
+    });
 }
 
 bool Window::poll_events() _OSL_NOEXCEPT {

@@ -1,7 +1,7 @@
-#include <unified/application/application.hpp>
-
 #ifndef UNIFIED_PLATFORM_LINUX_HPP
 #define UNIFIED_PLATFORM_LINUX_HPP
+
+#include <unified/application/application.hpp>
 
 int main() {
     Unified::Application *application = Unified::CreateApplication();

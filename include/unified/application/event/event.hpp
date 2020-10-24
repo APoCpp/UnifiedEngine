@@ -1,8 +1,8 @@
 #include <unified/defines.hpp>
-
 #ifndef UNIFIED_APPLICATION_EVENT_HPP
 #define UNIFIED_APPLICATION_EVENT_HPP
 
+#include <unified/defines.hpp>
 #include <unified/core/string.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
@@ -13,6 +13,7 @@ public:
 
     enum class Type
     {
+        WindowMaximize,
         WindowResize,
         WindowFocus,
         WindowClose,

@@ -1,8 +1,7 @@
-#include <unified/defines.hpp>
-
 #ifndef UNIFIED_APPLICATION_EVENT_WINDOW_CLOSE_HPP
 #define UNIFIED_APPLICATION_EVENT_WINDOW_CLOSE_HPP
 
+#include <unified/defines.hpp>
 #include <unified/application/event/event.hpp>
 
 UNIFIED_BEGIN_NAMESPACE

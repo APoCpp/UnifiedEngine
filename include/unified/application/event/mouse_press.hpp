@@ -1,8 +1,7 @@
-#include <unified/defines.hpp>
-
 #ifndef UNIFIED_APPLICATION_EVENT_MOUSE_PRESS_HPP
 #define UNIFIED_APPLICATION_EVENT_MOUSE_PRESS_HPP
 
+#include <unified/defines.hpp>
 #include <unified/application/event/event.hpp>
 #include <unified/core/input/mouse.hpp>
 

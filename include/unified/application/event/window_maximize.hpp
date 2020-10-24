@@ -1,26 +1,25 @@
-#ifndef UNIFIED_APPLICATION_EVENT_CURSOR_MOVE_HPP
-#define UNIFIED_APPLICATION_EVENT_CURSOR_MOVE_HPP
+#ifndef UNIFIED_APPLICATION_EVENT_WINDOW_MAXIMIZE_HPP
+#define UNIFIED_APPLICATION_EVENT_WINDOW_MAXIMIZE_HPP
 
 #include <unified/defines.hpp>
 #include <unified/application/event/event.hpp>
-#include <unified/core/math/vector2.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
 
-class CursorMoveEvent : public Event
+class WindowMaximizeEvent : public Event
 {
 public:
 
-    CursorMoveEvent(double x, double y) _OSL_NOEXCEPT;
+    WindowMaximizeEvent(int maximized) _OSL_NOEXCEPT;
 
     _OSL_NODISCARD virtual string get_name() const;
     _OSL_NODISCARD virtual Type get_type() const;
 
     _OSL_NODISCARD static Type get_type_static() {
-        return Type::CursorMove;
+        return Type::WindowFocus;
     }
 
-    const Vector2d position;
+    const bool maximized;
 
 };
 

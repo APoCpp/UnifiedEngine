@@ -1,8 +1,7 @@
-#include <unified/defines.hpp>
-
 #ifndef UNIFIED_CORE_STRING_HPP
 #define UNIFIED_CORE_STRING_HPP
 
+#include <unified/defines.hpp>
 #include <string.hpp>
 
 UNIFIED_BEGIN_NAMESPACE

@@ -1,10 +1,8 @@
-#include <unified/defines.hpp>
-
 #ifndef UNIFIED_APPLICATION_EVENT_WINDOW_FOCUS_HPP
 #define UNIFIED_APPLICATION_EVENT_WINDOW_FOCUS_HPP
 
+#include <unified/defines.hpp>
 #include <unified/application/event/event.hpp>
-#include <unified/core/input/mouse.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
 
