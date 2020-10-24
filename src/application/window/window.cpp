@@ -6,7 +6,7 @@ struct Unified::Window::glfw_wrapper {
     GLFWwindow *glfw_handle;
 };
 
-Unified::Window::Window(string title, VideoMode mode, u32 style) : _title(title), _mode(mode), _window(new glfw_wrapper) {
+Unified::Window::Window(string title, VideoMode mode, u32 style) : _title(title), _window(new glfw_wrapper), _mode(mode), _vsync(false) {
     if (!glfwInit()) {
         throw EXCEPTION_INITIALIZATION_FAILED("GLFW");
     }
@@ -14,11 +14,16 @@ Unified::Window::Window(string title, VideoMode mode, u32 style) : _title(title)
     glfwWindowHint(GLFW_RESIZABLE, (style & Style::Resizable) == Style::Resizable);
     glfwWindowHint(GLFW_MAXIMIZED, (style & Style::Maximized) == Style::Maximized);
     glfwWindowHint(GLFW_FLOATING,  (style & Style::Floating)  == Style::Floating);
-    
-    set_vsync(false);
 
     _window->glfw_handle = glfwCreateWindow(mode.width, mode.height, title.c_str(), nullptr, nullptr);
-    glfwMakeContextCurrent(_window->glfw_handle);   
+    glfwMakeContextCurrent(_window->glfw_handle);
+
+    glfwSetWindowUserPointer(_window->glfw_handle, &_event_callback);
+    glfwSetWindowCloseCallback(_window->glfw_handle, [](GLFWwindow *window) -> void {
+        event_callback_fn& dispatch_function = *reinterpret_cast<event_callback_fn*>(glfwGetWindowUserPointer(window));
+        WindowCloseEvent event;
+        dispatch_function(event);
+    });
 }
 
 bool Unified::Window::poll_events() _OSL_NOEXCEPT {
@@ -37,7 +42,7 @@ void Unified::Window::set_size(Vector2i size) _OSL_NOEXCEPT {
 
 _OSL_NODISCARD Unified::Vector2i Unified::Window::get_position() const _OSL_NOEXCEPT {
     Vector2i point;
-    glfwGetWindowPos(_window->glfw_handle, (int*)&point.x, (int*)&point.y);
+    glfwGetWindowPos(_window->glfw_handle, &point.x, &point.y);
     return point;
 }
 
@@ -51,4 +56,8 @@ _OSL_NODISCARD bool Unified::Window::get_vsync() const _OSL_NOEXCEPT {
 
 void Unified::Window::set_vsync(bool enabled) _OSL_NOEXCEPT {
     glfwSwapInterval(_vsync = enabled);
+}
+
+void Unified::Window::set_event_callback(const event_callback_fn &callback) {
+    _event_callback = callback;
 }

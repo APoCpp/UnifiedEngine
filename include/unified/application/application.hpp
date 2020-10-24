@@ -1,39 +1,44 @@
-#include <unified/application/window/window.hpp>
-#include <unified/core/clock.hpp>
+#include <unified/defines.hpp>
 
 #ifndef UNIFIED_APPLICATION_HPP
 #define UNIFIED_APPLICATION_HPP
 
-namespace Unified
+#include <unified/application/window/window.hpp>
+#include <unified/core/clock.hpp>
+
+UNIFIED_BEGIN_NAMESPACE
+
+class Application : public Window
 {
-    class Application : public Window
-    {
-    public:
+public:
 
-        Application(string title = "Unified", VideoMode mode = VideoMode(800, 600), u32 style = Window::Floating);
-        virtual ~Application();
+    Application(string title = "Unified", VideoMode mode = VideoMode(800, 600), u32 style = Window::Floating);
+    virtual ~Application();
 
-        _OSL_NODISCARD u32 get_frame_limit() const _OSL_NOEXCEPT;
-        void set_frame_limit(u32 limit) _OSL_NOEXCEPT;
+    _OSL_NODISCARD u32 get_frame_limit() const _OSL_NOEXCEPT;
+    void set_frame_limit(u32 limit) _OSL_NOEXCEPT;
 
-        void run();
+    void run();
 
-    protected:
+protected:
 
-        virtual void OnCreate();
-        virtual bool OnUpdate(Time elapsed) = 0; // @note: elapsed in seconds
-        virtual void OnClose();
+    virtual void OnCreate();
+    virtual bool OnUpdate(Time elapsed) = 0;
+    virtual void OnClose();
+    
+    virtual void OnEvent(Event &event);
 
-    protected:
+protected:
 
-        Clock _frame_clock;
+    u32 _frame_limit;
 
-        u32 _frame_limit;
-        Time _frame_duration;        
+    Clock _frame_clock;
+    Time _frame_duration;
 
-    };
+};
 
-    Application *CreateApplication();
-}
+Application *CreateApplication();
+
+UNIFIED_END_NAMESPACE
 
 #endif

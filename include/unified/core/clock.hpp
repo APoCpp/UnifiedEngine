@@ -1,25 +1,27 @@
-#include <unified/core/time.hpp>
-#include <defines.hpp>
+#include <unified/defines.hpp>
 
 #ifndef UNIFIED_CORE_CLOCK_HPP
 #define UNIFIED_CORE_CLOCK_HPP
 
-namespace Unified
+#include <unified/core/time.hpp>
+
+UNIFIED_BEGIN_NAMESPACE
+
+class Clock
 {
-    class Clock
-    {
-    public:
+public:
 
-        Clock();
+    Clock();
 
-        Time get_elapsed_time() const _OSL_NOEXCEPT;
-        Time restart() _OSL_NOEXCEPT;
+    Time get_elapsed_time() const _OSL_NOEXCEPT;
+    Time restart() _OSL_NOEXCEPT;
 
-    protected:
+protected:
 
-        Time _timestamp;
+    Time _timestamp;
 
-    };
-}
+};
+
+UNIFIED_END_NAMESPACE
 
 #endif
