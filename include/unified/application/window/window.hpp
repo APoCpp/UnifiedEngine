@@ -3,7 +3,12 @@
 #ifndef UNIFIED_APPLICATION_WINDOW_HPP
 #define UNIFIED_APPLICATION_WINDOW_HPP
 
+#include <unified/application/event/window_resize.hpp>
 #include <unified/application/event/window_close.hpp>
+#include <unified/application/event/window_focus.hpp>
+#include <unified/application/event/mouse_press.hpp>
+#include <unified/application/event/window_move.hpp>
+#include <unified/application/event/cursor_move.hpp>
 #include <unified/application/event/key_press.hpp>
 
 #include <unified/core/math/vector2.hpp>

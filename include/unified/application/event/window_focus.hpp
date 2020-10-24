@@ -1,22 +1,27 @@
 #include <unified/defines.hpp>
 
-#ifndef UNIFIED_APPLICATION_EVENT_WINDOW_CLOSE_HPP
-#define UNIFIED_APPLICATION_EVENT_WINDOW_CLOSE_HPP
+#ifndef UNIFIED_APPLICATION_EVENT_WINDOW_FOCUS_HPP
+#define UNIFIED_APPLICATION_EVENT_WINDOW_FOCUS_HPP
 
 #include <unified/application/event/event.hpp>
+#include <unified/core/input/mouse.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
 
-class WindowCloseEvent : public Event
+class WindowFocusEvent : public Event
 {
 public:
+
+    WindowFocusEvent(int focused) _OSL_NOEXCEPT;
 
     _OSL_NODISCARD virtual string get_name() const;
     _OSL_NODISCARD virtual Type get_type() const;
 
     _OSL_NODISCARD static Type get_type_static() {
-        return Type::WindowClose;
+        return Type::WindowFocus;
     }
+
+    const bool focused;
 
 };
 

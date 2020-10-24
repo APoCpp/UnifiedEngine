@@ -2,13 +2,13 @@
 
 UNIFIED_BEGIN_NAMESPACE
 
-KeyPressEvent::KeyPressEvent(int key, int action) : key((Keyboard::Code)key), action((Keyboard::Action)action) { }
+KeyPressEvent::KeyPressEvent(int code, int action) _OSL_NOEXCEPT : code((Keyboard::Code)code), action((Keyboard::Action)action) { }
 
-string KeyPressEvent::get_name() const {
+_OSL_NODISCARD string KeyPressEvent::get_name() const {
     return "KeyPressEvent";
 }
 
-Event::Type KeyPressEvent::get_type() const {
+_OSL_NODISCARD Event::Type KeyPressEvent::get_type() const {
     return Type::KeyPress;
 }
 

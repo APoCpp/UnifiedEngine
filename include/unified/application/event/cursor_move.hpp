@@ -1,22 +1,27 @@
 #include <unified/defines.hpp>
 
-#ifndef UNIFIED_APPLICATION_EVENT_WINDOW_CLOSE_HPP
-#define UNIFIED_APPLICATION_EVENT_WINDOW_CLOSE_HPP
+#ifndef UNIFIED_APPLICATION_EVENT_CURSOR_MOVE_HPP
+#define UNIFIED_APPLICATION_EVENT_CURSOR_MOVE_HPP
 
 #include <unified/application/event/event.hpp>
+#include <unified/core/math/vector2.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
 
-class WindowCloseEvent : public Event
+class CursorMoveEvent : public Event
 {
 public:
+
+    CursorMoveEvent(double x, double y) _OSL_NOEXCEPT;
 
     _OSL_NODISCARD virtual string get_name() const;
     _OSL_NODISCARD virtual Type get_type() const;
 
     _OSL_NODISCARD static Type get_type_static() {
-        return Type::WindowClose;
+        return Type::CursorMove;
     }
+
+    const Vector2d position;
 
 };
 

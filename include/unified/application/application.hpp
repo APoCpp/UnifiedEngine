@@ -14,7 +14,7 @@ class Application : public Window
 {
 public:
 
-    Application(string title = "Unified", VideoMode mode = VideoMode(800, 600), u32 style = Window::Floating);
+    Application(string title = "Unified", VideoMode mode = VideoMode(800, 600), u32 style = Window::Resizable);
     virtual ~Application();
 
     _OSL_NODISCARD u32 get_frame_limit() const _OSL_NOEXCEPT;

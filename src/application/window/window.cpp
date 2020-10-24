@@ -29,12 +29,47 @@ Window::Window(string title, VideoMode mode, u32 style) : _title(title), _window
         dispatch_function(event);
     });
 
-    glfwSetKeyCallback(_window->glfw_handle, [](GLFWwindow *window, int key, int, int action, int)  -> void {
+    glfwSetWindowPosCallback(_window->glfw_handle, [](GLFWwindow *window, int x, int y) -> void {
+        event_callback_fn &dispatch_function = *reinterpret_cast<event_callback_fn*>(glfwGetWindowUserPointer(window));
+        WindowMoveEvent window_move_event(x, y);
+        EventDispatcher event(window_move_event);
+        dispatch_function(event);
+    });
+
+    glfwSetWindowFocusCallback(_window->glfw_handle, [](GLFWwindow *window, int focused) -> void {
+        event_callback_fn &dispatch_function = *reinterpret_cast<event_callback_fn*>(glfwGetWindowUserPointer(window));
+        WindowFocusEvent window_focus_event(focused);
+        EventDispatcher event(window_focus_event);
+        dispatch_function(event);
+    });
+
+    glfwSetWindowSizeCallback(_window->glfw_handle, [](GLFWwindow *window, int horizontal, int vertical) -> void {
+        event_callback_fn &dispatch_function = *reinterpret_cast<event_callback_fn*>(glfwGetWindowUserPointer(window));
+        WindowResizeEvent window_resize_event(horizontal, vertical);
+        EventDispatcher event(window_resize_event);
+        dispatch_function(event);
+    });
+
+    glfwSetKeyCallback(_window->glfw_handle, [](GLFWwindow *window, int key, int, int action, int) -> void {
         event_callback_fn &dispatch_function = *reinterpret_cast<event_callback_fn*>(glfwGetWindowUserPointer(window));
         KeyPressEvent key_press_event(key, action);
         EventDispatcher event(key_press_event);
         dispatch_function(event);
     });
+
+    glfwSetCursorPosCallback(_window->glfw_handle, [](GLFWwindow *window, double x, double y) -> void {
+        event_callback_fn &dispatch_function = *reinterpret_cast<event_callback_fn*>(glfwGetWindowUserPointer(window));
+        CursorMoveEvent cursor_move_event(x, y);
+        EventDispatcher event(cursor_move_event);
+        dispatch_function(event);
+    });
+
+    glfwSetMouseButtonCallback(_window->glfw_handle, [](GLFWwindow *window, int button, int action, int) -> void {
+        event_callback_fn &dispatch_function = *reinterpret_cast<event_callback_fn*>(glfwGetWindowUserPointer(window));
+        MousePressEvent mouse_press_event(button, action);
+        EventDispatcher event(mouse_press_event);
+        dispatch_function(event);
+    });   
 }
 
 bool Window::poll_events() _OSL_NOEXCEPT {

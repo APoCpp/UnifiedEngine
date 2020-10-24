@@ -13,14 +13,19 @@ public:
 
     enum class Type
     {
+        WindowResize,
+        WindowFocus,
         WindowClose,
+        WindowMove,
+        CursorMove,
+        MousePress,
         KeyPress
     };
 
     virtual ~Event() = default;
 
-    virtual string get_name() const = 0;
-    virtual Type get_type() const = 0;
+    _OSL_NODISCARD virtual string get_name() const = 0;
+    _OSL_NODISCARD virtual Type get_type() const = 0;
 
 };
 
