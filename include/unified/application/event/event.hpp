@@ -13,13 +13,36 @@ public:
 
     enum class Type
     {
-        WindowClose
+        WindowClose,
+        KeyPress
     };
 
     virtual ~Event() = default;
 
     virtual string get_name() const = 0;
     virtual Type get_type() const = 0;
+
+};
+
+class EventDispatcher
+{
+public:
+
+    EventDispatcher(Event &event) : _event(event) { }
+    virtual ~EventDispatcher() = default;
+
+    template <class _type, class _function>
+    bool dispatch(const _function &callback) const {
+        if (_event.get_type() == _type::get_type_static()) {
+            callback(static_cast<_type&>(_event));
+            return true;
+        }
+        return false;
+    }
+
+protected:
+
+    Event &_event;
 
 };
 

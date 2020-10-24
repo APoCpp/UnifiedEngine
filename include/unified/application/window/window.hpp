@@ -4,6 +4,8 @@
 #define UNIFIED_APPLICATION_WINDOW_HPP
 
 #include <unified/application/event/window_close.hpp>
+#include <unified/application/event/key_press.hpp>
+
 #include <unified/core/math/vector2.hpp>
 #include <unified/core/string.hpp>
 
@@ -19,7 +21,7 @@ private:
 
 public:
 
-    using event_callback_fn = std::function<void(Event&)>;
+    using event_callback_fn = std::function<void(EventDispatcher&)>;
 
     struct VideoMode
     {
@@ -49,7 +51,7 @@ public:
     _OSL_NODISCARD bool get_vsync() const _OSL_NOEXCEPT;
     void set_vsync(bool enabled) _OSL_NOEXCEPT;
 
-    void set_event_callback(const event_callback_fn &callback);
+    void set_event_callback(const event_callback_fn &callback) _OSL_NOEXCEPT;
 
 protected:
 

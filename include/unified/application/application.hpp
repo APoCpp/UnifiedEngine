@@ -8,6 +8,8 @@
 
 UNIFIED_BEGIN_NAMESPACE
 
+#define BIND_EVENT_FN(method, object) std::bind(method, object, std::placeholders::_1)
+
 class Application : public Window
 {
 public:
@@ -26,7 +28,7 @@ protected:
     virtual bool OnUpdate(Time elapsed) = 0;
     virtual void OnClose();
     
-    virtual void OnEvent(Event &event);
+    virtual void OnEvent(EventDispatcher &event);
 
 protected:
 

@@ -3,8 +3,12 @@
 #include <string>
 #include <fmt/format.h>
 
-Unified::initialization_failed::initialization_failed(const char *target) : _target(target) { }
+UNIFIED_BEGIN_NAMESPACE
 
-const char *Unified::initialization_failed::what() const _OSL_NOEXCEPT {
+initialization_failed::initialization_failed(const char *target) : _target(target) { }
+
+const char *initialization_failed::what() const _OSL_NOEXCEPT {
     return _target;
 }
+
+UNIFIED_END_NAMESPACE

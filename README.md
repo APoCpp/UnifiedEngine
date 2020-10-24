@@ -1,7 +1,7 @@
 # UnifiedEngine
 Simple open source game development kit.
 
-## Example
+## Minimal Example
 ```cpp
 #include <unified.hpp>
 
@@ -11,7 +11,7 @@ class Example : public Application
 {
 public:
 
-    virtual bool OnUpdate(Time elapsed) override {
+    virtual bool OnUpdate(Time) override {
         return poll_events();
     }
 
@@ -21,3 +21,8 @@ Application *Unified::CreateApplication() {
     return new Example();
 }
 ```
+
+## Dependencies
+* [osl](https://github.com/beryll1um/osl)
+* [fmt](https://github.com/fmtlib/fmt)
+* [glfw](https://github.com/glfw/glfw)

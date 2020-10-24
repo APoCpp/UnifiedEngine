@@ -24,7 +24,7 @@ protected:
 };
 
 #define EXCEPTION_INITIALIZATION_FAILED(content) \
-    Unified::initialization_failed(content)
+    initialization_failed(content)
 
 UNIFIED_END_NAMESPACE
 
