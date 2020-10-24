@@ -12,16 +12,16 @@ class KeyPressEvent : public Event
 {
 public:
 
-    explicit KeyPressEvent(int ikey, int iaction);
+    KeyPressEvent(int code, int action) _OSL_NOEXCEPT;
 
-    virtual string get_name() const;
-    virtual Type get_type() const;
+    _OSL_NODISCARD virtual string get_name() const;
+    _OSL_NODISCARD virtual Type get_type() const;
 
-    static Type get_type_static() {
+    _OSL_NODISCARD static Type get_type_static() {
         return Type::KeyPress;
     }
 
-    const Keyboard::Code key;
+    const Keyboard::Code code;
     const Keyboard::Action action;
 
 };

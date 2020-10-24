@@ -7,8 +7,8 @@ class Example : public Application
 {
 public:
 
-    void key_press_event(KeyPressEvent& event) {
-        printf("key: %i, action: %i\n", event.key, event.action);
+    void window_resize_event(WindowResizeEvent& event) {
+        printf("horizontal: %i, vertical: %i\n", event.size.x, event.size.y);
     }
 
 public:
@@ -26,7 +26,7 @@ public:
     }
 
     virtual void OnEvent(EventDispatcher &dispatcher) override {
-        dispatcher.dispatch<KeyPressEvent>(BIND_EVENT_FN(&Example::key_press_event, this));
+        dispatcher.dispatch<WindowResizeEvent>(BIND_EVENT_FN(&Example::window_resize_event, this));
     }
 
 };
