@@ -14,6 +14,10 @@ public:
     virtual string get_name() const;
     virtual Type get_type() const;
 
+    static Type get_type_static() {
+        return Type::WindowClose;
+    }
+
 };
 
 UNIFIED_END_NAMESPACE

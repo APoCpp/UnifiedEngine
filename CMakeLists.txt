@@ -44,5 +44,6 @@ option(UNIFORM_BUILD_TESTS "Build the UnifiedEngine test program" TRUE)
 
 if (UNIFORM_BUILD_TESTS)
  message("Building the UnifiedEngine test program")
- add_subdirectory("${UNIFIED_EXAMPLE_DIR}/")
+ add_subdirectory("${UNIFIED_EXAMPLE_DIR}/events")
+ add_subdirectory("${UNIFIED_EXAMPLE_DIR}/minimal")
 endif ()

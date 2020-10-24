@@ -6,7 +6,7 @@ class Example : public Application
 {
 public:
 
-    virtual bool OnUpdate(Time elapsed) override {
+    virtual bool OnUpdate(Time) override {
         return poll_events();
     }
 

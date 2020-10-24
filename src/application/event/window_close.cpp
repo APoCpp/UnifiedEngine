@@ -1,10 +1,13 @@
 #include <unified/application/event/window_close.hpp>
-#include <typeinfo>
 
-Unified::string Unified::WindowCloseEvent::get_name() const {
+UNIFIED_BEGIN_NAMESPACE
+
+string WindowCloseEvent::get_name() const {
     return "WindowCloseEvent";
 }
 
-Unified::Event::Type Unified::WindowCloseEvent::get_type() const {
+Event::Type WindowCloseEvent::get_type() const {
     return Type::WindowClose;
 }
+
+UNIFIED_END_NAMESPACE

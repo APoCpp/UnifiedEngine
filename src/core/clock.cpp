@@ -1,14 +1,18 @@
 #include <unified/core/clock.hpp>
 #include <GLFW/glfw3.h>
 
-Unified::Clock::Clock() { restart(); }
+UNIFIED_BEGIN_NAMESPACE
 
-Unified::Time Unified::Clock::get_elapsed_time() const _OSL_NOEXCEPT {
+Clock::Clock() { restart(); }
+
+Time Clock::get_elapsed_time() const _OSL_NOEXCEPT {
     Time sec = seconds(glfwGetTime());
     return sec - _timestamp;
 }
 
-Unified::Time Unified::Clock::restart() _OSL_NOEXCEPT {
+Time Clock::restart() _OSL_NOEXCEPT {
     _timestamp = seconds(glfwGetTime());
     return _timestamp;
 }
+
+UNIFIED_END_NAMESPACE

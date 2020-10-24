@@ -2,26 +2,26 @@
 #include <unified/core/system/sleep.hpp>
 #include <GLFW/glfw3.h>
 
-#define BIND_EVENT_FN(method, object) std::bind(method, object, std::placeholders::_1)
+UNIFIED_BEGIN_NAMESPACE
 
-Unified::Application::Application(string title, VideoMode mode, u32 style) : Window(title, mode, style), _frame_limit(0), _frame_clock() {
+Application::Application(string title, VideoMode mode, u32 style) : Window(title, mode, style), _frame_limit(0), _frame_clock() {
     set_event_callback(BIND_EVENT_FN(&Application::OnEvent, this));
 }
 
-Unified::Application::~Application() { }
+Application::~Application() { }
 
-_OSL_NODISCARD u32 Unified::Application::get_frame_limit() const _OSL_NOEXCEPT {
+_OSL_NODISCARD u32 Application::get_frame_limit() const _OSL_NOEXCEPT {
     return _frame_limit;
 }
 
-void Unified::Application::set_frame_limit(u32 limit) _OSL_NOEXCEPT {
+void Application::set_frame_limit(u32 limit) _OSL_NOEXCEPT {
     if (limit != 0) {
         _frame_limit = limit;
         _frame_duration = seconds(1.0 / _frame_limit);
     }
 }
 
-void Unified::Application::run() {
+void Application::run() {
     OnCreate();
 
     Time elapsed;
@@ -36,7 +36,9 @@ void Unified::Application::run() {
     OnClose();
 }
 
-void Unified::Application::OnCreate() { }
-void Unified::Application::OnClose() { }
+void Application::OnCreate() { }
+void Application::OnClose() { }
 
-void Unified::Application::OnEvent(Event &event) { }
+void Application::OnEvent(EventDispatcher&) { }
+
+UNIFIED_END_NAMESPACE

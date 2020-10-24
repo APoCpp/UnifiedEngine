@@ -5,16 +5,26 @@
 
 #include <windows.h>
 
-void Unified::sleep(Time duration) {
+UNIFIED_BEGIN_NAMESPACE
+
+void sleep(Time duration) {
     ::Sleep(duration.asMilliseconds());
 }
+
+UNIFIED_END_NAMESPACE
 
 #elif defined(UNIFIED_PLATFORM_LINUX)
 
 #include <unistd.h>
 
-void Unified::sleep(Time duration) {
+UNIFIED_BEGIN_NAMESPACE
+
+void sleep(Time duration) {
     ::sleep(duration.asMilliseconds());
 }
 
+UNIFIED_END_NAMESPACE
+
 #endif
+
+
