@@ -8,7 +8,7 @@ set(UNIFIED_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
 set(UNIFIED_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set(UNIFIED_VENDOR_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vendor")
 
-set(UNIFIED_EXAMPLE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/example")
+set(UNIFIED_EXAMPLE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/examples")
 
 file(GLOB_RECURSE UNIFIED_SRC_FILES "${UNIFIED_SRC_DIR}/*.cpp")
 file(GLOB_RECURSE UNIFIED_INCLUDE_FILES "${UNIFIED_INCLUDE_DIR}/*.hpp")
@@ -40,10 +40,10 @@ set(GLFW_INSTALL OFF CACHE INTERNAL "")
 add_subdirectory("${UNIFIED_GLFW_DIR}/")
 target_link_libraries(${PROJECT_NAME} PRIVATE "glfw" ${GLFW_LIBRARIES})
 
-option(UNIFORM_BUILD_TESTS "Build the UnifiedEngine test program" TRUE)
+option(UNIFORM_BUILD_TESTS "Build the UnifiedEngine test programs" TRUE)
 
 if (UNIFORM_BUILD_TESTS)
- message("Building the UnifiedEngine test program")
+ message("Building the UnifiedEngine test programs")
  add_subdirectory("${UNIFIED_EXAMPLE_DIR}/events")
  add_subdirectory("${UNIFIED_EXAMPLE_DIR}/minimal")
 endif ()
