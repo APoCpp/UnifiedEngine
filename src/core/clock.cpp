@@ -6,8 +6,7 @@ UNIFIED_BEGIN_NAMESPACE
 Clock::Clock() { restart(); }
 
 Time Clock::get_elapsed_time() const _OSL_NOEXCEPT {
-    Time sec = seconds(glfwGetTime());
-    return sec - _timestamp;
+    return seconds(glfwGetTime()) - _timestamp;
 }
 
 Time Clock::restart() _OSL_NOEXCEPT {

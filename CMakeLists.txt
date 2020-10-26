@@ -42,6 +42,15 @@ set(GLFW_INSTALL OFF CACHE INTERNAL "")
 add_subdirectory("${UNIFIED_GLFW_DIR}/")
 target_link_libraries(${PROJECT_NAME} PRIVATE "glfw" ${GLFW_LIBRARIES})
 
+# Including the 'glad' library
+set(UNIFIED_GLAD_DIR "${UNIFIED_VENDOR_DIR}/glad")
+add_library(glad STATIC
+    "${UNIFIED_GLAD_DIR}/src/glad.c"
+    "${UNIFIED_GLAD_DIR}/include/glad/glad.h"
+)
+target_include_directories(glad PUBLIC "${UNIFIED_GLAD_DIR}/include")
+target_link_libraries(${PROJECT_NAME} PRIVATE glad ${CMAKE_DL_LIBS})
+
 option(UNIFORM_BUILD_TESTS "Build the UnifiedEngine test programs" TRUE)
 
 if (UNIFORM_BUILD_TESTS)

@@ -1,4 +1,3 @@
-#include <unified/defines.hpp>
 #ifndef UNIFIED_APPLICATION_EVENT_HPP
 #define UNIFIED_APPLICATION_EVENT_HPP
 
@@ -34,16 +33,21 @@ class EventDispatcher
 {
 public:
 
-    EventDispatcher(Event &event) : _event(event) { }
+    EventDispatcher(Event &event) _OSL_NOEXCEPT;
     virtual ~EventDispatcher() = default;
 
     template <class _type, class _function>
-    bool dispatch(const _function &callback) const {
+    bool dispatch(_function const &callback) const {
         if (_event.get_type() == _type::get_type_static()) {
             callback(static_cast<_type&>(_event));
             return true;
         }
         return false;
+    }
+
+    template <class _type>
+    _OSL_NODISCARD _type &get_event() const {
+        return static_cast<_type&>(_event);
     }
 
 protected:
