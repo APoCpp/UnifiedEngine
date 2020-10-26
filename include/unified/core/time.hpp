@@ -2,7 +2,7 @@
 #define UNIFIED_CORE_TIME_HPP
 
 #include <unified/defines.hpp>
-#include <inttypes.hpp>
+#include <unified/core/int_types.hpp>
 #include <defines.hpp>
 
 UNIFIED_BEGIN_NAMESPACE

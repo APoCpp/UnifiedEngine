@@ -2,7 +2,7 @@
 #define UNIFIED_CORE_MATH_VECTOR_FWD_HPP
 
 #include <unified/defines.hpp>
-#include <inttypes.hpp>
+#include <unified/core/int_types.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
 

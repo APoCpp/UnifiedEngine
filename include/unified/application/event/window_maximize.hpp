@@ -16,7 +16,7 @@ public:
     _OSL_NODISCARD virtual Type get_type() const;
 
     _OSL_NODISCARD static Type get_type_static() {
-        return Type::WindowFocus;
+        return Type::WindowMaximize;
     }
 
     const bool maximized;

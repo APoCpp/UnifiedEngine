@@ -34,74 +34,74 @@ struct Vector<_type, 3>
         return this->*accessors[i];
     }
 
-    _OSL_CONSTEXPR Vector operator+(const _type &r) const _OSL_NOEXCEPT {
+    _OSL_CONSTEXPR Vector operator+(_type const &r) const _OSL_NOEXCEPT {
         return Vector(x + r, y + r, z + r);
     }
 
-    _OSL_CONSTEXPR Vector operator+(const Vector &r) const _OSL_NOEXCEPT {
+    _OSL_CONSTEXPR Vector operator+(Vector const &r) const _OSL_NOEXCEPT {
         return Vector(x + r.x, y + r.y, z + r.z);
     }
 
-    _OSL_CONSTEXPR Vector operator-(const _type &r) const _OSL_NOEXCEPT {
+    _OSL_CONSTEXPR Vector operator-(_type const &r) const _OSL_NOEXCEPT {
         return Vector(x - r, y - r, z - r);
     }
 
-    _OSL_CONSTEXPR Vector operator-(const Vector &r) const _OSL_NOEXCEPT {
+    _OSL_CONSTEXPR Vector operator-(Vector const &r) const _OSL_NOEXCEPT {
         return Vector(x - r.x, y - r.y, z - r.z);
     }
 
-    _OSL_CONSTEXPR Vector operator*(const _type &r) const _OSL_NOEXCEPT {
+    _OSL_CONSTEXPR Vector operator*(_type const &r) const _OSL_NOEXCEPT {
         return Vector(x * r, y * r, z * r);
     }
 
-    _OSL_CONSTEXPR Vector operator*(const Vector &r) const _OSL_NOEXCEPT {
+    _OSL_CONSTEXPR Vector operator*(Vector const &r) const _OSL_NOEXCEPT {
         return Vector(x * r.x, y * r.y, z * r.z);
     }
 
-    _OSL_CONSTEXPR Vector operator/(const _type &r) const _OSL_NOEXCEPT {
+    _OSL_CONSTEXPR Vector operator/(_type const &r) const _OSL_NOEXCEPT {
         return Vector(x / r, y / r, z / r);
     }
 
-    _OSL_CONSTEXPR Vector operator/(const Vector &r) const _OSL_NOEXCEPT {
+    _OSL_CONSTEXPR Vector operator/(Vector const &r) const _OSL_NOEXCEPT {
         return Vector(x / r.x, y / r.y, z / r.z);
     }
 
-    _OSL_CONSTEXPR Vector &operator+=(const _type &r) _OSL_NOEXCEPT {
+    _OSL_CONSTEXPR Vector &operator+=(_type const &r) _OSL_NOEXCEPT {
         x += r, y += r, z += r;
         return *this;
     }
 
-    _OSL_CONSTEXPR Vector &operator+=(const Vector &r) _OSL_NOEXCEPT {
+    _OSL_CONSTEXPR Vector &operator+=(Vector const &r) _OSL_NOEXCEPT {
         x += r.x, y += r.y, z += r.z;
         return *this;
     }
 
-    _OSL_CONSTEXPR Vector &operator-=(const _type &r) _OSL_NOEXCEPT {
+    _OSL_CONSTEXPR Vector &operator-=(_type const &r) _OSL_NOEXCEPT {
         x -= r, y -= r, z -= r;
         return *this;
     }
 
-    _OSL_CONSTEXPR Vector &operator-=(const Vector &r) _OSL_NOEXCEPT {
+    _OSL_CONSTEXPR Vector &operator-=(Vector const &r) _OSL_NOEXCEPT {
         x -= r.x, y -= r.y, z -= r.z;
         return *this;
     }
 
-    _OSL_CONSTEXPR Vector &operator*=(const _type &r) _OSL_NOEXCEPT {
+    _OSL_CONSTEXPR Vector &operator*=(_type const &r) _OSL_NOEXCEPT {
         x *= r, y *= r, z *= r;
         return *this;
     }
 
-    _OSL_CONSTEXPR Vector &operator*=(const Vector &r) _OSL_NOEXCEPT {
+    _OSL_CONSTEXPR Vector &operator*=(Vector const &r) _OSL_NOEXCEPT {
         x *= r.x, y *= r.y, z *= r.z;
         return *this;
     }
 
-    _OSL_CONSTEXPR Vector &operator/=(const _type &r) _OSL_NOEXCEPT {
+    _OSL_CONSTEXPR Vector &operator/=(_type const &r) _OSL_NOEXCEPT {
         x /= r, y /= r, z /= r;
         return *this;
     }
 
-    _OSL_CONSTEXPR Vector &operator/=(const Vector &r) _OSL_NOEXCEPT {
+    _OSL_CONSTEXPR Vector &operator/=(Vector const &r) _OSL_NOEXCEPT {
         x /= r.x, y /= r.y, z /= r.z;
         return *this;
     }

@@ -3,7 +3,9 @@
 
 #include <defines.hpp>
 
-#define UNIFIED_BEGIN_NAMESPACE namespace Unified {
+#define UNIFIED_NAMESPACE Unified
+
+#define UNIFIED_BEGIN_NAMESPACE namespace UNIFIED_NAMESPACE {
 #define UNIFIED_END_NAMESPACE }
 
 #endif
