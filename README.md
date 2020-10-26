@@ -26,3 +26,4 @@ Application *Unified::CreateApplication() {
 * [osl](https://github.com/beryll1um/osl)
 * [fmt](https://github.com/fmtlib/fmt)
 * [glfw](https://github.com/glfw/glfw)
+* [glad](https://glad.dav1d.de/)
