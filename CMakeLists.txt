@@ -31,7 +31,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC osl)
 # Including the 'fmt' library
 set(UNIFIED_FMT_DIR "${UNIFIED_VENDOR_DIR}/fmt/")
 add_subdirectory(${UNIFIED_FMT_DIR})
-target_link_libraries(${PROJECT_NAME} PRIVATE fmt)
+target_link_libraries(${PROJECT_NAME} PUBLIC fmt)
 
 # Including the 'glfw' library
 set(UNIFIED_GLFW_DIR "${UNIFIED_VENDOR_DIR}/glfw")
@@ -40,7 +40,7 @@ set(GLFW_BUILD_TESTS OFF CACHE INTERNAL "")
 set(GLFW_BUILD_DOCS OFF CACHE INTERNAL "")
 set(GLFW_INSTALL OFF CACHE INTERNAL "")
 add_subdirectory("${UNIFIED_GLFW_DIR}/")
-target_link_libraries(${PROJECT_NAME} PRIVATE "glfw" ${GLFW_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} PUBLIC "glfw" ${GLFW_LIBRARIES})
 
 # Including the 'glad' library
 set(UNIFIED_GLAD_DIR "${UNIFIED_VENDOR_DIR}/glad")
@@ -48,13 +48,14 @@ add_library(glad STATIC
     "${UNIFIED_GLAD_DIR}/src/glad.c"
     "${UNIFIED_GLAD_DIR}/include/glad/glad.h"
 )
-target_include_directories(glad PUBLIC "${UNIFIED_GLAD_DIR}/include")
-target_link_libraries(${PROJECT_NAME} PRIVATE glad ${CMAKE_DL_LIBS})
+target_include_directories(glad PUBLIC "${UNIFIED_GLAD_DIR}/include/")
+target_link_libraries(${PROJECT_NAME} PUBLIC glad ${CMAKE_DL_LIBS})
 
 option(UNIFORM_BUILD_TESTS "Build the UnifiedEngine test programs" TRUE)
 
 if (UNIFORM_BUILD_TESTS)
  message("Building the UnifiedEngine test programs")
+ add_subdirectory("${UNIFIED_EXAMPLE_DIR}/draw")
  add_subdirectory("${UNIFIED_EXAMPLE_DIR}/events")
  add_subdirectory("${UNIFIED_EXAMPLE_DIR}/minimal")
 endif ()

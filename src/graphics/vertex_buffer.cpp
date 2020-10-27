@@ -8,9 +8,9 @@ namespace
 {
     _OSL_CONSTEXPR GLenum usage_to_glenum(UNIFIED_NAMESPACE::VertexBuffer::Usage usage) {
         switch (usage) {
-        case UNIFIED_NAMESPACE::VertexBuffer::Usage::Static: return GL_STATIC_DRAW;
-        case UNIFIED_NAMESPACE::VertexBuffer::Usage::Dynamic: return GL_DYNAMIC_DRAW;
-        default: return GL_STREAM_DRAW;
+            case UNIFIED_NAMESPACE::VertexBuffer::Usage::Static: return GL_STATIC_DRAW;
+            case UNIFIED_NAMESPACE::VertexBuffer::Usage::Dynamic: return GL_DYNAMIC_DRAW;
+            default: return GL_STREAM_DRAW;
         }
     }
 }

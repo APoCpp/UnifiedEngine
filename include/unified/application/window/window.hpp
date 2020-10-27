@@ -45,7 +45,9 @@ public:
 public:
 
     Window(string title, VideoMode mode, u32 style);
-        
+
+    virtual ~Window() _OSL_NOEXCEPT = default;
+
     bool poll_events() _OSL_NOEXCEPT;
 
     _OSL_NODISCARD Vector2i get_size() const _OSL_NOEXCEPT;
@@ -56,6 +58,8 @@ public:
 
     _OSL_NODISCARD bool get_vsync() const _OSL_NOEXCEPT;
     void set_vsync(bool enabled) _OSL_NOEXCEPT;
+
+    void swap_buffers() _OSL_NOEXCEPT;
 
     void set_event_callback(const event_callback_fn &callback) _OSL_NOEXCEPT;
 

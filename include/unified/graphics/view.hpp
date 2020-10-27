@@ -11,6 +11,8 @@ public:
 
     View() _OSL_NOEXCEPT;
 
+    virtual ~View() _OSL_NOEXCEPT = default;
+
 };
 
 UNIFIED_END_NAMESPACE

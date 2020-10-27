@@ -11,7 +11,7 @@ struct Window::glfw_wrapper {
 
 Window::Window(string title, VideoMode mode, u32 style) : _title(title), _window(new glfw_wrapper), _mode(mode), _vsync(false) {
     if (!glfwInit()) {
-        throw UNIFIED_CORE_EXCEPTIONS_HPP("GLFW");
+        throw UNIFIED_CORE_EXCEPTIONS_HPP("failed to initialize glfw");
     }
 
     glfwWindowHint(GLFW_RESIZABLE, (style & Style::Resizable) == Style::Resizable);
@@ -109,6 +109,10 @@ _OSL_NODISCARD bool Window::get_vsync() const _OSL_NOEXCEPT {
 
 void Window::set_vsync(bool enabled) _OSL_NOEXCEPT {
     glfwSwapInterval(_vsync = enabled);
+}
+
+void Window::swap_buffers() _OSL_NOEXCEPT {
+    glfwSwapBuffers(_window->glfw_handle);
 }
 
 void Window::set_event_callback(const event_callback_fn &callback) _OSL_NOEXCEPT {
