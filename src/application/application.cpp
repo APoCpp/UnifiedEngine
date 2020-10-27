@@ -8,7 +8,7 @@ Application::Application(string title, VideoMode mode, u32 style) : Window(title
     set_event_callback(BIND_EVENT_FN(&Application::OnEvent, this));
 }
 
-Application::~Application() { }
+Application::~Application() _OSL_NOEXCEPT { }
 
 _OSL_NODISCARD u32 Application::get_frame_limit() const _OSL_NOEXCEPT {
     return _frame_limit;

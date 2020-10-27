@@ -15,7 +15,7 @@ public:
 
     using HandleType = ui32;
 
-    enum class Usage
+    enum Usage
     {
         Stream,
         Dynamic,
@@ -27,6 +27,8 @@ public:
     VertexBuffer(Usage usage) _OSL_NOEXCEPT;
     VertexBuffer(PrimitiveType type) _OSL_NOEXCEPT;
     VertexBuffer(PrimitiveType type, Usage usage) _OSL_NOEXCEPT;
+
+    virtual ~VertexBuffer() _OSL_NOEXCEPT = default;
 
     bool create(u32 vertex_count);
 
