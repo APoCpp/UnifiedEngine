@@ -10,9 +10,8 @@ struct Window::glfw_wrapper {
 };
 
 Window::Window(string title, VideoMode mode, u32 style) : _title(title), _window(new glfw_wrapper), _mode(mode), _vsync(false) {
-    if (!glfwInit()) {
+    if (!glfwInit())
         throw UNIFIED_CORE_EXCEPTIONS_HPP("failed to initialize glfw");
-    }
 
     glfwWindowHint(GLFW_RESIZABLE, (style & Style::Resizable) == Style::Resizable);
     glfwWindowHint(GLFW_MAXIMIZED, (style & Style::Maximized) == Style::Maximized);
@@ -84,22 +83,22 @@ bool Window::poll_events() _OSL_NOEXCEPT {
     return !glfwWindowShouldClose(_window->glfw_handle);
 }
 
-_OSL_NODISCARD Vector2i Window::get_size() const _OSL_NOEXCEPT {
+_OSL_NODISCARD Point2i Window::get_size() const _OSL_NOEXCEPT {
     glfwGetWindowSize(_window->glfw_handle, (int*)&_mode.width, (int*)&_mode.height);
-    return Vector2i(_mode.width, _mode.height);
+    return Point2i(_mode.width, _mode.height);
 }
 
-void Window::set_size(Vector2i size) _OSL_NOEXCEPT {
+void Window::set_size(Point2i size) _OSL_NOEXCEPT {
     glfwSetWindowSize(_window->glfw_handle, size.x, size.y);
 }
 
-_OSL_NODISCARD Vector2i Window::get_position() const _OSL_NOEXCEPT {
-    Vector2i point;
+_OSL_NODISCARD Point2i Window::get_position() const _OSL_NOEXCEPT {
+    Point2i point;
     glfwGetWindowPos(_window->glfw_handle, &point.x, &point.y);
     return point;
 }
 
-void Window::set_position(Vector2i point) _OSL_NOEXCEPT {
+void Window::set_position(Point2i point) _OSL_NOEXCEPT {
     glfwSetWindowPos(_window->glfw_handle, point.x, point.y);
 }
 

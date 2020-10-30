@@ -2,6 +2,7 @@
 #define UNIFIED_DEFINES_HPP
 
 #include <defines.hpp>
+#include <unified/core/int_types.hpp>
 
 #define UNIFIED_NAMESPACE Unified
 

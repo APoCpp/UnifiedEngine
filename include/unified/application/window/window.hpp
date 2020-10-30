@@ -12,7 +12,7 @@
 #include <unified/application/event/cursor_move.hpp>
 #include <unified/application/event/key_press.hpp>
 
-#include <unified/core/math/vector2.hpp>
+#include <unified/core/math/point2.hpp>
 #include <unified/core/string.hpp>
 
 #include <functional>
@@ -50,11 +50,11 @@ public:
 
     bool poll_events() _OSL_NOEXCEPT;
 
-    _OSL_NODISCARD Vector2i get_size() const _OSL_NOEXCEPT;
-    void set_size(Vector2i size) _OSL_NOEXCEPT;
+    _OSL_NODISCARD Point2i get_size() const _OSL_NOEXCEPT;
+    void set_size(Point2i size) _OSL_NOEXCEPT;
 
-    _OSL_NODISCARD Vector2i get_position() const _OSL_NOEXCEPT;
-    void set_position(Vector2i point) _OSL_NOEXCEPT;
+    _OSL_NODISCARD Point2i get_position() const _OSL_NOEXCEPT;
+    void set_position(Point2i point) _OSL_NOEXCEPT;
 
     _OSL_NODISCARD bool get_vsync() const _OSL_NOEXCEPT;
     void set_vsync(bool enabled) _OSL_NOEXCEPT;
