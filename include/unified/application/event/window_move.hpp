@@ -3,7 +3,7 @@
 
 #include <unified/defines.hpp>
 #include <unified/application/event/event.hpp>
-#include <unified/core/math/vector2.hpp>
+#include <unified/core/math/point2.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
 
@@ -20,7 +20,7 @@ public:
         return Type::WindowMove;
     }
 
-    const Vector2i position;
+    const Point2i position;
 
 };
 

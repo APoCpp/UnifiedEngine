@@ -1,6 +1,9 @@
 #include <unified/graphics/render_target.hpp>
 #include <unified/core/exceptions.hpp>
 
+#include <unified/graphics/gpu_buffer.hpp>
+#include <unified/graphics/drawable.hpp>
+
 #include <glad/glad.h>
 
 UNIFIED_BEGIN_NAMESPACE
@@ -16,36 +19,14 @@ void RenderTarget::clear(Color const &color) _OSL_NOEXCEPT {
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void RenderTarget::push_gl_states() _OSL_NOEXCEPT {
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glMatrixMode(GL_PROJECTION);
-    glPushMatrix();
-    glMatrixMode(GL_TEXTURE);
-    glPushMatrix();
-}
+void RenderTarget::push_gl_states() _OSL_NOEXCEPT { }
 
-void RenderTarget::pop_gl_states() _OSL_NOEXCEPT {
-    glMatrixMode(GL_MODELVIEW);
-    glPopMatrix();
-    glMatrixMode(GL_PROJECTION);
-    glPopMatrix();
-    glMatrixMode(GL_TEXTURE);
-    glPopMatrix();
-}
+void RenderTarget::pop_gl_states() _OSL_NOEXCEPT { }
 
-void RenderTarget::reset_gl_states() _OSL_NOEXCEPT {
-    glDisable(GL_CULL_FACE);
-    glDisable(GL_LIGHTING);
-    glDisable(GL_DEPTH_TEST);
-    glDisable(GL_ALPHA_TEST);
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+void RenderTarget::reset_gl_states() _OSL_NOEXCEPT { }
+
+void RenderTarget::draw(Drawable const &drawable) const {
+    drawable.draw(*this);
 }
 
 UNIFIED_END_NAMESPACE

@@ -1,12 +1,12 @@
 #ifndef UNIFIED_GRAPHICS_RENDER_TARGET_HPP
 #define UNIFIED_GRAPHICS_RENDER_TARGET_HPP
 
-#include <unified/defines.hpp>
-
-#include <unified/core/math/vector2.hpp>
 #include <unified/core/color.hpp>
+#include <unified/core/math/point2.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
+
+class Drawable;
 
 class RenderTarget
 {
@@ -21,6 +21,10 @@ public:
     void pop_gl_states() _OSL_NOEXCEPT;
 
     void reset_gl_states() _OSL_NOEXCEPT;
+
+public:
+
+    void draw(Drawable const &buffer) const;
 
 };
 
