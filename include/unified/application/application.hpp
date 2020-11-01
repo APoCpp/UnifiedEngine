@@ -16,13 +16,17 @@ class Application : public Window, public RenderTarget
 {
 public:
 
-    Application(string title = "Unified", VideoMode mode = VideoMode(800, 600), u32 style = Window::Resizable);
+    Application(string title = "Unified", VideoMode video_mode = VideoMode(800, 600), u32 style = Window::Resizable);
     virtual ~Application() _OSL_NOEXCEPT;
+
+    void run();
+
+public:
 
     _OSL_NODISCARD u32 get_frame_limit() const _OSL_NOEXCEPT;
     void set_frame_limit(u32 limit) _OSL_NOEXCEPT;
 
-    void run();
+    void set_viewport(Point2i size) _OSL_NOEXCEPT;
 
 protected:
 

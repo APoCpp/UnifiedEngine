@@ -2,6 +2,7 @@
 #define UNIFIED_CORE_MATH_POINT3_HPP
 
 #include <unified/core/math/point_fwd.hpp>
+#include <fmt/format.h>
 
 UNIFIED_BEGIN_NAMESPACE
 
@@ -10,11 +11,11 @@ struct Point<_type, 3>
 {
     _type x, y, z;
 
-    Point() _OSL_NOEXCEPT : x(_type()), y(_type()), z(_type()) { }
-    Point(const _type v[3]) _OSL_NOEXCEPT : x(v[0]), y(v[1]), z(v[2]) { }
-    Point(const _type x, const _type y, const _type z) _OSL_NOEXCEPT : x(x), y(y), z(z) { }
+    _OSL_CONSTEXPR Point() _OSL_NOEXCEPT : x(_type()), y(_type()), z(_type()) { }
+    _OSL_CONSTEXPR Point(_type xyz) _OSL_NOEXCEPT : x(xyz), y(xyz), z(xyz) { }
+    _OSL_CONSTEXPR Point(const _type x, const _type y, const _type z) _OSL_NOEXCEPT : x(x), y(y), z(z) { }
 
-    _type operator[](u32 i) const _OSL_NOEXCEPT {
+    _OSL_CONSTEXPR _type operator[](u32 i) const _OSL_NOEXCEPT {
         _OSL_CONSTEXPR _type Point::*accessors[] = {
             &Point::x,
             &Point::y,
@@ -23,7 +24,7 @@ struct Point<_type, 3>
         return this->*accessors[i];
     }
 
-    _type &operator[](u32 i) _OSL_NOEXCEPT {
+    _OSL_CONSTEXPR _type &operator[](u32 i) _OSL_NOEXCEPT {
         _OSL_CONSTEXPR _type Point::*accessors[] = {
             &Point::x,
             &Point::y,
@@ -115,5 +116,12 @@ typedef Point<float,    3> Point3f;
 typedef Point<double,   3> Point3d;
 
 UNIFIED_END_NAMESPACE
+
+template <class _type> struct fmt::formatter<UNIFIED_NAMESPACE::Point<_type, 3>> : fmt::formatter<std::string> {
+    template <class FormatContext>
+    auto format(const UNIFIED_NAMESPACE::Point<_type, 3> &vector, FormatContext &ctx) {
+        return formatter<std::string>::format(fmt::format("{{ {}, {}, {} }}", vector.x, vector.y, vector.z), ctx);
+    }
+};
 
 #endif

@@ -9,7 +9,7 @@ struct Window::glfw_wrapper {
     GLFWwindow *glfw_handle;
 };
 
-Window::Window(string title, VideoMode mode, u32 style) : _title(title), _window(new glfw_wrapper), _mode(mode), _vsync(false) {
+Window::Window(string title, VideoMode video_mode, u32 style) : _title(title), _window(new glfw_wrapper), _video_mode(video_mode), _vsync(false) {
     if (!glfwInit())
         throw UNIFIED_CORE_EXCEPTIONS_HPP("failed to initialize glfw");
 
@@ -17,7 +17,7 @@ Window::Window(string title, VideoMode mode, u32 style) : _title(title), _window
     glfwWindowHint(GLFW_MAXIMIZED, (style & Style::Maximized) == Style::Maximized);
     glfwWindowHint(GLFW_FLOATING,  (style & Style::Floating)  == Style::Floating);
 
-    _window->glfw_handle = glfwCreateWindow(mode.width, mode.height, title.c_str(), nullptr, nullptr);
+    _window->glfw_handle = glfwCreateWindow(video_mode.width, video_mode.height, title.c_str(), nullptr, nullptr);
     glfwMakeContextCurrent(_window->glfw_handle);
 
     glfwSetWindowUserPointer(_window->glfw_handle, &_event_callback);
@@ -84,8 +84,8 @@ bool Window::poll_events() _OSL_NOEXCEPT {
 }
 
 _OSL_NODISCARD Point2i Window::get_size() const _OSL_NOEXCEPT {
-    glfwGetWindowSize(_window->glfw_handle, (int*)&_mode.width, (int*)&_mode.height);
-    return Point2i(_mode.width, _mode.height);
+    glfwGetWindowSize(_window->glfw_handle, (int*)&_video_mode.width, (int*)&_video_mode.height);
+    return Point2i(_video_mode.width, _video_mode.height);
 }
 
 void Window::set_size(Point2i size) _OSL_NOEXCEPT {
@@ -112,6 +112,10 @@ void Window::set_vsync(bool enabled) _OSL_NOEXCEPT {
 
 void Window::swap_buffers() _OSL_NOEXCEPT {
     glfwSwapBuffers(_window->glfw_handle);
+}
+
+Keyboard::Action Window::get_key_action(Keyboard::Code code) {
+    return (Keyboard::Action)glfwGetKey(_window->glfw_handle, (int)code);
 }
 
 void Window::set_event_callback(const event_callback_fn &callback) _OSL_NOEXCEPT {

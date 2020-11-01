@@ -28,11 +28,9 @@ public:
     void set_usage(Usage usage) _OSL_NOEXCEPT;
     _OSL_NODISCARD Usage get_usage() const _OSL_NOEXCEPT;
 
-public:
+protected:
 
     static void bind(GPUBuffer const *buffer) _OSL_NOEXCEPT;
-
-protected:
 
     Usage _usage;
     HandleType _buffer;
