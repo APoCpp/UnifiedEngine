@@ -7,7 +7,7 @@ class Example : public Application
 {
 public:
 
-    void window_maximize_event(WindowMaximizeEvent& event) {
+    void window_maximize_event(WindowMaximizeEvent &event) {
         printf(event.maximized ? "maximized\n" : "minimized\n");
     }
 

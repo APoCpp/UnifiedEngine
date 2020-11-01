@@ -61,6 +61,8 @@ public:
 
     void swap_buffers() _OSL_NOEXCEPT;
 
+    Keyboard::Action get_key_action(Keyboard::Code code);
+
     void set_event_callback(const event_callback_fn &callback) _OSL_NOEXCEPT;
 
 protected:
@@ -69,7 +71,7 @@ protected:
     glfw_wrapper *_window;
     event_callback_fn _event_callback;
         
-    VideoMode _mode;
+    VideoMode _video_mode;
     bool _vsync;
 
 };

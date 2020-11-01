@@ -1,14 +1,19 @@
 #include <unified/application/application.hpp>
 #include <unified/core/system/sleep.hpp>
-#include <GLFW/glfw3.h>
+
+#include <glad/glad.h>
 
 UNIFIED_BEGIN_NAMESPACE
 
-Application::Application(string title, VideoMode mode, u32 style) : Window(title, mode, style), _frame_limit(0), _frame_clock() {
+Application::Application(string title, VideoMode video_mode, u32 style) : Window(title, video_mode, style), _frame_limit(0), _frame_clock() {
     set_event_callback(BIND_EVENT_FN(&Application::OnEvent, this));
 }
 
 Application::~Application() _OSL_NOEXCEPT { }
+
+void Application::set_viewport(Point2i size) _OSL_NOEXCEPT {
+    glViewport(0, 0, _video_mode.width = size.x, _video_mode.height = size.y);
+}
 
 _OSL_NODISCARD u32 Application::get_frame_limit() const _OSL_NOEXCEPT {
     return _frame_limit;

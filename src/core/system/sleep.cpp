@@ -20,7 +20,7 @@ UNIFIED_END_NAMESPACE
 UNIFIED_BEGIN_NAMESPACE
 
 void sleep(Time duration) {
-    ::sleep(duration.asMilliseconds());
+    ::usleep(duration.asMicroseconds());
 }
 
 UNIFIED_END_NAMESPACE
