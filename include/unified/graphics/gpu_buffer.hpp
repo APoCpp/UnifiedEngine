@@ -19,9 +19,10 @@ public:
     };
 
     GPUBuffer(Usage usage);
+
     virtual ~GPUBuffer() _OSL_NOEXCEPT;
 
-    void write(void const *data, u32 size);
+    virtual void write(void const *data, u32 size) _OSL_NOEXCEPT;
 
     _OSL_NODISCARD HandleType get_handle() const _OSL_NOEXCEPT;
 

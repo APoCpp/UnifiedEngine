@@ -3,8 +3,9 @@
 #include <unified/core/math/point3.hpp>
 #include <unified/core/math/matrix.hpp>
 
+#include <unified/graphics/math/transform.hpp>
+#include <unified/graphics/math/vertex2.hpp>
 #include <unified/graphics/vertex_array.hpp>
-#include <unified/graphics/vars.hpp>
 
 using namespace Unified;
 
@@ -13,23 +14,21 @@ class Example : public Application
 public:
 
     VertexArray vertex_array;
-    Point3d position;
-
-    Matrix4x4d model_view;
+    Transform3d model_view;
+    Point2d position;
 
 public:
 
     Example() : Application("Unified", VideoMode(800, 600), Window::Resizable),
-        vertex_array(GPUBuffer::Usage::Static, PrimitiveType::Quads, 3, 4), position(0.0) {
-        model_view = get_modelview_matrix();
+        vertex_array(PrimitiveType::Quads, 2, 4), model_view(), position(0.0) {
     }
 
     void render() {
-        Point3d vertices[4] = {
-            position + translate<double, 3>(model_view, { -0.3, -0.3, 0.0 }),
-            position + translate<double, 3>(model_view, { -0.3,  0.3, 0.0 }),
-            position + translate<double, 3>(model_view, {  0.3,  0.3, 0.0 }),
-            position + translate<double, 3>(model_view, {  0.3, -0.3, 0.0 })
+        Vertex2d vertices[4] = {
+            position + model_view.translate({ -0.3, -0.3 }),
+            position + model_view.translate({ -0.3,  0.3 }),
+            position + model_view.translate({  0.3,  0.3 }),
+            position + model_view.translate({  0.3, -0.3 })
         };
 
         vertex_array.write(vertices, sizeof(vertices));
@@ -44,10 +43,10 @@ public:
         Keyboard::Action action = get_key_action(code);
         if (action == Keyboard::Action::Press || action == Keyboard::Action::Repeat) {
             switch (code) {
-                case (Keyboard::Code::W): { position += translate<double, 3>(model_view, {  0.0,  0.1, 0.0 }); break; }
-                case (Keyboard::Code::A): { position += translate<double, 3>(model_view, { -0.1,  0.0, 0.0 }); break; }
-                case (Keyboard::Code::S): { position += translate<double, 3>(model_view, {  0.0, -0.1, 0.0 }); break; }
-                case (Keyboard::Code::D): { position += translate<double, 3>(model_view, {  0.1,  0.0, 0.0 }); break; }
+                case (Keyboard::Code::W): { position += model_view.translate({  0.0,  0.1 }); break; }
+                case (Keyboard::Code::A): { position += model_view.translate({ -0.1,  0.0 }); break; }
+                case (Keyboard::Code::S): { position += model_view.translate({  0.0, -0.1 }); break; }
+                case (Keyboard::Code::D): { position += model_view.translate({  0.1,  0.0 }); break; }
                 default: { }
             }
         }

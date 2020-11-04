@@ -5,7 +5,7 @@
 
 UNIFIED_BEGIN_NAMESPACE
 
-Application::Application(string title, VideoMode video_mode, u32 style) : Window(title, video_mode, style), _frame_limit(0), _frame_clock() {
+Application::Application(string title, VideoMode video_mode, u32 style) : Window(title, video_mode, style), _frame_limit(0), _frame_clock(), _frame_duration(0) {
     set_event_callback(BIND_EVENT_FN(&Application::OnEvent, this));
 }
 
@@ -23,6 +23,8 @@ void Application::set_frame_limit(u32 limit) _OSL_NOEXCEPT {
     if (limit != 0) {
         _frame_limit = limit;
         _frame_duration = seconds(1.0 / _frame_limit);
+    } else {
+        _frame_duration = microseconds(0);
     }
 }
 
@@ -31,7 +33,7 @@ void Application::run() {
 
     Time elapsed;
     while (OnUpdate(elapsed)) {
-        elapsed = _frame_clock.get_elapsed_time(); 
+        elapsed = _frame_clock.get_elapsed_time();
         _frame_clock.restart();
         if (_frame_duration > elapsed) {
             sleep(_frame_duration - elapsed);

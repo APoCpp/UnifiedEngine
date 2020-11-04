@@ -53,7 +53,7 @@ public:
         return reinterpret_cast<_type*>(_data);
     }
 
-private:
+protected:
 
     _type _data[_rows][_columns];
 
@@ -88,22 +88,6 @@ _OSL_CONSTEXPR Matrix<_type, _rows, _columns> operator*(Matrix<_type, _rows, _co
         }
     }
     return l;
-}
-
-template <class _type, u32 _dimension>
-_OSL_CONSTEXPR Point<_type, _dimension> translate(Matrix<_type, _dimension + 1, _dimension + 1> const &matrix, Point<_type, _dimension> const &move) _OSL_NOEXCEPT {
-    Point<_type, _dimension> result;
-
-    for (u32 col = 0; col < matrix.columns(); col++) {
-        for (u32 row = 0; row < matrix.rows(); row++) {
-            if (col < _dimension && row < _dimension)
-                result[col] += matrix(col, row) * move[row];
-            else if (col < _dimension)
-                result[col] += matrix(col, row) * 1;
-        }
-    }
-
-    return result;
 }
 
 UNIFIED_END_NAMESPACE
