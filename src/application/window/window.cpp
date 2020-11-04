@@ -20,6 +20,8 @@ Window::Window(string title, VideoMode video_mode, u32 style) : _title(title), _
     _window->glfw_handle = glfwCreateWindow(video_mode.width, video_mode.height, title.c_str(), nullptr, nullptr);
     glfwMakeContextCurrent(_window->glfw_handle);
 
+    set_vsync(_vsync);
+
     glfwSetWindowUserPointer(_window->glfw_handle, &_event_callback);
     glfwSetWindowCloseCallback(_window->glfw_handle, [](GLFWwindow *window) -> void {
         event_callback_fn &dispatch_function = *reinterpret_cast<event_callback_fn*>(glfwGetWindowUserPointer(window));

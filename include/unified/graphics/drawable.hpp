@@ -7,13 +7,11 @@ UNIFIED_BEGIN_NAMESPACE
 
 class Drawable
 {
-public:
-
-    virtual ~Drawable() = default;
-
 protected:
 
     friend class RenderTarget;
+
+    virtual ~Drawable() = default;
 
     virtual void draw(RenderTarget const&) const = 0;
 

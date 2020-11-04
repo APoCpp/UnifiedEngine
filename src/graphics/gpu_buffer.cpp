@@ -28,7 +28,7 @@ GPUBuffer::~GPUBuffer() _OSL_NOEXCEPT {
     glDeleteBuffers(1, &_buffer);
 }
 
-void GPUBuffer::write(void const *data, u32 size) {
+void GPUBuffer::write(void const *data, u32 size) _OSL_NOEXCEPT {
     glBindBuffer(GL_ARRAY_BUFFER, _buffer);
     glBufferData(GL_ARRAY_BUFFER, _size = size, data, usage_to_glenum(_usage));
     glBindBuffer(GL_ARRAY_BUFFER, 0);

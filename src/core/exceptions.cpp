@@ -5,7 +5,7 @@
 
 UNIFIED_BEGIN_NAMESPACE
 
-initialization_failed::initialization_failed(const char *target) : _target(target) { }
+initialization_failed::initialization_failed(char const *target) : _target(target) { }
 
 const char *initialization_failed::what() const _OSL_NOEXCEPT {
     return _target;

@@ -6,13 +6,14 @@
 
 UNIFIED_BEGIN_NAMESPACE
 
-// @todo: functions for converting
+// @todo: methods for converting
 class Color
 {
 public:
 
-    Color();
-    Color(u8 r, u8 g, u8 b, u8 a);
+    Color() _OSL_NOEXCEPT;
+    Color(u8 r, u8 g, u8 b) _OSL_NOEXCEPT;
+    Color(u8 r, u8 g, u8 b, u8 a) _OSL_NOEXCEPT;
 
     u8 r, g, b, a;
 
