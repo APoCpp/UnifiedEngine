@@ -46,24 +46,24 @@ public:
 
     Window(string title, VideoMode mode, u32 style);
 
-    virtual ~Window() _OSL_NOEXCEPT = default;
+    virtual ~Window() _UNIFIED_NOEXCEPT = default;
 
-    bool poll_events() _OSL_NOEXCEPT;
+    bool poll_events() _UNIFIED_NOEXCEPT;
 
-    _OSL_NODISCARD Point2i get_size() const _OSL_NOEXCEPT;
-    void set_size(Point2i size) _OSL_NOEXCEPT;
+    _UNIFIED_NODISCARD Point2i get_size() const _UNIFIED_NOEXCEPT;
+    void set_size(Point2i size) _UNIFIED_NOEXCEPT;
 
-    _OSL_NODISCARD Point2i get_position() const _OSL_NOEXCEPT;
-    void set_position(Point2i point) _OSL_NOEXCEPT;
+    _UNIFIED_NODISCARD Point2i get_position() const _UNIFIED_NOEXCEPT;
+    void set_position(Point2i point) _UNIFIED_NOEXCEPT;
 
-    _OSL_NODISCARD bool get_vsync() const _OSL_NOEXCEPT;
-    void set_vsync(bool enabled) _OSL_NOEXCEPT;
+    _UNIFIED_NODISCARD bool get_vsync() const _UNIFIED_NOEXCEPT;
+    void set_vsync(bool enabled) _UNIFIED_NOEXCEPT;
 
-    void swap_buffers() _OSL_NOEXCEPT;
+    void swap_buffers() _UNIFIED_NOEXCEPT;
 
     Keyboard::Action get_key_action(Keyboard::Code code);
 
-    void set_event_callback(const event_callback_fn &callback) _OSL_NOEXCEPT;
+    void set_event_callback(const event_callback_fn &callback) _UNIFIED_NOEXCEPT;
 
 protected:
 

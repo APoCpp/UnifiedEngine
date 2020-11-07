@@ -2,13 +2,13 @@
 
 UNIFIED_BEGIN_NAMESPACE
 
-MousePressEvent::MousePressEvent(int code, int action) _OSL_NOEXCEPT : code((Mouse::Code)code), action((Mouse::Action)action) { }
+MousePressEvent::MousePressEvent(int code, int action) _UNIFIED_NOEXCEPT : code((Mouse::Code)code), action((Mouse::Action)action) { }
 
-_OSL_NODISCARD string MousePressEvent::get_name() const {
+_UNIFIED_NODISCARD string MousePressEvent::get_name() const {
     return "MousePressEvent";
 }
 
-_OSL_NODISCARD Event::Type MousePressEvent::get_type() const {
+_UNIFIED_NODISCARD Event::Type MousePressEvent::get_type() const {
     return Type::MousePress;
 }
 

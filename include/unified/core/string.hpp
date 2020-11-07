@@ -2,12 +2,12 @@
 #define UNIFIED_CORE_STRING_HPP
 
 #include <unified/defines.hpp>
-#include <string.hpp>
+#include <string>
 
 UNIFIED_BEGIN_NAMESPACE
 
-typedef osl::basic_string<char> string;
-typedef osl::basic_string<wchar_t> wstring;
+typedef std::basic_string<char> string;
+typedef std::basic_string<wchar_t> wstring;
 
 UNIFIED_END_NAMESPACE
 

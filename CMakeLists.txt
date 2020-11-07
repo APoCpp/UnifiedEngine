@@ -22,12 +22,6 @@ target_compile_definitions(${PROJECT_NAME} INTERFACE "UNIFIED_LIBRARY")
 target_compile_definitions(${PROJECT_NAME} INTERFACE "$<$<CONFIG:DEBUG>:_DEBUG_>")
 target_compile_definitions(${PROJECT_NAME} INTERFACE "$<$<CONFIG:RELEASE>:_RELEASE_>")
 
-# Including the 'osl' library
-set(UNIFIED_OSL_DIR "${UNIFIED_VENDOR_DIR}/osl")
-set(OSL_BUILD_TESTS OFF CACHE INTERNAL "")
-add_subdirectory(${UNIFIED_OSL_DIR})
-target_link_libraries(${PROJECT_NAME} PUBLIC osl)
-
 # Including the 'fmt' library
 set(UNIFIED_FMT_DIR "${UNIFIED_VENDOR_DIR}/fmt/")
 add_subdirectory(${UNIFIED_FMT_DIR})

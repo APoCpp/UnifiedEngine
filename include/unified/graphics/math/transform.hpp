@@ -12,13 +12,13 @@ class Transform<double, _dimension> : public Matrix<double, _dimension, _dimensi
 {
 public:
 
-    _OSL_CONSTEXPR Transform() _OSL_NOEXCEPT : Matrix<double, _dimension, _dimension>() {
+    _UNIFIED_CONSTEXPR Transform() _UNIFIED_NOEXCEPT : Matrix<double, _dimension, _dimension>() {
         for (u32 dim = 0; dim < _dimension; dim++) {
             this->_data[dim][dim] = 1.0;
         }
     }
 
-    _OSL_CONSTEXPR Point<double, _dimension - 1> translate(Point<double, _dimension - 1> const &move) _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Point<double, _dimension - 1> translate(Point<double, _dimension - 1> const &move) _UNIFIED_NOEXCEPT {
         Point<double, _dimension - 1> result;
 
         for (u32 col = 0; col < this->columns(); col++) {
@@ -40,13 +40,13 @@ class Transform<float, _dimension> : public Matrix<float, _dimension, _dimension
 {
 public:
 
-    _OSL_CONSTEXPR Transform() _OSL_NOEXCEPT : Matrix<float, _dimension, _dimension>() {
+    _UNIFIED_CONSTEXPR Transform() _UNIFIED_NOEXCEPT : Matrix<float, _dimension, _dimension>() {
         for (u32 dim = 0; dim < _dimension; dim++) {
             this->_data[dim][dim] = 1.f;
         }
     }
 
-    _OSL_CONSTEXPR Point<double, _dimension - 1> translate(Point<double, _dimension - 1> const &move) _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Point<double, _dimension - 1> translate(Point<double, _dimension - 1> const &move) _UNIFIED_NOEXCEPT {
         Point<double, _dimension - 1> result;
 
         for (u32 col = 0; col < this->columns(); col++) {

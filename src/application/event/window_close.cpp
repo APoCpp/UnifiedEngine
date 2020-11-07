@@ -2,11 +2,11 @@
 
 UNIFIED_BEGIN_NAMESPACE
 
-_OSL_NODISCARD string WindowCloseEvent::get_name() const {
+_UNIFIED_NODISCARD string WindowCloseEvent::get_name() const {
     return "WindowCloseEvent";
 }
 
-_OSL_NODISCARD Event::Type WindowCloseEvent::get_type() const {
+_UNIFIED_NODISCARD Event::Type WindowCloseEvent::get_type() const {
     return Type::WindowClose;
 }
 

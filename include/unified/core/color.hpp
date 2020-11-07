@@ -2,20 +2,23 @@
 #define UNIFIED_CORE_COLOR_HPP
 
 #include <unified/defines.hpp>
-#include <unified/core/int_types.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
 
-// @todo: methods for converting
 class Color
 {
 public:
 
-    Color() _OSL_NOEXCEPT;
-    Color(u8 r, u8 g, u8 b) _OSL_NOEXCEPT;
-    Color(u8 r, u8 g, u8 b, u8 a) _OSL_NOEXCEPT;
+    Color() _UNIFIED_NOEXCEPT :
+        r(0.f), g(0.f), b(0.f), a(1.f) { }
 
-    u8 r, g, b, a;
+    Color(float r, float g, float b) _UNIFIED_NOEXCEPT :
+        r(r), g(g), b(b), a(1.f) { }
+
+    Color(float r, float g, float b, float a) _UNIFIED_NOEXCEPT :
+        r(r), g(g), b(b), a(a) { }
+
+    float r, g, b, a;
 
 };
 

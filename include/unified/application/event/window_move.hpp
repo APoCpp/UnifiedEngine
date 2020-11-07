@@ -11,12 +11,12 @@ class WindowMoveEvent : public Event
 {
 public:
 
-    WindowMoveEvent(int x, int y) _OSL_NOEXCEPT;
+    WindowMoveEvent(int x, int y) _UNIFIED_NOEXCEPT;
 
-    _OSL_NODISCARD virtual string get_name() const;
-    _OSL_NODISCARD virtual Type get_type() const;
+    _UNIFIED_NODISCARD virtual string get_name() const;
+    _UNIFIED_NODISCARD virtual Type get_type() const;
 
-    _OSL_NODISCARD static Type get_type_static() {
+    _UNIFIED_NODISCARD static Type get_type_static() {
         return Type::WindowMove;
     }
 

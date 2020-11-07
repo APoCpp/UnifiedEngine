@@ -13,14 +13,9 @@ class RenderTarget
 public:
 
     RenderTarget();
-    virtual ~RenderTarget() _OSL_NOEXCEPT = default;
+    virtual ~RenderTarget() _UNIFIED_NOEXCEPT = default;
 
-    void clear(Color const &color = Color(0, 0, 0, 255)) _OSL_NOEXCEPT;
-
-    void push_gl_states() _OSL_NOEXCEPT;
-    void pop_gl_states() _OSL_NOEXCEPT;
-
-    void reset_gl_states() _OSL_NOEXCEPT;
+    void clear(Color const &color = Color(0, 0, 0, 255)) _UNIFIED_NOEXCEPT;
 
 public:
 

@@ -11,99 +11,99 @@ struct Point<_type, 2>
 {
     _type x, y;
 
-    _OSL_CONSTEXPR Point() _OSL_NOEXCEPT : x(_type()), y(_type()) { }
-    _OSL_CONSTEXPR Point(_type xy) _OSL_NOEXCEPT : x(xy), y(xy) { }
-    _OSL_CONSTEXPR Point(_type x, _type y) _OSL_NOEXCEPT : x(x), y(y) { }
+    _UNIFIED_CONSTEXPR Point() _UNIFIED_NOEXCEPT : x(_type()), y(_type()) { }
+    _UNIFIED_CONSTEXPR Point(_type xy) _UNIFIED_NOEXCEPT : x(xy), y(xy) { }
+    _UNIFIED_CONSTEXPR Point(_type const x, _type const y) _UNIFIED_NOEXCEPT : x(x), y(y) { }
 
-    _OSL_CONSTEXPR _type operator[](u32 i) const _OSL_NOEXCEPT {
-        _OSL_CONSTEXPR _type Point::*accessors[] = {
+    _UNIFIED_CONSTEXPR _type operator[](u32 i) const _UNIFIED_NOEXCEPT {
+        _UNIFIED_CONSTEXPR _type Point::*accessors[] = {
             &Point::x,
             &Point::y
         };
         return this->*accessors[i];
     }
 
-    _OSL_CONSTEXPR _type &operator[](u32 i) _OSL_NOEXCEPT {
-        _OSL_CONSTEXPR _type Point::*accessors[] = {
+    _UNIFIED_CONSTEXPR _type &operator[](u32 i) _UNIFIED_NOEXCEPT {
+        _UNIFIED_CONSTEXPR _type Point::*accessors[] = {
             &Point::x,
             &Point::y
         };
         return this->*accessors[i];
     }
 
-    _OSL_CONSTEXPR Point operator+(_type const &r) const _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Point operator+(_type const &r) const _UNIFIED_NOEXCEPT {
         return Point(x + r, y + r);
     }
 
-    _OSL_CONSTEXPR Point operator+(Point const &r) const _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Point operator+(Point const &r) const _UNIFIED_NOEXCEPT {
         return Point(x + r.x, y + r.y);
     }
 
-    _OSL_CONSTEXPR Point operator-(_type const &r) const _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Point operator-(_type const &r) const _UNIFIED_NOEXCEPT {
         return Point(x - r, y - r);
     }
 
-    _OSL_CONSTEXPR Point operator-(Point const &r) const _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Point operator-(Point const &r) const _UNIFIED_NOEXCEPT {
         return Point(x - r.x, y - r.y);
     }
 
-    _OSL_CONSTEXPR Point operator*(_type const &r) const _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Point operator*(_type const &r) const _UNIFIED_NOEXCEPT {
         return Point(x * r, y * r);
     }
 
-    _OSL_CONSTEXPR Point operator*(Point const &r) const _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Point operator*(Point const &r) const _UNIFIED_NOEXCEPT {
         return Point(x * r.x, y * r.y);
     }
 
-    _OSL_CONSTEXPR Point operator/(_type const &r) const _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Point operator/(_type const &r) const _UNIFIED_NOEXCEPT {
         return Point(x / r, y / r);
     }
 
-    _OSL_CONSTEXPR Point operator/(Point const &r) const _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Point operator/(Point const &r) const _UNIFIED_NOEXCEPT {
         return Point(x / r.x, y / r.y);
     }
 
-    _OSL_CONSTEXPR Point &operator+=(_type const &r) _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Point &operator+=(_type const &r) _UNIFIED_NOEXCEPT {
         x += r, y += r;
         return *this;
     }
 
-    _OSL_CONSTEXPR Point &operator+=(Point const &r) _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Point &operator+=(Point const &r) _UNIFIED_NOEXCEPT {
         x += r.x, y += r.y;
         return *this;
     }
 
-    _OSL_CONSTEXPR Point &operator-=(_type const &r) _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Point &operator-=(_type const &r) _UNIFIED_NOEXCEPT {
         x -= r, y -= r;
         return *this;
     }
 
-    _OSL_CONSTEXPR Point &operator-=(Point const &r) _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Point &operator-=(Point const &r) _UNIFIED_NOEXCEPT {
         x -= r.x, y -= r.y;
         return *this;
     }
 
-    _OSL_CONSTEXPR Point &operator*=(_type const &r) _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Point &operator*=(_type const &r) _UNIFIED_NOEXCEPT {
         x *= r, y *= r;
         return *this;
     }
 
-    _OSL_CONSTEXPR Point &operator*=(Point const &r) _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Point &operator*=(Point const &r) _UNIFIED_NOEXCEPT {
         x *= r.x, y *= r.y;
         return *this;
     }
 
-    _OSL_CONSTEXPR Point &operator/=(_type const &r) _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Point &operator/=(_type const &r) _UNIFIED_NOEXCEPT {
         x /= r, y /= r;
         return *this;
     }
 
-    _OSL_CONSTEXPR Point &operator/=(Point const &r) _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Point &operator/=(Point const &r) _UNIFIED_NOEXCEPT {
         x /= r.x, y /= r.y;
         return *this;
     }
 
-    _OSL_CONSTEXPR u32 size() const _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR u32 size() const _UNIFIED_NOEXCEPT {
         return 2;
     }
 };

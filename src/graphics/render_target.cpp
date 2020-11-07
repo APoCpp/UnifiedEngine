@@ -14,16 +14,10 @@ RenderTarget::RenderTarget() {
     }
 }
 
-void RenderTarget::clear(Color const &color) _OSL_NOEXCEPT {
+void RenderTarget::clear(Color const &color) _UNIFIED_NOEXCEPT {
     glClearColor(color.r / 255.f, color.g / 255.f, color.b / 255.f, color.a / 255.f);
     glClear(GL_COLOR_BUFFER_BIT);
 }
-
-void RenderTarget::push_gl_states() _OSL_NOEXCEPT { }
-
-void RenderTarget::pop_gl_states() _OSL_NOEXCEPT { }
-
-void RenderTarget::reset_gl_states() _OSL_NOEXCEPT { }
 
 void RenderTarget::draw(Drawable const &drawable) const {
     drawable.draw(*this);
