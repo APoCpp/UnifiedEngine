@@ -6,6 +6,9 @@
 #include <unified/graphics/math/transform.hpp>
 #include <unified/graphics/math/vertex2.hpp>
 #include <unified/graphics/vertex_array.hpp>
+#include <unified/graphics/shader.hpp>
+
+#include <glad/glad.h>
 
 using namespace Unified;
 
@@ -14,42 +17,54 @@ class Example : public Application
 public:
 
     VertexArray vertex_array;
-    Transform3d model_view;
-    Point2d position;
+
+    bool calculate_state;
+    Vertex2d segments[4] = {
+        { { -1.0, -1.0 } },
+        { { -1.0,  1.0 } },
+        { {  1.0,  1.0 } },
+        { {  1.0, -1.0 } }
+    };
 
 public:
 
     Example() : Application("Unified", VideoMode(800, 600), Window::Resizable),
-        vertex_array(PrimitiveType::Quads, 2, 4), model_view(), position(0.0) {
+        vertex_array(PrimitiveType::Polygon, 2, 4), calculate_state(true) {
+    }
+
+    void calculate_colors() {
+        if (calculate_state) {
+
+            segments[0].color.r += 0.01f;
+            segments[1].color.g += 0.01f;
+            segments[2].color.b += 0.01f;
+            segments[3].color.r += 0.01f;
+            segments[3].color.b += 0.01f;
+
+            if (segments[0].color.r >= 1.f)
+                calculate_state = false;
+
+        } else {
+
+            segments[0].color.r -= 0.01f;
+            segments[1].color.g -= 0.01f;
+            segments[2].color.b -= 0.01f;
+            segments[3].color.r -= 0.01f;
+            segments[3].color.b -= 0.01f;
+
+            if (segments[0].color.r < 0.02f)
+                calculate_state = true;
+
+        }
     }
 
     void render() {
-        Vertex2d vertices[4] = {
-            position + model_view.translate({ -0.3, -0.3 }),
-            position + model_view.translate({ -0.3,  0.3 }),
-            position + model_view.translate({  0.3,  0.3 }),
-            position + model_view.translate({  0.3, -0.3 })
-        };
-
-        vertex_array.write(vertices, sizeof(vertices));
+        vertex_array.write(segments, sizeof(segments));
         draw(vertex_array);
     }
 
     void window_resize_event(WindowResizeEvent const &event) {
         set_viewport(event.size);
-    }
-
-    void input_handle(Keyboard::Code code) {
-        Keyboard::Action action = get_key_action(code);
-        if (action == Keyboard::Action::Press || action == Keyboard::Action::Repeat) {
-            switch (code) {
-                case (Keyboard::Code::W): { position += model_view.translate({  0.0,  0.1 }); break; }
-                case (Keyboard::Code::A): { position += model_view.translate({ -0.1,  0.0 }); break; }
-                case (Keyboard::Code::S): { position += model_view.translate({  0.0, -0.1 }); break; }
-                case (Keyboard::Code::D): { position += model_view.translate({  0.1,  0.0 }); break; }
-                default: { }
-            }
-        }
     }
 
 public:
@@ -61,11 +76,7 @@ public:
     virtual bool OnUpdate(Time) override {
         clear();
 
-        input_handle(Keyboard::Code::W);
-        input_handle(Keyboard::Code::A);
-        input_handle(Keyboard::Code::S);
-        input_handle(Keyboard::Code::D);
-
+        calculate_colors();
         render();
 
         swap_buffers();

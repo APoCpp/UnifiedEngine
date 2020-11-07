@@ -14,43 +14,43 @@ class Matrix
 {
 public:
 
-    _OSL_CONSTEXPR Matrix() _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Matrix() _UNIFIED_NOEXCEPT {
         std::fill(&_data[0][0], &_data[_rows][0], _type());
     }
 
-    _OSL_CONSTEXPR Matrix(std::initializer_list<std::initializer_list<_type>> matrix) _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Matrix(std::initializer_list<std::initializer_list<_type>> matrix) _UNIFIED_NOEXCEPT {
         u32 i = 0;
         for (auto &r : matrix) {
             std::copy(r.begin(), r.end(), _data[i++]);
         }
     }
 
-    _OSL_CONSTEXPR Matrix(_type const &fill) _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Matrix(_type const &fill) _UNIFIED_NOEXCEPT {
         std::fill(&_data[0][0], &_data[_rows][0], fill);
     }
 
-    _OSL_CONSTEXPR _type operator()(u32 row, u32 column) const _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR _type operator()(u32 row, u32 column) const _UNIFIED_NOEXCEPT {
         return _data[row][column];
     }
 
-    _OSL_CONSTEXPR _type &operator()(u32 row, u32 column) _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR _type &operator()(u32 row, u32 column) _UNIFIED_NOEXCEPT {
         return _data[row][column];
     }
 
-    _OSL_CONSTEXPR u32 rows() const _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR u32 rows() const _UNIFIED_NOEXCEPT {
         return _rows;
     }
 
-    _OSL_CONSTEXPR u32 columns() const _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR u32 columns() const _UNIFIED_NOEXCEPT {
         return _columns;
     }
 
-    _OSL_CONSTEXPR u32 size() const _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR u32 size() const _UNIFIED_NOEXCEPT {
         return _rows * _columns;
     }
 
-    _type *data() {
-        return reinterpret_cast<_type*>(_data);
+    _type const *data() const {
+        return reinterpret_cast<_type const*>(_data);
     }
 
 protected:
@@ -70,7 +70,7 @@ typedef Matrix<float,    4, 4> Matrix4x4f;
 typedef Matrix<double,   4, 4> Matrix4x4d;
 
 template <class _type, uint32_t _rows, uint32_t _columns>
-_OSL_CONSTEXPR Point<_type, _columns> operator*(Matrix<_type, _rows, _columns> const &l, Point<_type, _columns> const &r) _OSL_NOEXCEPT {
+_UNIFIED_CONSTEXPR Point<_type, _columns> operator*(Matrix<_type, _rows, _columns> const &l, Point<_type, _columns> const &r) _UNIFIED_NOEXCEPT {
     Point<_type, _columns> result;
     for (u32 col = 0; col < l.columns(); col++) {
         for (u32 row = 0; row < l.rows(); row++) {
@@ -81,7 +81,7 @@ _OSL_CONSTEXPR Point<_type, _columns> operator*(Matrix<_type, _rows, _columns> c
 }
 
 template <class _type, uint32_t _rows, uint32_t _columns>
-_OSL_CONSTEXPR Matrix<_type, _rows, _columns> operator*(Matrix<_type, _rows, _columns> l, Matrix<_type, _rows, _columns> const &r) _OSL_NOEXCEPT {
+_UNIFIED_CONSTEXPR Matrix<_type, _rows, _columns> operator*(Matrix<_type, _rows, _columns> l, Matrix<_type, _rows, _columns> const &r) _UNIFIED_NOEXCEPT {
     for (u32 col = 0; col < l.columns(); col++) {
         for (u32 row = 0; row < l.rows(); row++) {
             l(col, row) *= r(col, row);

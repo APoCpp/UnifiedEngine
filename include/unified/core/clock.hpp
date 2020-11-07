@@ -12,8 +12,8 @@ public:
 
     Clock();
 
-    Time get_elapsed_time() const _OSL_NOEXCEPT;
-    Time restart() _OSL_NOEXCEPT;
+    Time get_elapsed_time() const _UNIFIED_NOEXCEPT;
+    Time restart() _UNIFIED_NOEXCEPT;
 
 protected:
 

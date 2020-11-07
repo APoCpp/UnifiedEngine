@@ -13,7 +13,10 @@ enum class PrimitiveType
     Triangles,
     TriangleStrip,
     TriangleFan,
-    Quads
+    Quads,
+
+    QuadStrip = 8,
+    Polygon
 };
 
 UNIFIED_END_NAMESPACE

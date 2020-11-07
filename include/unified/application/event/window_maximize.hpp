@@ -10,12 +10,12 @@ class WindowMaximizeEvent : public Event
 {
 public:
 
-    WindowMaximizeEvent(int maximized) _OSL_NOEXCEPT;
+    WindowMaximizeEvent(int maximized) _UNIFIED_NOEXCEPT;
 
-    _OSL_NODISCARD virtual string get_name() const;
-    _OSL_NODISCARD virtual Type get_type() const;
+    _UNIFIED_NODISCARD virtual string get_name() const;
+    _UNIFIED_NODISCARD virtual Type get_type() const;
 
-    _OSL_NODISCARD static Type get_type_static() {
+    _UNIFIED_NODISCARD static Type get_type_static() {
         return Type::WindowMaximize;
     }
 

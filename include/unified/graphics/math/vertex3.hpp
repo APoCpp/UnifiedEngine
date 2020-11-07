@@ -13,15 +13,17 @@ class Vertex<_type, 3> : public Point<_type, 3>
 {
 public:
 
-    _OSL_CONSTEXPR Vertex() _OSL_NOEXCEPT : Point<_type, 3>() { }
+    _UNIFIED_CONSTEXPR Vertex() _UNIFIED_NOEXCEPT : Point<_type, 3>(), color() { }
 
-    _OSL_CONSTEXPR Vertex(Point<_type, 3> const &point) _OSL_NOEXCEPT {
+    _UNIFIED_CONSTEXPR Vertex(Point<_type, 3> const &point) _UNIFIED_NOEXCEPT : color() {
         this->x = point.x, this->y = point.y, this->z = point.z;
     }
 
-    _OSL_CONSTEXPR operator Point<_type, 3>() const {
+    _UNIFIED_CONSTEXPR operator Point<_type, 3>() const {
         return Point<_type, 3>(this->x, this->y, this->z);
     }
+
+    Color color;
 
 };
 

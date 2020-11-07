@@ -20,21 +20,21 @@ public:
 
     GPUBuffer(Usage usage);
 
-    virtual ~GPUBuffer() _OSL_NOEXCEPT;
+    virtual ~GPUBuffer() _UNIFIED_NOEXCEPT;
 
-    virtual void write(void const *data, u32 size) _OSL_NOEXCEPT;
+    virtual void write(void const *data, u32 size) _UNIFIED_NOEXCEPT;
 
-    _OSL_NODISCARD HandleType get_handle() const _OSL_NOEXCEPT;
+    _UNIFIED_NODISCARD HandleType get_handle() const _UNIFIED_NOEXCEPT;
 
-    void set_usage(Usage usage) _OSL_NOEXCEPT;
-    _OSL_NODISCARD Usage get_usage() const _OSL_NOEXCEPT;
+    void set_usage(Usage usage) _UNIFIED_NOEXCEPT;
+    _UNIFIED_NODISCARD Usage get_usage() const _UNIFIED_NOEXCEPT;
+
+    static void bind(GPUBuffer const *buffer) _UNIFIED_NOEXCEPT;
 
 protected:
 
-    static void bind(GPUBuffer const *buffer) _OSL_NOEXCEPT;
-
     Usage _usage;
-    HandleType _buffer;
+    HandleType _id;
     u32 _size;
 
 };

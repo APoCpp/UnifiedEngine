@@ -24,8 +24,8 @@ public:
 
     virtual ~Event() = default;
 
-    _OSL_NODISCARD virtual string get_name() const = 0;
-    _OSL_NODISCARD virtual Type get_type() const = 0;
+    _UNIFIED_NODISCARD virtual string get_name() const = 0;
+    _UNIFIED_NODISCARD virtual Type get_type() const = 0;
 
 };
 
@@ -33,7 +33,7 @@ class EventDispatcher
 {
 public:
 
-    EventDispatcher(Event &event) _OSL_NOEXCEPT;
+    EventDispatcher(Event &event) _UNIFIED_NOEXCEPT;
     virtual ~EventDispatcher() = default;
 
     template <class _type, class _function>
@@ -46,7 +46,7 @@ public:
     }
 
     template <class _type>
-    _OSL_NODISCARD _type &get_event() const {
+    _UNIFIED_NODISCARD _type &get_event() const {
         return static_cast<_type&>(_event);
     }
 

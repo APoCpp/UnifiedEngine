@@ -2,13 +2,13 @@
 
 UNIFIED_BEGIN_NAMESPACE
 
-WindowResizeEvent::WindowResizeEvent(int horizontal, int vertical) _OSL_NOEXCEPT : size(horizontal, vertical) { }
+WindowResizeEvent::WindowResizeEvent(int horizontal, int vertical) _UNIFIED_NOEXCEPT : size(horizontal, vertical) { }
 
-_OSL_NODISCARD string WindowResizeEvent::get_name() const {
+_UNIFIED_NODISCARD string WindowResizeEvent::get_name() const {
     return "WindowResizeEvent";
 }
 
-_OSL_NODISCARD Event::Type WindowResizeEvent::get_type() const {
+_UNIFIED_NODISCARD Event::Type WindowResizeEvent::get_type() const {
     return Type::WindowResize;
 }
 

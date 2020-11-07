@@ -5,7 +5,7 @@
 
 namespace
 {
-    _OSL_CONSTEXPR GLenum usage_to_glenum(UNIFIED_NAMESPACE::GPUBuffer::Usage usage) {
+    _UNIFIED_CONSTEXPR GLenum usage_to_glenum(UNIFIED_NAMESPACE::GPUBuffer::Usage usage) {
         switch (usage) {
             case UNIFIED_NAMESPACE::GPUBuffer::Usage::Static: return GL_STATIC_DRAW;
             case UNIFIED_NAMESPACE::GPUBuffer::Usage::Dynamic: return GL_DYNAMIC_DRAW;
@@ -16,37 +16,37 @@ namespace
 
 UNIFIED_BEGIN_NAMESPACE
 
-GPUBuffer::GPUBuffer(Usage usage) : _usage(usage), _buffer(0), _size(0) {
-    if (!_buffer)
-        glGenBuffers(1, &_buffer);
+GPUBuffer::GPUBuffer(Usage usage) : _usage(usage), _id(0), _size(0) {
+    if (!_id)
+        glGenBuffers(1, &_id);
 
-    if (!_buffer)
+    if (!_id)
         throw EXCEPTION_INITIALIZATION_FAILED("failed to initialize GPU buffer");
 }
 
-GPUBuffer::~GPUBuffer() _OSL_NOEXCEPT {
-    glDeleteBuffers(1, &_buffer);
+GPUBuffer::~GPUBuffer() _UNIFIED_NOEXCEPT {
+    glDeleteBuffers(1, &_id);
 }
 
-void GPUBuffer::write(void const *data, u32 size) _OSL_NOEXCEPT {
-    glBindBuffer(GL_ARRAY_BUFFER, _buffer);
+void GPUBuffer::write(void const *data, u32 size) _UNIFIED_NOEXCEPT {
+    glBindBuffer(GL_ARRAY_BUFFER, _id);
     glBufferData(GL_ARRAY_BUFFER, _size = size, data, usage_to_glenum(_usage));
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-_OSL_NODISCARD GPUBuffer::HandleType GPUBuffer::get_handle() const _OSL_NOEXCEPT {
-    return _buffer;
+_UNIFIED_NODISCARD GPUBuffer::HandleType GPUBuffer::get_handle() const _UNIFIED_NOEXCEPT {
+    return _id;
 }
 
-void GPUBuffer::set_usage(Usage usage) _OSL_NOEXCEPT {
+void GPUBuffer::set_usage(Usage usage) _UNIFIED_NOEXCEPT {
     _usage = usage;
 }
 
-_OSL_NODISCARD GPUBuffer::Usage GPUBuffer::get_usage() const _OSL_NOEXCEPT {
+_UNIFIED_NODISCARD GPUBuffer::Usage GPUBuffer::get_usage() const _UNIFIED_NOEXCEPT {
     return _usage;
 }
 
-void GPUBuffer::bind(GPUBuffer const *buffer) _OSL_NOEXCEPT {
+void GPUBuffer::bind(GPUBuffer const *buffer) _UNIFIED_NOEXCEPT {
     glBindBuffer(GL_ARRAY_BUFFER, buffer ? buffer->get_handle() : 0);
 }
 
