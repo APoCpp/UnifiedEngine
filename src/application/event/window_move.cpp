@@ -2,13 +2,13 @@
 
 UNIFIED_BEGIN_NAMESPACE
 
-WindowMoveEvent::WindowMoveEvent(int x, int y) _UNIFIED_NOEXCEPT : position(x, y) { }
+WindowMoveEvent::WindowMoveEvent(int x, int y) : position(x, y) { }
 
-_UNIFIED_NODISCARD string WindowMoveEvent::get_name() const {
+UNIFIED_NODISCARD string WindowMoveEvent::get_name() const {
     return "WindowMoveEvent";
 }
 
-_UNIFIED_NODISCARD Event::Type WindowMoveEvent::get_type() const {
+UNIFIED_NODISCARD Event::Type WindowMoveEvent::get_type() const {
     return Type::WindowMove;
 }
 

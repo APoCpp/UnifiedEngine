@@ -1,7 +1,7 @@
-#ifndef UNIFIED_HPP
-#define UNIFIED_HPP
+#ifndef _UNIFIED_HPP
+#define _UNIFIED_HPP
 
-#include <unified/platform/platform.hpp>
+# include <unified/platform/platform.hpp>
 
 # if defined(UNIFIED_PLATFORM_WINDOWS)
 #  include <unified/platform/windows/windows.hpp>

@@ -2,6 +2,6 @@
 
 UNIFIED_BEGIN_NAMESPACE
 
-EventDispatcher::EventDispatcher(Event &event) _UNIFIED_NOEXCEPT : _event(event) { }
+EventDispatcher::EventDispatcher(Event &event) : _event(event) { }
 
 UNIFIED_END_NAMESPACE

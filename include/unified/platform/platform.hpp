@@ -1,5 +1,5 @@
-#ifndef UNIFIED_PLATFORM_HPP
-#define UNIFIED_PLATFORM_HPP
+#ifndef _UNIFIED_PLATFORM_HPP
+#define _UNIFIED_PLATFORM_HPP
 
 # if defined(_WIN32) || defined(_WIN64)
 #  define UNIFIED_PLATFORM_WINDOWS

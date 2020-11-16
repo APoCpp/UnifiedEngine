@@ -1,5 +1,5 @@
-#ifndef UNIFIED_CORE_STRING_HPP
-#define UNIFIED_CORE_STRING_HPP
+#ifndef _UNIFIED_CORE_STRING_HPP
+#define _UNIFIED_CORE_STRING_HPP
 
 #include <unified/defines.hpp>
 #include <string>

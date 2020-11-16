@@ -1,17 +1,17 @@
-﻿#include <unified.hpp>
+#include <unified.hpp>
 
-using namespace Unified;
+using namespace UNIFIED_NAMESPACE;
 
-class Example : public Application
+class Minimal : public Application
 {
 public:
 
-    virtual bool OnUpdate(Time) override {
+    virtual bool OnUpdate(Time&) override {
         return poll_events();
     }
 
 };
 
-Application *Unified::CreateApplication() {
-    return new Example();
+Application *UNIFIED_NAMESPACE::CreateApplication() {
+    return new Minimal();
 }

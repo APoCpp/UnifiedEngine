@@ -1,55 +1,58 @@
 cmake_minimum_required(VERSION 3.12)
 
-project(unified VERSION 0.0.1)
+project(UnifiedEngine VERSION 0.0.2)
 
-message("Building the UnifiedEngine version ${PROJECT_VERSION}")
+set(UNIFIED_PROJECT ${PROJECT_NAME})
+set(UNIFIED_VERSION ${PROJECT_VERSION})
 
 set(UNIFIED_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
 set(UNIFIED_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
-set(UNIFIED_VENDOR_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vendor")
-
-set(UNIFIED_EXAMPLE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/examples")
 
 file(GLOB_RECURSE UNIFIED_SRC_FILES "${UNIFIED_SRC_DIR}/*.cpp")
 file(GLOB_RECURSE UNIFIED_INCLUDE_FILES "${UNIFIED_INCLUDE_DIR}/*.hpp")
 
-add_library(${PROJECT_NAME} STATIC ${UNIFIED_SRC_FILES})
-target_include_directories(${PROJECT_NAME} PUBLIC "${UNIFIED_INCLUDE_DIR}/")
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+message("Building the ${UNIFIED_PROJECT} version ${UNIFIED_VERSION}")
 
-# Setting of special macro definitions
-target_compile_definitions(${PROJECT_NAME} INTERFACE "UNIFIED_LIBRARY")
-target_compile_definitions(${PROJECT_NAME} INTERFACE "$<$<CONFIG:DEBUG>:_DEBUG_>")
-target_compile_definitions(${PROJECT_NAME} INTERFACE "$<$<CONFIG:RELEASE>:_RELEASE_>")
+add_library(${UNIFIED_PROJECT} STATIC ${UNIFIED_SRC_FILES})
+set_property(TARGET ${UNIFIED_PROJECT} PROPERTY CXX_STANDARD 17)
+target_include_directories(${UNIFIED_PROJECT} PUBLIC ${UNIFIED_INCLUDE_DIR})
 
-# Including the 'fmt' library
-set(UNIFIED_FMT_DIR "${UNIFIED_VENDOR_DIR}/fmt/")
+target_compile_definitions(${UNIFIED_PROJECT} PUBLIC "UNIFIED_ENGINE")
+target_compile_definitions(${UNIFIED_PROJECT} PRIVATE "$<$<CONFIG:DEBUG>:_DEBUG_>")
+target_compile_definitions(${UNIFIED_PROJECT} PRIVATE "$<$<CONFIG:RELEASE>:_RELEASE_>")
+
+set(UNIFIED_VENDOR_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vendor")
+
+# including the 'fmt' library
+set(UNIFIED_FMT_DIR "${UNIFIED_VENDOR_DIR}/fmt")
 add_subdirectory(${UNIFIED_FMT_DIR})
-target_link_libraries(${PROJECT_NAME} PUBLIC fmt)
+target_link_libraries(${UNIFIED_PROJECT} PUBLIC fmt)
 
-# Including the 'glfw' library
+# including the 'glfw' library
 set(UNIFIED_GLFW_DIR "${UNIFIED_VENDOR_DIR}/glfw")
 set(GLFW_BUILD_EXAMPLES OFF CACHE INTERNAL "")
 set(GLFW_BUILD_TESTS OFF CACHE INTERNAL "")
 set(GLFW_BUILD_DOCS OFF CACHE INTERNAL "")
 set(GLFW_INSTALL OFF CACHE INTERNAL "")
-add_subdirectory("${UNIFIED_GLFW_DIR}/")
-target_link_libraries(${PROJECT_NAME} PUBLIC "glfw" ${GLFW_LIBRARIES})
+add_subdirectory(${UNIFIED_GLFW_DIR})
+target_link_libraries(${UNIFIED_PROJECT} PUBLIC glfw ${GLFW_LIBRARIES})
 
-# Including the 'glad' library
+# including the 'glad' library
 set(UNIFIED_GLAD_DIR "${UNIFIED_VENDOR_DIR}/glad")
 add_library(glad STATIC
     "${UNIFIED_GLAD_DIR}/src/glad.c"
     "${UNIFIED_GLAD_DIR}/include/glad/glad.h"
 )
 target_include_directories(glad PUBLIC "${UNIFIED_GLAD_DIR}/include/")
-target_link_libraries(${PROJECT_NAME} PUBLIC glad ${CMAKE_DL_LIBS})
+target_link_libraries(${UNIFIED_PROJECT} PUBLIC glad ${CMAKE_DL_LIBS})
 
-option(UNIFORM_BUILD_TESTS "Build the UnifiedEngine test programs" TRUE)
+option(UNIFORM_BUILD_EXAMPLES "Build the ${UNIFIED_PROJECT} test programs" TRUE)
 
-if (UNIFORM_BUILD_TESTS)
- message("Building the UnifiedEngine test programs")
- add_subdirectory("${UNIFIED_EXAMPLE_DIR}/draw")
- add_subdirectory("${UNIFIED_EXAMPLE_DIR}/events")
- add_subdirectory("${UNIFIED_EXAMPLE_DIR}/minimal")
+if (UNIFORM_BUILD_EXAMPLES)
+ message("Building the ${UNIFIED_PROJECT} test programs")
+ set(UNIFIED_EXAMPLES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/examples")
+ add_subdirectory("${UNIFIED_EXAMPLES_DIR}/minimal")
 endif ()
+
+
+

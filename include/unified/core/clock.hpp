@@ -1,8 +1,7 @@
-#ifndef UNIFIED_CORE_CLOCK_HPP
-#define UNIFIED_CORE_CLOCK_HPP
+#ifndef _UNIFIED_CORE_CLOCK_HPP
+#define _UNIFIED_CORE_CLOCK_HPP
 
-#include <unified/defines.hpp>
-#include <unified/core/time.hpp>
+# include <unified/core/time.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
 
@@ -12,8 +11,8 @@ public:
 
     Clock();
 
-    Time get_elapsed_time() const _UNIFIED_NOEXCEPT;
-    Time restart() _UNIFIED_NOEXCEPT;
+    UNIFIED_NODISCARD Time get_elapsed_time() const;
+    Time restart();
 
 protected:
 

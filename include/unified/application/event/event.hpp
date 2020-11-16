@@ -1,8 +1,7 @@
-#ifndef UNIFIED_APPLICATION_EVENT_HPP
-#define UNIFIED_APPLICATION_EVENT_HPP
+#ifndef _UNIFIED_APPLICATION_EVENT_HPP
+#define _UNIFIED_APPLICATION_EVENT_HPP
 
-#include <unified/defines.hpp>
-#include <unified/core/string.hpp>
+# include <unified/core/string.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
 
@@ -24,8 +23,8 @@ public:
 
     virtual ~Event() = default;
 
-    _UNIFIED_NODISCARD virtual string get_name() const = 0;
-    _UNIFIED_NODISCARD virtual Type get_type() const = 0;
+    UNIFIED_NODISCARD virtual string get_name() const = 0;
+    UNIFIED_NODISCARD virtual Type get_type() const = 0;
 
 };
 
@@ -33,11 +32,11 @@ class EventDispatcher
 {
 public:
 
-    EventDispatcher(Event &event) _UNIFIED_NOEXCEPT;
+    EventDispatcher(Event &event);
     virtual ~EventDispatcher() = default;
 
     template <class _type, class _function>
-    bool dispatch(_function const &callback) const {
+    bool dispatch(const _function &callback) const {
         if (_event.get_type() == _type::get_type_static()) {
             callback(static_cast<_type&>(_event));
             return true;
@@ -46,7 +45,7 @@ public:
     }
 
     template <class _type>
-    _UNIFIED_NODISCARD _type &get_event() const {
+    UNIFIED_NODISCARD _type &get_event() const {
         return static_cast<_type&>(_event);
     }
 
