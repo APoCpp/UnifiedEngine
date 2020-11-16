@@ -11,7 +11,7 @@ struct Window::glfw_wrapper {
 
 Window::Window(string title, VideoMode video_mode, u32 style) : _title(title), _window(new glfw_wrapper), _video_mode(video_mode), _vsync(false) {
     if (!glfwInit())
-        throw UNIFIED_CORE_EXCEPTIONS_HPP("failed to initialize glfw");
+        throw EXCEPTION_INITIALIZATION_FAILED("failed to initialize glfw");
 
     glfwWindowHint(GLFW_RESIZABLE, (style & Style::Resizable) == Style::Resizable);
     glfwWindowHint(GLFW_MAXIMIZED, (style & Style::Maximized) == Style::Maximized);
@@ -80,39 +80,41 @@ Window::Window(string title, VideoMode video_mode, u32 style) : _title(title), _
     });
 }
 
-bool Window::poll_events() _UNIFIED_NOEXCEPT {
+Window::~Window() { }
+
+bool Window::poll_events() {
     glfwPollEvents();
     return !glfwWindowShouldClose(_window->glfw_handle);
 }
 
-_UNIFIED_NODISCARD Point2i Window::get_size() const _UNIFIED_NOEXCEPT {
+UNIFIED_NODISCARD Point2i Window::get_size() const {
     glfwGetWindowSize(_window->glfw_handle, (int*)&_video_mode.width, (int*)&_video_mode.height);
     return Point2i(_video_mode.width, _video_mode.height);
 }
 
-void Window::set_size(Point2i size) _UNIFIED_NOEXCEPT {
+void Window::set_size(Point2i size) {
     glfwSetWindowSize(_window->glfw_handle, size.x, size.y);
 }
 
-_UNIFIED_NODISCARD Point2i Window::get_position() const _UNIFIED_NOEXCEPT {
+UNIFIED_NODISCARD Point2i Window::get_position() const {
     Point2i point;
     glfwGetWindowPos(_window->glfw_handle, &point.x, &point.y);
     return point;
 }
 
-void Window::set_position(Point2i point) _UNIFIED_NOEXCEPT {
+void Window::set_position(Point2i point) {
     glfwSetWindowPos(_window->glfw_handle, point.x, point.y);
 }
 
-_UNIFIED_NODISCARD bool Window::get_vsync() const _UNIFIED_NOEXCEPT {
+UNIFIED_NODISCARD bool Window::get_vsync() const {
     return _vsync;
 }
 
-void Window::set_vsync(bool enabled) _UNIFIED_NOEXCEPT {
+void Window::set_vsync(bool enabled) {
     glfwSwapInterval(_vsync = enabled);
 }
 
-void Window::swap_buffers() _UNIFIED_NOEXCEPT {
+void Window::swap_buffers() {
     glfwSwapBuffers(_window->glfw_handle);
 }
 
@@ -120,7 +122,7 @@ Keyboard::Action Window::get_key_action(Keyboard::Code code) {
     return (Keyboard::Action)glfwGetKey(_window->glfw_handle, (int)code);
 }
 
-void Window::set_event_callback(const event_callback_fn &callback) _UNIFIED_NOEXCEPT {
+void Window::set_event_callback(const event_callback_fn &callback) {
     _event_callback = callback;
 }
 

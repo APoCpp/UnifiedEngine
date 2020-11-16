@@ -1,21 +1,16 @@
-#ifndef UNIFIED_APPLICATION_WINDOW_HPP
-#define UNIFIED_APPLICATION_WINDOW_HPP
+#ifndef _UNIFIED_APPLICATION_WINDOW_HPP
+#define _UNIFIED_APPLICATION_WINDOW_HPP
 
-#include <unified/defines.hpp>
+# include <unified/application/event/window_maximize.hpp>
+# include <unified/application/event/window_resize.hpp>
+# include <unified/application/event/window_close.hpp>
+# include <unified/application/event/window_focus.hpp>
+# include <unified/application/event/mouse_press.hpp>
+# include <unified/application/event/window_move.hpp>
+# include <unified/application/event/cursor_move.hpp>
+# include <unified/application/event/key_press.hpp>
 
-#include <unified/application/event/window_maximize.hpp>
-#include <unified/application/event/window_resize.hpp>
-#include <unified/application/event/window_close.hpp>
-#include <unified/application/event/window_focus.hpp>
-#include <unified/application/event/mouse_press.hpp>
-#include <unified/application/event/window_move.hpp>
-#include <unified/application/event/cursor_move.hpp>
-#include <unified/application/event/key_press.hpp>
-
-#include <unified/core/math/point2.hpp>
-#include <unified/core/string.hpp>
-
-#include <functional>
+# include <functional>
 
 UNIFIED_BEGIN_NAMESPACE
 
@@ -46,31 +41,31 @@ public:
 
     Window(string title, VideoMode mode, u32 style);
 
-    virtual ~Window() _UNIFIED_NOEXCEPT = default;
+    virtual ~Window();
 
-    bool poll_events() _UNIFIED_NOEXCEPT;
+    bool poll_events();
 
-    _UNIFIED_NODISCARD Point2i get_size() const _UNIFIED_NOEXCEPT;
-    void set_size(Point2i size) _UNIFIED_NOEXCEPT;
+    UNIFIED_NODISCARD Point2i get_size() const;
+    void set_size(Point2i size);
 
-    _UNIFIED_NODISCARD Point2i get_position() const _UNIFIED_NOEXCEPT;
-    void set_position(Point2i point) _UNIFIED_NOEXCEPT;
+    UNIFIED_NODISCARD Point2i get_position() const;
+    void set_position(Point2i point);
 
-    _UNIFIED_NODISCARD bool get_vsync() const _UNIFIED_NOEXCEPT;
-    void set_vsync(bool enabled) _UNIFIED_NOEXCEPT;
+    UNIFIED_NODISCARD bool get_vsync() const;
+    void set_vsync(bool enabled);
 
-    void swap_buffers() _UNIFIED_NOEXCEPT;
+    void swap_buffers();
 
     Keyboard::Action get_key_action(Keyboard::Code code);
 
-    void set_event_callback(const event_callback_fn &callback) _UNIFIED_NOEXCEPT;
+    void set_event_callback(const event_callback_fn &callback);
 
 protected:
 
     string _title;
     glfw_wrapper *_window;
     event_callback_fn _event_callback;
-        
+
     VideoMode _video_mode;
     bool _vsync;
 

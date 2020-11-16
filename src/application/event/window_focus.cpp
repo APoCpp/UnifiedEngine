@@ -2,13 +2,13 @@
 
 UNIFIED_BEGIN_NAMESPACE
 
-WindowFocusEvent::WindowFocusEvent(int focused) _UNIFIED_NOEXCEPT : focused(focused) { }
+WindowFocusEvent::WindowFocusEvent(int focused) : focused(focused) { }
 
-_UNIFIED_NODISCARD string WindowFocusEvent::get_name() const {
+UNIFIED_NODISCARD string WindowFocusEvent::get_name() const {
     return "WindowFocusEvent";
 }
 
-_UNIFIED_NODISCARD Event::Type WindowFocusEvent::get_type() const {
+UNIFIED_NODISCARD Event::Type WindowFocusEvent::get_type() const {
     return Type::WindowFocus;
 }
 

@@ -1,8 +1,7 @@
-#ifndef UNIFIED_CORE_TIME_HPP
-#define UNIFIED_CORE_TIME_HPP
+#ifndef _UNIFIED_CORE_TIME_HPP
+#define _UNIFIED_CORE_TIME_HPP
 
-#include <unified/defines.hpp>
-#include <unified/core/int_types.hpp>
+# include <unified/core/int_types.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
 
@@ -10,33 +9,33 @@ class Time
 {
 public:
 
-    Time() _UNIFIED_NOEXCEPT;
-    explicit Time(u64 microseconds) _UNIFIED_NOEXCEPT;
+    Time();
+    explicit Time(u64 microseconds);
 
-    _UNIFIED_NODISCARD double asSeconds() const;
-    _UNIFIED_NODISCARD u32 asMilliseconds() const;
-    _UNIFIED_NODISCARD u64 asMicroseconds() const _UNIFIED_NOEXCEPT;
+    UNIFIED_NODISCARD double asSeconds() const;
+    UNIFIED_NODISCARD u32 asMilliseconds() const;
+    UNIFIED_NODISCARD u64 asMicroseconds() const;
 
-    _UNIFIED_NODISCARD bool operator==(Time const &object) const _UNIFIED_NOEXCEPT;
-    _UNIFIED_NODISCARD bool operator!=(Time const &object) const _UNIFIED_NOEXCEPT;
+    UNIFIED_NODISCARD bool operator==(const Time &object) const;
+    UNIFIED_NODISCARD bool operator!=(const Time &object) const;
 
-    _UNIFIED_NODISCARD bool operator>(Time const &object) _UNIFIED_NOEXCEPT;
-    _UNIFIED_NODISCARD bool operator<(Time const &object) _UNIFIED_NOEXCEPT;
+    UNIFIED_NODISCARD bool operator>(const Time &object);
+    UNIFIED_NODISCARD bool operator<(const Time &object);
 
-    _UNIFIED_NODISCARD bool operator>=(Time const &object) _UNIFIED_NOEXCEPT;
-    _UNIFIED_NODISCARD bool operator<=(Time const &object) _UNIFIED_NOEXCEPT;
+    UNIFIED_NODISCARD bool operator>=(const Time &object);
+    UNIFIED_NODISCARD bool operator<=(const Time &object);
 
-    _UNIFIED_NODISCARD Time operator+(Time const &object) _UNIFIED_NOEXCEPT;
-    Time operator+=(Time const &object) _UNIFIED_NOEXCEPT;
+    UNIFIED_NODISCARD Time operator+(const Time &object);
+    Time operator+=(const Time &object);
 
-    _UNIFIED_NODISCARD Time operator-(Time const &object) _UNIFIED_NOEXCEPT;
-    Time operator-=(Time const &object) _UNIFIED_NOEXCEPT;
+    UNIFIED_NODISCARD Time operator-(const Time &object);
+    Time operator-=(const Time &object);
 
-    _UNIFIED_NODISCARD Time operator*(Time const &object) _UNIFIED_NOEXCEPT;
-    Time operator*=(Time const &object) _UNIFIED_NOEXCEPT;
+    UNIFIED_NODISCARD Time operator*(const Time &object);
+    Time operator*=(const Time &object);
 
-    _UNIFIED_NODISCARD Time operator/(Time const &object) _UNIFIED_NOEXCEPT;
-    Time operator/=(Time const &object) _UNIFIED_NOEXCEPT;
+    UNIFIED_NODISCARD Time operator/(const Time &object);
+    Time operator/=(const Time &object);
 
 protected:
 
@@ -44,9 +43,11 @@ protected:
 
 };
 
-_UNIFIED_NODISCARD Time seconds(double count);
-_UNIFIED_NODISCARD Time milliseconds(u32 count);
-_UNIFIED_NODISCARD Time microseconds(u64 count) _UNIFIED_NOEXCEPT;
+UNIFIED_NODISCARD Time seconds(double count);
+UNIFIED_NODISCARD Time milliseconds(u32 count);
+UNIFIED_NODISCARD Time microseconds(u64 count);
+
+UNIFIED_NODISCARD Time get_current_time();
 
 UNIFIED_END_NAMESPACE
 

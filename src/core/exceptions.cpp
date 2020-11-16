@@ -1,14 +1,13 @@
 #include <unified/core/exceptions.hpp>
 
-#include <string>
-#include <fmt/format.h>
-
 UNIFIED_BEGIN_NAMESPACE
 
-initialization_failed::initialization_failed(char const *target) : _target(target) { }
+initialization_failed::initialization_failed(const char *message) : _message(message) { }
 
-const char *initialization_failed::what() const _UNIFIED_NOEXCEPT {
-    return _target;
+initialization_failed::~initialization_failed() { }
+
+const char *initialization_failed::what() const UNIFIED_NOEXCEPT {
+    return _message;
 }
 
 UNIFIED_END_NAMESPACE

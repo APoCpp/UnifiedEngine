@@ -1,16 +1,31 @@
-#ifndef UNIFIED_CORE_INT_TYPES_HPP
-#define UNIFIED_CORE_INT_TYPES_HPP
+#ifndef _UNIFIED_CORE_INT_TYPES_HPP
+#define _UNIFIED_CORE_INT_TYPES_HPP
+
+# include <unified/defines.hpp>
+# include <bits/wordsize.h>
+
+UNIFIED_BEGIN_NAMESPACE
 
 typedef signed char s8;
-typedef unsigned char u8;
+typedef short int   s16;
+typedef int         s32;
 
-typedef int i32;
-typedef unsigned int ui32;
+# if __WORDSIZE == 64
+ typedef long int s64;
+# else
+ typedef long long int s64;
+# endif
 
-typedef signed   long s32;
-typedef unsigned long u32;
+typedef unsigned char      u8;
+typedef unsigned short int u16;
+typedef unsigned int       u32;
 
-typedef signed   long long s64;
-typedef unsigned long long u64;
+#if __WORDSIZE == 64
+ typedef unsigned long int u64;
+#else
+ typedef unsigned long long int u64;
+#endif
+
+UNIFIED_END_NAMESPACE
 
 #endif

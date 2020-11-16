@@ -1,7 +1,7 @@
-#ifndef UNIFIED_PLATFORM_WINDOWS_HPP
-#define UNIFIED_PLATFORM_WINDOWS_HPP
+#ifndef _UNIFIED_PLATFORM_WINDOWS_HPP
+#define _UNIFIED_PLATFORM_WINDOWS_HPP
 
-#include <unified/application/application.hpp>
+# include <unified/application/application.hpp>
 
 # if defined(_RELEASE_)
 #  if defined(WINAPI)
@@ -13,7 +13,7 @@ int WinMain()
 int main()
 # endif
 {
-    Unified::Application *application = Unified::CreateApplication();
+    UNIFIED_NAMESPACE::Application *application = UNIFIED_NAMESPACE::CreateApplication();
     application->run();
     delete application;
     return 0;

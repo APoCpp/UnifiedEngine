@@ -1,8 +1,8 @@
-#ifndef UNIFIED_CORE_EXCEPTIONS_HPP
-#define UNIFIED_CORE_EXCEPTIONS_HPP
+#ifndef _UNIFIED_CORE_EXCEPTIONS_HPP
+#define _UNIFIED_CORE_EXCEPTIONS_HPP
 
-#include <unified/defines.hpp>
-#include <exception>
+# include <unified/defines.hpp>
+# include <exception>
 
 UNIFIED_BEGIN_NAMESPACE
 
@@ -10,20 +10,20 @@ class initialization_failed : public std::exception
 {
 public:
 
-    initialization_failed(char const *target);
-    virtual ~initialization_failed() = default;
+    initialization_failed(const char *message);
+    virtual ~initialization_failed();
 
-    virtual char const *what() const _UNIFIED_NOEXCEPT;
+    virtual const char *what() const UNIFIED_NOEXCEPT;
 
 protected:
 
-    char const *_target;
+    const char *_message;
 
 };
 
-#define EXCEPTION_INITIALIZATION_FAILED(content) \
-    initialization_failed(content)
-
 UNIFIED_END_NAMESPACE
+
+# define EXCEPTION_INITIALIZATION_FAILED(content) \
+     initialization_failed(content)
 
 #endif
