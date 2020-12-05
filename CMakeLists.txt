@@ -11,7 +11,7 @@ set(UNIFIED_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 file(GLOB_RECURSE UNIFIED_SRC_FILES "${UNIFIED_SRC_DIR}/*.cpp")
 file(GLOB_RECURSE UNIFIED_INCLUDE_FILES "${UNIFIED_INCLUDE_DIR}/*.hpp")
 
-message("Building the ${UNIFIED_PROJECT} version ${UNIFIED_VERSION}")
+message("-- Building the ${UNIFIED_PROJECT} version ${UNIFIED_VERSION}")
 
 add_library(${UNIFIED_PROJECT} STATIC ${UNIFIED_SRC_FILES})
 set_property(TARGET ${UNIFIED_PROJECT} PROPERTY CXX_STANDARD 17)
@@ -46,7 +46,7 @@ add_library(glad STATIC
 target_include_directories(glad PUBLIC "${UNIFIED_GLAD_DIR}/include/")
 target_link_libraries(${UNIFIED_PROJECT} PUBLIC glad ${CMAKE_DL_LIBS})
 
-option(UNIFORM_BUILD_EXAMPLES "Build the ${UNIFIED_PROJECT} test programs" TRUE)
+option(UNIFORM_BUILD_EXAMPLES "-- Build the ${UNIFIED_PROJECT} test programs" TRUE)
 
 if (UNIFORM_BUILD_EXAMPLES)
  message("Building the ${UNIFIED_PROJECT} test programs")
@@ -54,5 +54,3 @@ if (UNIFORM_BUILD_EXAMPLES)
  add_subdirectory("${UNIFIED_EXAMPLES_DIR}/minimal")
  add_subdirectory("${UNIFIED_EXAMPLES_DIR}/draw")
 endif ()
-
-
