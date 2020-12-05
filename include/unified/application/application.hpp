@@ -2,13 +2,14 @@
 #define _UNIFIED_APPLICATION_HPP
 
 # include <unified/application/window/window.hpp>
+# include <unified/graphics/render_target.hpp>
 # include <unified/core/clock.hpp>
 
 # define BIND_EVENT_FN(method, object) std::bind(method, object, std::placeholders::_1)
 
 UNIFIED_BEGIN_NAMESPACE
 
-class Application : public Window
+class Application : public Window, public RenderTarget
 {
 public:
 

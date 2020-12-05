@@ -1,7 +1,7 @@
 #ifndef UNIFIED_APPLICATION_EVENT_WINDOW_RESIZE_HPP
 #define UNIFIED_APPLICATION_EVENT_WINDOW_RESIZE_HPP
 
-# include <unified/application/event/event.hpp>
+# include <unified/application/event.hpp>
 # include <unified/core/math/point2.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
