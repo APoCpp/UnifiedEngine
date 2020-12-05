@@ -11,7 +11,6 @@ class initialization_failed : public std::exception
 public:
 
     initialization_failed(const char *message);
-    virtual ~initialization_failed();
 
     virtual const char *what() const UNIFIED_NOEXCEPT;
 

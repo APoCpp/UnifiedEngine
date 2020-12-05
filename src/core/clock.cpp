@@ -14,5 +14,4 @@ Time Clock::restart() {
     return _timestamp = get_current_time();
 }
 
-
 UNIFIED_END_NAMESPACE

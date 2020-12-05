@@ -52,7 +52,7 @@ if (UNIFORM_BUILD_EXAMPLES)
  message("Building the ${UNIFIED_PROJECT} test programs")
  set(UNIFIED_EXAMPLES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/examples")
  add_subdirectory("${UNIFIED_EXAMPLES_DIR}/minimal")
+ add_subdirectory("${UNIFIED_EXAMPLES_DIR}/draw")
 endif ()
-
 
 

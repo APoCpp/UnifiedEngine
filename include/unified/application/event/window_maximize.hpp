@@ -1,7 +1,7 @@
 #ifndef _UNIFIED_APPLICATION_EVENT_WINDOW_MAXIMIZE_HPP
 #define _UNIFIED_APPLICATION_EVENT_WINDOW_MAXIMIZE_HPP
 
-# include <unified/application/event/event.hpp>
+# include <unified/application/event.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
 

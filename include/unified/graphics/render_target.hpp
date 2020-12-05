@@ -1,0 +1,23 @@
+#ifndef _UNIFIED_GRAPHICS_RENDER_TARGET_HPP
+#define _UNIFIED_GRAPHICS_RENDER_TARGET_HPP
+
+# include <unified/graphics/drawable.hpp>
+# include <unified/graphics/color.hpp>
+
+UNIFIED_BEGIN_NAMESPACE
+
+class RenderTarget
+{
+public:
+
+    RenderTarget();
+
+    void clear(Color const &color = Color(0, 0, 0, 255));
+
+    void draw(const Drawable &object) const;
+
+};
+
+UNIFIED_END_NAMESPACE
+
+#endif

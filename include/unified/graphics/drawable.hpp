@@ -1,0 +1,24 @@
+#ifndef _UNIFIED_GRAPHICS_DRAWABLE_HPP
+#define _UNIFIED_GRAPHICS_DRAWABLE_HPP
+
+# include <unified/defines.hpp>
+
+UNIFIED_BEGIN_NAMESPACE
+
+class RenderTarget;
+
+class Drawable
+{
+protected:
+
+    friend class RenderTarget;
+
+    virtual ~Drawable();
+
+    virtual void draw(RenderTarget const&) const = 0;
+
+};
+
+UNIFIED_END_NAMESPACE
+
+#endif
