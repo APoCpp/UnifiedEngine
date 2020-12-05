@@ -13,6 +13,7 @@ public:
     VertexArray vertex_array;
 
     bool calculate_state;
+
     Vertex<double, 2> segments[4] = {
         { { -1.0, -1.0 } },
         { { -1.0,  1.0 } },
@@ -27,26 +28,25 @@ public:
         set_frame_limit(60);
     }
 
-    void calculate_colors(Time &elapsed) {
-        float elapsed_fl = (float)elapsed.asSeconds();
+    void calculate_colors(float elapsed) {
         if (calculate_state) {
 
-            segments[0].color.r += 1.f * elapsed_fl;
-            segments[1].color.g += 1.f * elapsed_fl;
-            segments[2].color.b += 1.f * elapsed_fl;
-            segments[3].color.r += 1.f * elapsed_fl;
-            segments[3].color.b += 1.f * elapsed_fl;
+            segments[0].color.r += 1.f * elapsed;
+            segments[1].color.g += 1.f * elapsed;
+            segments[2].color.b += 1.f * elapsed;
+            segments[3].color.r += 1.f * elapsed;
+            segments[3].color.b += 1.f * elapsed;
 
             if (segments[0].color.r >= 1.f)
                 calculate_state = false;
 
         } else {
 
-            segments[0].color.r -= 1.f * elapsed_fl;
-            segments[1].color.g -= 1.f * elapsed_fl;
-            segments[2].color.b -= 1.f * elapsed_fl;
-            segments[3].color.r -= 1.f * elapsed_fl;
-            segments[3].color.b -= 1.f * elapsed_fl;
+            segments[0].color.r -= 1.f * elapsed;
+            segments[1].color.g -= 1.f * elapsed;
+            segments[2].color.b -= 1.f * elapsed;
+            segments[3].color.r -= 1.f * elapsed;
+            segments[3].color.b -= 1.f * elapsed;
 
             if (segments[0].color.r <= 0.0f)
                 calculate_state = true;
@@ -68,7 +68,7 @@ public:
     virtual bool OnUpdate(Time &elapsed) override {
         clear();
 
-        calculate_colors(elapsed);
+        calculate_colors((float)elapsed.asSeconds());
         render();
 
         swap_buffers();

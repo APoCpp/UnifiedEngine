@@ -3,7 +3,7 @@
 
 #if defined(UNIFIED_PLATFORM_WINDOWS)
 
-#  include <windows.h>
+# include <windows.h>
 
 UNIFIED_BEGIN_NAMESPACE
 
@@ -13,9 +13,9 @@ void sleep(Time duration) {
 
 UNIFIED_END_NAMESPACE
 
-# elif defined(UNIFIED_PLATFORM_LINUX)
+#elif defined(UNIFIED_PLATFORM_LINUX)
 
-#  include <unistd.h>
+# include <unistd.h>
 
 UNIFIED_BEGIN_NAMESPACE
 
