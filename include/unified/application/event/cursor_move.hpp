@@ -12,12 +12,7 @@ public:
 
     CursorMoveEvent(double x, double y);
 
-    UNIFIED_NODISCARD virtual string get_name() const;
-    UNIFIED_NODISCARD virtual Type get_type() const;
-
-    UNIFIED_NODISCARD static Type get_type_static() {
-        return Type::CursorMove;
-    }
+    UNIFIED_EVENT_CLASS_TYPE(Type::CursorMove)
 
     const Point2d position;
 

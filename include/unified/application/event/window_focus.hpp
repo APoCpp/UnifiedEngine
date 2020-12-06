@@ -11,12 +11,7 @@ public:
 
     WindowFocusEvent(int focused);
 
-    UNIFIED_NODISCARD virtual string get_name() const;
-    UNIFIED_NODISCARD virtual Type get_type() const;
-
-    UNIFIED_NODISCARD static Type get_type_static() {
-        return Type::WindowFocus;
-    }
+    UNIFIED_EVENT_CLASS_TYPE(Type::WindowFocus)
 
     const bool focused;
 

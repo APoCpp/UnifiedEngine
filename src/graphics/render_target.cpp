@@ -5,9 +5,8 @@
 UNIFIED_BEGIN_NAMESPACE
 
 RenderTarget::RenderTarget() {
-    if (!gladLoadGL()) {
+    if (!gladLoadGL())
         throw EXCEPTION_INITIALIZATION_FAILED("failed to initialize glad");
-    }
 }
 
 void RenderTarget::clear(Color const &color) {

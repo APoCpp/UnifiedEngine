@@ -80,8 +80,6 @@ Window::Window(string title, VideoMode video_mode, u32 style) : _title(title), _
     });
 }
 
-Window::~Window() { }
-
 bool Window::poll_events() {
     glfwPollEvents();
     return !glfwWindowShouldClose(_window->glfw_handle);

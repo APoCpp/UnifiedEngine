@@ -21,10 +21,6 @@ struct Vertex<_type, 3> : public Point<_type, 3>
         this->x = point.x, this->y = point.y;
     }
 
-    UNIFIED_CONSTEXPR operator Point<_type, 3>() const {
-        return Point<_type, 3>(this->x, this->y);
-    }
-
     Color color;
 
 };

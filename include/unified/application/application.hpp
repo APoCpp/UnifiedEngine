@@ -14,7 +14,6 @@ class Application : public Window, public RenderTarget
 public:
 
     Application(string title = "Unified", VideoMode video_mode = VideoMode(800, 600), u32 style = Window::Resizable);
-    virtual ~Application();
 
     void run();
 

@@ -21,19 +21,21 @@ public:
         KeyPress
     };
 
-    virtual ~Event() = default;
-
-    UNIFIED_NODISCARD virtual string get_name() const = 0;
+    UNIFIED_NODISCARD virtual const char *get_name() const = 0;
     UNIFIED_NODISCARD virtual Type get_type() const = 0;
 
 };
+
+# define UNIFIED_EVENT_CLASS_TYPE(event_type) \
+    UNIFIED_NODISCARD virtual const char *get_name() const { return #event_type; } \
+    UNIFIED_NODISCARD virtual Type get_type() const { return event_type; } \
+    UNIFIED_NODISCARD static Type get_type_static() { return event_type; } \
 
 class EventDispatcher
 {
 public:
 
     EventDispatcher(Event &event);
-    virtual ~EventDispatcher() = default;
 
     template <class _type, class _function>
     bool dispatch(const _function &callback) const {

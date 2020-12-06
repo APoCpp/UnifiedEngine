@@ -12,12 +12,7 @@ public:
 
     MousePressEvent(int code, int action);
 
-    UNIFIED_NODISCARD virtual string get_name() const;
-    UNIFIED_NODISCARD virtual Type get_type() const;
-
-    UNIFIED_NODISCARD static Type get_type_static() {
-        return Type::MousePress;
-    }
+    UNIFIED_EVENT_CLASS_TYPE(Type::MousePress)
 
     const Mouse::Code code;
     const Mouse::Action action;
