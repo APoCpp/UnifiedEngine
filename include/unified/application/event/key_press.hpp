@@ -12,12 +12,7 @@ public:
 
     KeyPressEvent(int code, int action);
 
-    UNIFIED_NODISCARD virtual string get_name() const;
-    UNIFIED_NODISCARD virtual Type get_type() const;
-
-    UNIFIED_NODISCARD static Type get_type_static() {
-        return Type::KeyPress;
-    }
+    UNIFIED_EVENT_CLASS_TYPE(Type::KeyPress)
 
     const Keyboard::Code code;
     const Keyboard::Action action;

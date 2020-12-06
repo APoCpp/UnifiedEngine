@@ -8,8 +8,6 @@ Application::Application(string title, VideoMode video_mode, u32 style) : Window
     set_event_callback(BIND_EVENT_FN(&Application::OnEvent, this));
 }
 
-Application::~Application() { }
-
 void Application::run() {
     Time elapsed;
     while (OnUpdate(elapsed)) {
