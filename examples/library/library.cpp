@@ -1,3 +1,5 @@
+#define UNIFIED_LIBRARY_MODE
+
 #include <unified.hpp>
 
 using namespace Unified;
@@ -6,12 +8,16 @@ class Template : public Application
 {
 public:
 
+    using Application::Application;
+
     virtual bool OnUpdate(Time&) override {
         return poll_events();
     }
 
 };
 
-Application *UNIFIED_NAMESPACE::CreateApplication() {
-    return new Template();
+int main() {
+    Template application("Template");
+    application.run();
+    return 0;
 }

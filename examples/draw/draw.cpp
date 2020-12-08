@@ -1,20 +1,20 @@
 #include <unified.hpp>
 
 #include <unified/graphics/math/vertex2.hpp>
-#include <unified/graphics/drawable/vertex_array.hpp>
+#include <unified/graphics/drawable/array.hpp>
 #include <unified/graphics/shader.hpp>
 
-using namespace UNIFIED_NAMESPACE;
+using namespace Unified;
 
 class Draw : public Application
 {
 public:
 
-    VertexArray vertex_array;
+    Graphics::Array vertex_array;
 
     bool calculate_state;
 
-    Vertex<double, 2> segments[4] = {
+    Graphics::Vertex<double, 2> segments[4] = {
         { { -1.0, -1.0 } },
         { { -1.0,  1.0 } },
         { {  1.0,  1.0 } },
@@ -24,7 +24,7 @@ public:
 public:
 
     Draw() : Application("Unified", VideoMode(800, 600), Window::Resizable),
-        vertex_array(PrimitiveType::Polygon, 2, 4), calculate_state(true) {
+        vertex_array(Graphics::PrimitiveType::Polygon, 2, 4), calculate_state(true) {
         set_frame_limit(60);
     }
 

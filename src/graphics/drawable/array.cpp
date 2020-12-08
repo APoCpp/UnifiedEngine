@@ -1,23 +1,23 @@
-#include <unified/graphics/drawable/vertex_array.hpp>
+#include <unified/graphics/drawable/array.hpp>
 #include <unified/graphics/shader.hpp>
 #include <glad/glad.h>
 
 UNIFIED_BEGIN_NAMESPACE
+UNIFIED_GRAPHICS_BEGIN_NAMESPACE
 
-VertexArray::VertexArray(PrimitiveType type, u32 vertices_dimension, u32 vertices_count, Buffer::Usage usage) :
+Array::Array(PrimitiveType type, u32 vertices_dimension, u32 vertices_count, Buffer::Usage usage) :
     _buffer(usage), _primitive_type(type), _vertices_dimension(vertices_dimension), _vertices_count(vertices_count) { }
 
-void VertexArray::draw(RenderTarget const&) const {
-    Buffer::bind(&_buffer);
+void Array::draw(RenderTarget const&) const {
+    Buffer::ScopeBind bind(&_buffer);
 
     static Shader shader(
-        #include "vertex_array.vert"
+        #include "array.vert"
             ,
-        #include "vertex_array.frag"
+        #include "array.frag"
     );
 
-    GLint buffer_size = 0;
-    glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &buffer_size);
+    GLint buffer_size = _buffer.size();
 
     glVertexAttribPointer(0, _vertices_dimension, GL_DOUBLE, GL_FALSE,
         buffer_size / _vertices_count, (void*)0);
@@ -33,8 +33,7 @@ void VertexArray::draw(RenderTarget const&) const {
 
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
-
-    Buffer::bind(0);
 }
 
+UNIFIED_GRAPHICS_END_NAMESPACE
 UNIFIED_END_NAMESPACE

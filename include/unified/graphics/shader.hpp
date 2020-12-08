@@ -7,6 +7,7 @@
 # include <unified/core/math/point_fwd.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
+UNIFIED_GRAPHICS_BEGIN_NAMESPACE
 
 class Shader
 {
@@ -45,6 +46,7 @@ public:
     void set_double4x4(const char *name, const Matrix<double, 4, 4> &value);
 
     static void bind(const Shader *shader);
+    static void unbind();
 
 protected:
 
@@ -57,6 +59,7 @@ protected:
 
 };
 
+UNIFIED_GRAPHICS_END_NAMESPACE
 UNIFIED_END_NAMESPACE
 
 #endif

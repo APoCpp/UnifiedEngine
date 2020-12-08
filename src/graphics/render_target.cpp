@@ -3,10 +3,11 @@
 #include <glad/glad.h>
 
 UNIFIED_BEGIN_NAMESPACE
+UNIFIED_GRAPHICS_BEGIN_NAMESPACE
 
 RenderTarget::RenderTarget() {
     if (!gladLoadGL())
-        throw EXCEPTION_INITIALIZATION_FAILED("failed to initialize glad");
+        throw Exceptions::initialization_failed("failed to initialize glad");
 }
 
 void RenderTarget::clear(Color const &color) {
@@ -18,4 +19,5 @@ void RenderTarget::draw(const Drawable &object) const {
     object.draw(*this);
 }
 
+UNIFIED_GRAPHICS_END_NAMESPACE
 UNIFIED_END_NAMESPACE

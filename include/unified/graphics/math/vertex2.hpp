@@ -6,6 +6,7 @@
 # include <unified/graphics/color.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
+UNIFIED_GRAPHICS_BEGIN_NAMESPACE
 
 template <class _type>
 struct Vertex<_type, 2> : public Point<_type, 2>
@@ -25,6 +26,7 @@ struct Vertex<_type, 2> : public Point<_type, 2>
 
 };
 
+UNIFIED_GRAPHICS_END_NAMESPACE
 UNIFIED_END_NAMESPACE
 
 #endif

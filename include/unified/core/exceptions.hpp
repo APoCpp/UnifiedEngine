@@ -4,25 +4,28 @@
 # include <unified/defines.hpp>
 # include <exception>
 
+# define GENERATE_EXCEPTION_CLASS(class_name) \
+    class class_name : public std::exception \
+    { \
+    public: \
+        class_name(const char *message) : _message(message) { } \
+        virtual const char *what() const UNIFIED_NOEXCEPT { \
+            return _message; \
+        } \
+    protected: \
+        const char *_message; \
+    } \
+
 UNIFIED_BEGIN_NAMESPACE
 
-class initialization_failed : public std::exception
+namespace Exceptions
 {
-public:
 
-    initialization_failed(const char *message);
+    GENERATE_EXCEPTION_CLASS(initialization_failed);
+    GENERATE_EXCEPTION_CLASS(misbehavior);
 
-    virtual const char *what() const UNIFIED_NOEXCEPT;
-
-protected:
-
-    const char *_message;
-
-};
+}
 
 UNIFIED_END_NAMESPACE
-
-# define EXCEPTION_INITIALIZATION_FAILED(content) \
-     initialization_failed(content)
 
 #endif

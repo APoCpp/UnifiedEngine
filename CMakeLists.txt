@@ -17,7 +17,7 @@ add_library(${UNIFIED_PROJECT} STATIC ${UNIFIED_SRC_FILES})
 set_property(TARGET ${UNIFIED_PROJECT} PROPERTY CXX_STANDARD 17)
 target_include_directories(${UNIFIED_PROJECT} PUBLIC ${UNIFIED_INCLUDE_DIR})
 
-target_compile_definitions(${UNIFIED_PROJECT} PUBLIC "UNIFIED_ENGINE")
+target_compile_definitions(${UNIFIED_PROJECT} PUBLIC "UNIFIED_GDK")
 target_compile_definitions(${UNIFIED_PROJECT} PRIVATE "$<$<CONFIG:DEBUG>:_DEBUG_>")
 target_compile_definitions(${UNIFIED_PROJECT} PRIVATE "$<$<CONFIG:RELEASE>:_RELEASE_>")
 
@@ -51,6 +51,7 @@ option(UNIFORM_BUILD_EXAMPLES "-- Build the ${UNIFIED_PROJECT} test programs" TR
 if (UNIFORM_BUILD_EXAMPLES)
  message("Building the ${UNIFIED_PROJECT} test programs")
  set(UNIFIED_EXAMPLES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/examples")
- add_subdirectory("${UNIFIED_EXAMPLES_DIR}/minimal")
  add_subdirectory("${UNIFIED_EXAMPLES_DIR}/draw")
+ add_subdirectory("${UNIFIED_EXAMPLES_DIR}/library")
+ add_subdirectory("${UNIFIED_EXAMPLES_DIR}/minimal")
 endif ()
