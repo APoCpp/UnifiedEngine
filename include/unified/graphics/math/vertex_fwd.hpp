@@ -4,10 +4,12 @@
 # include <unified/core/int_types.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
+UNIFIED_GRAPHICS_BEGIN_NAMESPACE
 
 template <class _type, u32 _dimension>
 struct Vertex;
 
+UNIFIED_GRAPHICS_END_NAMESPACE
 UNIFIED_END_NAMESPACE
 
 #endif

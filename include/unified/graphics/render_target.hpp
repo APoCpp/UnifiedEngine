@@ -5,6 +5,7 @@
 # include <unified/graphics/color.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
+UNIFIED_GRAPHICS_BEGIN_NAMESPACE
 
 class RenderTarget
 {
@@ -18,6 +19,7 @@ public:
 
 };
 
+UNIFIED_GRAPHICS_END_NAMESPACE
 UNIFIED_END_NAMESPACE
 
 #endif

@@ -4,6 +4,7 @@
 # include <unified/defines.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
+UNIFIED_GRAPHICS_BEGIN_NAMESPACE
 
 class Color
 {
@@ -22,7 +23,7 @@ public:
 
 };
 
-
+UNIFIED_GRAPHICS_END_NAMESPACE
 UNIFIED_END_NAMESPACE
 
 #endif

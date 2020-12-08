@@ -9,6 +9,7 @@
 #include <glad/glad.h>
 
 UNIFIED_BEGIN_NAMESPACE
+UNIFIED_GRAPHICS_BEGIN_NAMESPACE
 
 Shader::Shader() : _id(0) { }
 
@@ -99,6 +100,10 @@ void Shader::bind(Shader const *shader) {
     glUseProgram(shader ? shader->get_handle() : 0);
 }
 
+void Shader::unbind() {
+    glUseProgram(0);
+}
+
 void Shader::compile(const char *vertex_shader, const char *fragment_shader) {
     GLuint vertex_shader_id = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertex_shader_id, 1, &vertex_shader, 0);
@@ -134,7 +139,8 @@ void Shader::throw_if_error(u32 id, u32 type) {
                 error.resize(size);
 
                 glGetProgramInfoLog(_id, size, 0, error.data());
-                throw EXCEPTION_INITIALIZATION_FAILED(error.c_str());
+
+                throw Exceptions::initialization_failed(error.c_str());
             }
             break;
         }
@@ -149,11 +155,13 @@ void Shader::throw_if_error(u32 id, u32 type) {
                 error.resize(size);
 
                 glGetShaderInfoLog(_id, size, 0, error.data());
-                throw EXCEPTION_INITIALIZATION_FAILED(error.c_str());
+
+                throw Exceptions::initialization_failed(error.c_str());
             }
             break;
         }
     }
 }
 
+UNIFIED_GRAPHICS_END_NAMESPACE
 UNIFIED_END_NAMESPACE

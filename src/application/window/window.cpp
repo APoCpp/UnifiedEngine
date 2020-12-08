@@ -11,7 +11,7 @@ struct Window::glfw_wrapper {
 
 Window::Window(string title, VideoMode video_mode, u32 style) : _title(title), _window(new glfw_wrapper), _video_mode(video_mode), _vsync(false) {
     if (!glfwInit())
-        throw EXCEPTION_INITIALIZATION_FAILED("failed to initialize glfw");
+        throw Exceptions::initialization_failed("failed to initialize glfw");
 
     glfwWindowHint(GLFW_RESIZABLE, (style & Style::Resizable) == Style::Resizable);
     glfwWindowHint(GLFW_MAXIMIZED, (style & Style::Maximized) == Style::Maximized);

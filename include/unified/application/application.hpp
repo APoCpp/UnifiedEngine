@@ -9,7 +9,7 @@
 
 UNIFIED_BEGIN_NAMESPACE
 
-class Application : public Window, public RenderTarget
+class Application : public Window, public UNIFIED_GRAPHICS_NAMESPACE::RenderTarget
 {
 public:
 
