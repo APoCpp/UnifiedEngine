@@ -1,14 +1,15 @@
 language: cpp
 
 addons:
-  apt:
-    packages:
-      - libxrandr-dev
-      - libxinerama-dev
-      - libxcursor-dev
-      - libxi-dev
-      - libxext-dev
-      - g++-5
+    apt:
+        packages:
+            - mesa-common-dev
+            - libxrandr-dev
+            - libxinerama-dev
+            - libxcursor-dev
+            - libxi-dev
+            - libxext-dev
+            - g++-5
 
 script:
   - cmake .
