@@ -138,7 +138,7 @@ void Shader::throw_if_error(u32 id, u32 type) {
                 string error;
                 error.resize(size);
 
-                glGetProgramInfoLog(_id, size, 0, error.data());
+                glGetProgramInfoLog(_id, size, 0, (GLchar*)error.data());
 
                 throw Exceptions::initialization_failed(error.c_str());
             }
@@ -154,7 +154,7 @@ void Shader::throw_if_error(u32 id, u32 type) {
                 string error;
                 error.resize(size);
 
-                glGetShaderInfoLog(_id, size, 0, error.data());
+                glGetShaderInfoLog(_id, size, 0, (GLchar*)error.data());
 
                 throw Exceptions::initialization_failed(error.c_str());
             }
