@@ -119,11 +119,14 @@ typedef Point<double,   4> Point4d;
 
 UNIFIED_END_NAMESPACE
 
-template <class _type> struct fmt::formatter<UNIFIED_NAMESPACE::Point<_type, 4>> : fmt::formatter<std::string> {
-    template <class FormatContext>
-    auto format(const UNIFIED_NAMESPACE::Point<_type, 4> &point, FormatContext &ctx) {
-        return formatter<std::string>::format(fmt::format("{{ {}, {}, {}, {} }}", point.x, point.y, point.z, point.w), ctx);
-    }
-};
+namespace fmt
+{
+    template <class _type> struct formatter<UNIFIED_NAMESPACE::Point<_type, 4>> : formatter<std::string> {
+        template <class FormatContext>
+        auto format(const UNIFIED_NAMESPACE::Point<_type, 4> &point, FormatContext &ctx) {
+            return formatter<std::string>::format(fmt::format("{{ {}, {}, {}, {} }}", point.x, point.y, point.z, point.w), ctx);
+        }
+    };
+}
 
 #endif
