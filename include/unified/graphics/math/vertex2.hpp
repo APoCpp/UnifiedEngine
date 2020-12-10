@@ -22,6 +22,14 @@ struct Vertex<_type, 2> : public Point<_type, 2>
         this->x = point.x, this->y = point.y;
     }
 
+    UNIFIED_CONSTEXPR bool operator==(const Vertex &r) const {
+        return this->x == r.x && this->y == r.y && this->color == r.color;
+    }
+
+    UNIFIED_CONSTEXPR bool operator!=(const Vertex &r) const {
+        return !this->operator==(r);
+    }
+
     Color color;
 
 };

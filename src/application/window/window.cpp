@@ -120,6 +120,12 @@ Keyboard::Action Window::get_key_action(Keyboard::Code code) {
     return (Keyboard::Action)glfwGetKey(_window->glfw_handle, (int)code);
 }
 
+Point2d Window::get_cursor_position() {
+    Point2d point;
+    glfwGetCursorPos(_window->glfw_handle, &point.x, &point.y);
+    return point;
+}
+
 void Window::set_event_callback(const event_callback_fn &callback) {
     _event_callback = callback;
 }

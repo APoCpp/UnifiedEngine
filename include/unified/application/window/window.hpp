@@ -55,6 +55,7 @@ public:
     void swap_buffers();
 
     Keyboard::Action get_key_action(Keyboard::Code code);
+    Point2d get_cursor_position();
 
     void set_event_callback(const event_callback_fn &callback);
 

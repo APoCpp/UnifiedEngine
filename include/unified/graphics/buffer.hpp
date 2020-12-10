@@ -35,6 +35,9 @@ public:
 
     UNIFIED_NODISCARD u32 size() const;
 
+    static void bind(const Buffer *buffer);
+    static void unbind();
+
 public:
 
     class ScopeBind

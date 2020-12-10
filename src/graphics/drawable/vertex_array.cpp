@@ -1,20 +1,20 @@
-#include <unified/graphics/drawable/array.hpp>
+#include <unified/graphics/drawable/vertex_array.hpp>
 #include <unified/graphics/shader.hpp>
 #include <glad/glad.h>
 
 UNIFIED_BEGIN_NAMESPACE
 UNIFIED_GRAPHICS_BEGIN_NAMESPACE
 
-Array::Array(PrimitiveType type, u32 vertices_dimension, u32 vertices_count, Buffer::Usage usage) :
+VertexArray::VertexArray(PrimitiveType type, u32 vertices_dimension, u32 vertices_count, Buffer::Usage usage) :
     _buffer(usage), _primitive_type(type), _vertices_dimension(vertices_dimension), _vertices_count(vertices_count) { }
 
-void Array::draw(RenderTarget const&) const {
+void VertexArray::draw(RenderTarget const&) const {
     Buffer::ScopeBind bind(&_buffer);
 
     static Shader shader(
-        #include "array.vert"
+        #include "vertex_array.vert"
             ,
-        #include "array.frag"
+        #include "vertex_array.frag"
     );
 
     GLint buffer_size = _buffer.size();
