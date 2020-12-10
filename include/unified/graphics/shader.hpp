@@ -22,7 +22,7 @@ public:
 
     void create(const char *vertex_shader, const char *fragment_shader);
 
-    UNIFIED_NODISCARD HandleType get_handle() const;
+    UNIFIED_NODISCARD HandleType handle() const;
 
     void set_int(const char *name, int value);
     void set_int2(const char *name, const Point<int, 2> &value);
@@ -47,6 +47,27 @@ public:
 
     static void bind(const Shader *shader);
     static void unbind();
+
+public:
+
+    class ScopeBind
+    {
+    public:
+
+        static ScopeBind *current;
+
+        ScopeBind(const Shader *shader);
+
+        virtual ~ScopeBind();
+
+        HandleType binded() const;
+
+    protected:
+
+        ScopeBind *_prev;
+        HandleType _binded;
+
+    };
 
 protected:
 

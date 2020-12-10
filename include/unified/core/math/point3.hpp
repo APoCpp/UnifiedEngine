@@ -33,6 +33,22 @@ struct Point<_type, 3>
         return this->*accessors[i];
     }
 
+    UNIFIED_CONSTEXPR bool operator==(const _type &r) const {
+        return this->x == r && this->y == r && this->z == r;
+    }
+
+    UNIFIED_CONSTEXPR bool operator==(const Point &r) const {
+        return this->x == r.x && this->y == r.y && this->z == r.z;
+    }
+
+    UNIFIED_CONSTEXPR bool operator!=(const _type &r) const {
+        return !this->operator==(r);
+    }
+
+    UNIFIED_CONSTEXPR bool operator!=(const Point &r) const {
+        return !this->operator==(r);
+    }
+
     UNIFIED_CONSTEXPR Point operator+(const _type &r) const {
         return Point(x + r, y + r, z + r);
     }

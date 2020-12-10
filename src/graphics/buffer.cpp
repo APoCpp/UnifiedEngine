@@ -36,16 +36,18 @@ void Buffer::reallocate(u32 size) {
 
     u32 old_size = this->size();
 
-    if (old_size != 0) {
-        s8 *old_data = new s8[old_size];
+    if (old_size == 0)
+        throw Exceptions::misbehavior("impossible to reallocate memory. memory not allocated");
 
-        glGetBufferSubData(GL_ARRAY_BUFFER, 0, old_size, (void*)old_data);
-        glBufferData(GL_ARRAY_BUFFER, size, (void*)old_data, usage_to_glenum(_usage));
-
-        delete[] old_data;
-        return;
-    } else
+    if (old_size > size)
         throw Exceptions::misbehavior("impossible to reallocate less memory than already allocated. possible data loss");
+
+    s8 *old_data = new s8[old_size];
+    glGetBufferSubData(GL_ARRAY_BUFFER, 0, old_size, (void*)old_data);
+    glBufferData(GL_ARRAY_BUFFER, size, (void*)old_data, usage_to_glenum(_usage));
+    delete[] old_data;
+
+    return;
 }
 
 void Buffer::write(const void *data, u32 size, u32 offset) {
@@ -77,6 +79,17 @@ UNIFIED_NODISCARD u32 Buffer::size() const {
     glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &result);
 
     return static_cast<u32>(result);
+}
+
+void Buffer::bind(const Buffer *buffer) {
+    if (!buffer)
+        throw Exceptions::misbehavior("bad " UNIFIED_GRAPHICS_NAMESPACE_STRING "::Buffer pointer");
+
+    glBindBuffer(GL_ARRAY_BUFFER, buffer->handle());
+}
+
+void Buffer::unbind() {
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 Buffer::ScopeBind *Buffer::ScopeBind::current = 0;

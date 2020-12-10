@@ -28,7 +28,7 @@ void Shader::create(const char *vertex_shader, const char *fragment_shader) {
     compile(vertex_shader, fragment_shader);
 }
 
-UNIFIED_NODISCARD Shader::HandleType Shader::get_handle() const {
+UNIFIED_NODISCARD Shader::HandleType Shader::handle() const {
     return _id;
 }
 
@@ -96,14 +96,6 @@ void Shader::set_double4x4(const char *name, const Matrix<double, 4, 4> &value) 
     glUniformMatrix4dv(glGetUniformLocation(_id, name), 1, GL_FALSE, value.data());
 }
 
-void Shader::bind(Shader const *shader) {
-    glUseProgram(shader ? shader->get_handle() : 0);
-}
-
-void Shader::unbind() {
-    glUseProgram(0);
-}
-
 void Shader::compile(const char *vertex_shader, const char *fragment_shader) {
     GLuint vertex_shader_id = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertex_shader_id, 1, &vertex_shader, 0);
@@ -161,6 +153,44 @@ void Shader::throw_if_error(u32 id, u32 type) {
             break;
         }
     }
+}
+
+void Shader::bind(const Shader *shader) {
+    if (!shader)
+        throw Exceptions::misbehavior("bad " UNIFIED_GRAPHICS_NAMESPACE_STRING "::Shader pointer");
+
+    glUseProgram(shader->handle());
+}
+
+void Shader::unbind() {
+    glUseProgram(0);
+}
+
+Shader::ScopeBind *Shader::ScopeBind::current = 0;
+
+Shader::ScopeBind::ScopeBind(const Shader *shader) {
+    if (current && current->binded() != shader->handle()) {
+        _binded = 0;
+        return;
+    }
+
+    _prev = current;
+    _binded = shader->handle();
+    glBindBuffer(GL_ARRAY_BUFFER, _binded), current = this;
+}
+
+Shader::ScopeBind::~ScopeBind() {
+    if (_binded) {
+        if (_prev) {
+            glBindBuffer(GL_ARRAY_BUFFER, _prev->_binded), current = _prev;
+            return;
+        }
+        glBindBuffer(GL_ARRAY_BUFFER, 0), current = 0;
+    }
+}
+
+Shader::HandleType Shader::ScopeBind::binded() const {
+    return _binded;
 }
 
 UNIFIED_GRAPHICS_END_NAMESPACE
