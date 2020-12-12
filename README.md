@@ -28,3 +28,4 @@ Application *Unified::CreateApplication() {
 * [fmt](https://github.com/fmtlib/fmt)
 * [glfw](https://github.com/glfw/glfw)
 * [glad](https://glad.dav1d.de)
+* [stb](https://github.com/nothings/stb)
