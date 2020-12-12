@@ -6,4 +6,4 @@
 	url = https://github.com/fmtlib/fmt
 [submodule "vendor/stb"]
 	path = vendor/stb
-	url = https://github.com/nothings/stb/
+        url = https://github.com/nothings/stb
