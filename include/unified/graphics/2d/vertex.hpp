@@ -1,7 +1,7 @@
-#ifndef _UNIFIED_GRAPHICS_VERTEX2_HPP
-#define _UNIFIED_GRAPHICS_VERTEX2_HPP
+#ifndef _UNIFIED_GRAPHICS_2D_VERTEX_HPP
+#define _UNIFIED_GRAPHICS_2D_VERTEX_HPP
 
-# include <unified/graphics/math/vertex_fwd.hpp>
+# include <unified/graphics/vertex_fwd.hpp>
 # include <unified/core/math/point2.hpp>
 # include <unified/graphics/color.hpp>
 
@@ -31,8 +31,12 @@ struct Vertex<_type, 2> : public Point<_type, 2>
     }
 
     Color color;
-
 };
+
+typedef Vertex<unsigned, 2> Vertex2u;
+typedef Vertex<int,      2> Vertex2i;
+typedef Vertex<float,    2> Vertex2f;
+typedef Vertex<double,   2> Vertex2d;
 
 UNIFIED_GRAPHICS_END_NAMESPACE
 UNIFIED_END_NAMESPACE
