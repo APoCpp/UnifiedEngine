@@ -102,13 +102,15 @@ Buffer::ScopeBind::ScopeBind(const Buffer *buffer) {
 
     _prev = current;
     _binded = buffer->handle();
-    glBindBuffer(GL_ARRAY_BUFFER, _binded), current = this;
+    glBindBuffer(GL_ARRAY_BUFFER, _binded);
+    current = this;
 }
 
 Buffer::ScopeBind::~ScopeBind() {
     if (_binded) {
         if (_prev) {
-            glBindBuffer(GL_ARRAY_BUFFER, _prev->_binded), current = _prev;
+            glBindBuffer(GL_ARRAY_BUFFER, _prev->_binded);
+            current = _prev;
             return;
         }
         glBindBuffer(GL_ARRAY_BUFFER, 0), current = 0;

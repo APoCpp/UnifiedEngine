@@ -41,6 +41,8 @@ public:
 
     Window(string title, VideoMode mode, u32 style);
 
+    virtual ~Window() = default;
+
     bool poll_events();
 
     UNIFIED_NODISCARD Point2i get_size() const;

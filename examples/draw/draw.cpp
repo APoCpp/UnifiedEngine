@@ -1,33 +1,34 @@
 #include <unified.hpp>
 
-#include <unified/graphics/math/vertex2.hpp>
-#include <unified/graphics/drawable/vertex_list.hpp>
-
-#include <unified/core/system/sleep.hpp>
+#include <unified/graphics/2d/drawable/vertex_list.hpp>
+#include <unified/graphics/2d/vertex.hpp>
 
 using namespace Unified;
+
+using namespace Graphics;
+using namespace Graphics2D;
 
 class Draw : public Application
 {
 public:
 
-    Graphics::VertexList vertex_list;
-    Graphics::Vertex<double, 2> vertex_last;
+    VertexList vertex_list;
+    Vertex2d vertex_last;
 
     bool is_mouse_clip;
 
 public:
 
     Draw() : Application("Unified", VideoMode(800, 600), Window::Resizable),
-        vertex_list(Graphics::PrimitiveType::Polygon, 2), vertex_last({ 0.0, 0.0 }, { 0.1, 0.1, 0.1, 1.0 }), is_mouse_clip(false) {
+        vertex_list(PrimitiveType::Polygon), vertex_last({ 0.0, 0.0 }, { 0.1, 0.1, 0.1, 1.0 }), is_mouse_clip(false) {
         set_frame_limit(60);
-        vertex_list.add(Graphics::Vertex<double, 2> {
+        vertex_list.add(Vertex2d {
             Point2d { 0.0, 0.0 },
-            Graphics::Color { 0.1, 0.1, 0.1, 1.0 }
+            Color { 0.1, 0.1, 0.1, 1.0 }
         });
     }
 
-    void add_vertex(const Graphics::Vertex<double, 2> &vertex) {
+    void add_vertex(const Vertex2d &vertex) {
         if (vertex_last == vertex)
             return;
 
@@ -53,25 +54,13 @@ public:
         if (is_mouse_clip) {
             Point2i size = get_size();
             Point2d position = get_cursor_position();
-
-            add_vertex(Graphics::Vertex<double, 2> {
+            add_vertex(Vertex2d {
                 Point2d { -1.0 + (position.x * 2.0 / (double)size.x), 1.0 - (position.y * 2.0 / (double)size.y) },
-                Graphics::Color { 0.18, 1.0, 0.0, 1.0 }
+                Color { 0.18, 1.0, 0.0, 1.0 }
             });
         }
 
         draw(vertex_list);
-
-        if (get_key_action(Keyboard::Code::Space) == Keyboard::Action::Press) {
-            Graphics::Vertex<double, 2> *vertex = new Graphics::Vertex<double, 2>[vertex_list.size() / sizeof(Graphics::Vertex<double, 2>)];
-            vertex_list.read(vertex, vertex_list.size());
-
-            for (size_t i = 0; i < vertex_list.size() / sizeof(Graphics::Vertex<double, 2>); i++) {
-                fmt::print(stdout, "{{ {}, {} }}\n", vertex[i].x, vertex[i].y);
-            } fmt::print(stdout, "\n");
-
-            delete[] vertex;
-        }
 
         swap_buffers();
         return poll_events();

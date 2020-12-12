@@ -37,7 +37,7 @@ set(GLFW_BUILD_TESTS OFF CACHE INTERNAL "")
 set(GLFW_BUILD_DOCS OFF CACHE INTERNAL "")
 set(GLFW_INSTALL OFF CACHE INTERNAL "")
 add_subdirectory(${UNIFIED_GLFW_DIR})
-target_link_libraries(${UNIFIED_PROJECT} PUBLIC glfw ${GLFW_LIBRARIES})
+target_link_libraries(${UNIFIED_PROJECT} PRIVATE glfw ${GLFW_LIBRARIES})
 
 # including the 'glad' library
 set(UNIFIED_GLAD_DIR "${UNIFIED_VENDOR_DIR}/glad")
@@ -46,12 +46,15 @@ add_library(glad STATIC
     "${UNIFIED_GLAD_DIR}/include/glad/glad.h"
 )
 target_include_directories(glad PUBLIC "${UNIFIED_GLAD_DIR}/include/")
-target_link_libraries(${UNIFIED_PROJECT} PUBLIC glad ${CMAKE_DL_LIBS})
+target_link_libraries(${UNIFIED_PROJECT} PRIVATE glad ${CMAKE_DL_LIBS})
 
-option(UNIFORM_BUILD_EXAMPLES "-- Build the ${UNIFIED_PROJECT} test programs" TRUE)
+set(UNIFIED_STB_DIR "${UNIFIED_VENDOR_DIR}/stb")
+target_include_directories(${UNIFIED_PROJECT} PRIVATE ${UNIFIED_STB_DIR})
+
+option(UNIFORM_BUILD_EXAMPLES "Build the ${UNIFIED_PROJECT} test programs" TRUE)
 
 if (UNIFORM_BUILD_EXAMPLES)
- message("Building the ${UNIFIED_PROJECT} test programs")
+ message("-- Build the ${UNIFIED_PROJECT} test programs")
  set(UNIFIED_EXAMPLES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/examples")
  add_subdirectory("${UNIFIED_EXAMPLES_DIR}/draw")
  add_subdirectory("${UNIFIED_EXAMPLES_DIR}/library")
