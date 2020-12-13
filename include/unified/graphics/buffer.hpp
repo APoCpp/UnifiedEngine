@@ -44,18 +44,15 @@ public:
     {
     public:
 
-        static ScopeBind *current;
+        static Buffer *current;
 
         ScopeBind(const Buffer *buffer);
 
         virtual ~ScopeBind();
 
-        HandleType binded() const;
-
     protected:
 
-        ScopeBind *_prev;
-        HandleType _binded;
+        Buffer *_prev;
 
     };
 

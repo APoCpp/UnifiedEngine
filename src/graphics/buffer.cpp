@@ -92,33 +92,25 @@ void Buffer::unbind() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-Buffer::ScopeBind *Buffer::ScopeBind::current = 0;
+Buffer *Buffer::ScopeBind::current = 0;
 
 Buffer::ScopeBind::ScopeBind(const Buffer *buffer) {
-    if (current && current->binded() != buffer->handle()) {
-        _binded = 0;
+    if (current && (current->handle() == buffer->handle())) {
+        _prev = 0;
         return;
     }
 
     _prev = current;
-    _binded = buffer->handle();
-    glBindBuffer(GL_ARRAY_BUFFER, _binded);
-    current = this;
+    current = const_cast<Buffer*>(buffer);
+
+    bind(buffer);
 }
 
 Buffer::ScopeBind::~ScopeBind() {
-    if (_binded) {
-        if (_prev) {
-            glBindBuffer(GL_ARRAY_BUFFER, _prev->_binded);
-            current = _prev;
-            return;
-        }
-        glBindBuffer(GL_ARRAY_BUFFER, 0), current = 0;
-    }
-}
-
-Buffer::HandleType Buffer::ScopeBind::binded() const {
-    return _binded;
+    if (_prev) {
+        bind(_prev);
+        current = _prev;
+    };
 }
 
 UNIFIED_GRAPHICS_END_NAMESPACE

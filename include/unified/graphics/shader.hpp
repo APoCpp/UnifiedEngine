@@ -54,18 +54,15 @@ public:
     {
     public:
 
-        static ScopeBind *current;
+        static Shader *current;
 
         ScopeBind(const Shader *shader);
 
         virtual ~ScopeBind();
 
-        HandleType binded() const;
-
     protected:
 
-        ScopeBind *_prev;
-        HandleType _binded;
+        Shader *_prev;
 
     };
 

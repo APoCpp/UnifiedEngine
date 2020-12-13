@@ -166,31 +166,25 @@ void Shader::unbind() {
     glUseProgram(0);
 }
 
-Shader::ScopeBind *Shader::ScopeBind::current = 0;
+Shader *Shader::ScopeBind::current = 0;
 
 Shader::ScopeBind::ScopeBind(const Shader *shader) {
-    if (current && current->binded() != shader->handle()) {
-        _binded = 0;
+    if (current && (current->handle() == shader->handle())) {
+        _prev = 0;
         return;
     }
 
     _prev = current;
-    _binded = shader->handle();
-    glBindBuffer(GL_ARRAY_BUFFER, _binded), current = this;
+    current = const_cast<Shader*>(shader);
+
+    bind(shader);
 }
 
 Shader::ScopeBind::~ScopeBind() {
-    if (_binded) {
-        if (_prev) {
-            glBindBuffer(GL_ARRAY_BUFFER, _prev->_binded), current = _prev;
-            return;
-        }
-        glBindBuffer(GL_ARRAY_BUFFER, 0), current = 0;
+    if (_prev) {
+        bind(_prev);
+        current = _prev;
     }
-}
-
-Shader::HandleType Shader::ScopeBind::binded() const {
-    return _binded;
 }
 
 UNIFIED_GRAPHICS_END_NAMESPACE
