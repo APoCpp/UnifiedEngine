@@ -1,23 +1,21 @@
-#ifndef _UNIFIED_GRAPHICS_2D_DRAWABLE_VERTEX_ARRAY_HPP
-#define _UNIFIED_GRAPHICS_2D_DRAWABLE_VERTEX_ARRAY_HPP
+#ifndef _UNIFIED_GRAPHICS_2D_DRAWABLE_TEXTURE_HPP
+#define _UNIFIED_GRAPHICS_2D_DRAWABLE_TEXTURE_HPP
 
 # include <unified/graphics/drawable.hpp>
 # include <unified/graphics/primitive_type.hpp>
 
 # include <unified/graphics/buffer.hpp>
-
+# include <unified/graphics/texture.hpp>
 # include <unified/graphics/2d/vertex.hpp>
 
 UNIFIED_BEGIN_NAMESPACE
 UNIFIED_GRAPHICS_2D_BEGIN_NAMESPACE
 
-class VertexArray : public Graphics::Drawable
+class Texture : public Graphics::Texture, public Graphics::Drawable
 {
 public:
 
-    VertexArray(Graphics::PrimitiveType type, u32 vertices_count, Graphics::Buffer::Usage usage = Graphics::Buffer::Usage::Static);
-
-    virtual ~VertexArray() = default;
+    Texture(string texture, Graphics::Buffer::Usage usage = Graphics::Buffer::Usage::Static);
 
     virtual void draw(const Graphics::RenderTarget &target) const override;
 
@@ -43,9 +41,6 @@ public:
 protected:
 
     Graphics::Buffer _buffer;
-
-    Graphics::PrimitiveType _primitive_type;
-    u32 _vertices_count;
 
 };
 

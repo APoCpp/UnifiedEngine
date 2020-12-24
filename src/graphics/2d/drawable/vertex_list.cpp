@@ -15,14 +15,6 @@ void VertexList::draw(const RenderTarget&) const {
     if (!_vertices_count)
         return;
 
-    Buffer::ScopeBind bind(&_buffer);
-
-    static Shader shader(
-        #include "vertex_color.vert"
-            ,
-        #include "vertex_color.frag"
-    );
-
     GLint buffer_size = static_cast<u32>(_buffer.size());
 
     glVertexAttribPointer(0, 2, GL_DOUBLE, GL_FALSE,
@@ -30,12 +22,18 @@ void VertexList::draw(const RenderTarget&) const {
     glEnableVertexAttribArray(0);
 
     glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE,
-        buffer_size / _vertices_count, (void*)(sizeof(double) * 2));
+        buffer_size / _vertices_count, (void*)(sizeof(Point2d)));
     glEnableVertexAttribArray(1);
 
-    Shader::bind(&shader);
-    glDrawArrays((GLenum)_primitive_type, 0, _vertices_count);
-    Shader::unbind();
+    static Shader shader(
+        #include "vertex_color.vert"
+            ,
+        #include "vertex_color.frag"
+    );
+
+    Shader::ScopeBind shader_bind(&shader);
+
+    glDrawArrays(static_cast<GLenum>(_primitive_type), 0, _vertices_count);
 
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);

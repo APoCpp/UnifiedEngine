@@ -15,7 +15,8 @@ public:
     using HandleType = u32;
     using SlotType = u32;
 
-    Texture(string file);
+    Texture(string image);
+    Texture(u8 *data, u32 size);
 
     virtual ~Texture();
 

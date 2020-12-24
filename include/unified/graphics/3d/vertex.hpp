@@ -12,15 +12,15 @@ template <class _type>
 struct Vertex<_type, 3> : public Point<_type, 3>
 {
 
-    UNIFIED_CONSTEXPR Vertex() : Point<_type, 3>(), color() { }
+    UNIFIED_CONSTEXPR Vertex() : Point<_type, 3>(), color(), texture() { }
 
-    UNIFIED_CONSTEXPR Vertex(const Point<_type, 3> &point) : color() {
-        this->x = point.x, this->y = point.y;
-    }
+    UNIFIED_CONSTEXPR Vertex(const Point<_type, 3> &point) : Point<_type, 3>(point), color(), texture() { }
 
-    UNIFIED_CONSTEXPR Vertex(const Point<_type, 3> &point, const Color &color) : color(color) {
-        this->x = point.x, this->y = point.y;
-    }
+    UNIFIED_CONSTEXPR Vertex(const Point<_type, 3> &point, const Color &color) : Point<_type, 3>(point), color(color), texture() { }
+
+    UNIFIED_CONSTEXPR Vertex(const Point<_type, 3> &point, const Point<_type, 2> &vertex) : Point<_type, 3>(point), color(), texture(vertex) { }
+
+    UNIFIED_CONSTEXPR Vertex(const Point<_type, 3> &point, const Color &color, const Point<_type, 2> &vertex) : Point<_type, 3>(point), color(color), texture(vertex) { }
 
     UNIFIED_CONSTEXPR bool operator==(const Vertex &r) const {
         return this->x == r.x && this->y == r.y && this->color == r.color;
@@ -31,8 +31,14 @@ struct Vertex<_type, 3> : public Point<_type, 3>
     }
 
     Color color;
+    Point<_type, 2> texture;
 
 };
+
+typedef Vertex<unsigned, 3> Vertex3u;
+typedef Vertex<int,      3> Vertex3i;
+typedef Vertex<float,    3> Vertex3f;
+typedef Vertex<double,   3> Vertex3d;
 
 UNIFIED_GRAPHICS_END_NAMESPACE
 UNIFIED_END_NAMESPACE
