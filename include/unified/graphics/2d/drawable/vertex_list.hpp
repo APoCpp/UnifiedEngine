@@ -55,7 +55,7 @@ public:
         _buffer.read(data, size, offset);
     }
 
-    u32 size() {
+    u32 size() const {
         return _buffer.size();
     }
 

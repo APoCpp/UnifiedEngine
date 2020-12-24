@@ -1,16 +1,42 @@
 #include <unified/graphics/texture.hpp>
 #include <unified/core/exceptions.hpp>
 
+#define STB_IMAGE_IMPLEMENTATION
+
 #include <stb_image.h>
 #include <glad/glad.h>
 
 UNIFIED_BEGIN_NAMESPACE
 UNIFIED_GRAPHICS_BEGIN_NAMESPACE
 
-Texture::Texture(string file) {
+Texture::Texture(string image) {
     stbi_set_flip_vertically_on_load(1);
 
-    auto buffer = stbi_load(file.c_str(), &_width, &_height, &_channels, 4);
+    auto buffer = stbi_load(image.c_str(), &_width, &_height, &_channels, 4);
+
+    if (!buffer)
+        throw Exceptions::misbehavior("failed to load image");
+
+    glGenTextures(1, &_id);
+
+    bind(this);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, _width, _height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+
+    stbi_image_free(buffer);
+
+    unbind();
+}
+
+Texture::Texture(u8 *data, u32 size) {
+    stbi_set_flip_vertically_on_load(1);
+
+    auto buffer = stbi_load_from_memory(data, static_cast<int>(size), &_width, &_height, &_channels, 4);
 
     if (!buffer)
         throw Exceptions::misbehavior("failed to load image");

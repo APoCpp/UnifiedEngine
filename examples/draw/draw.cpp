@@ -8,7 +8,7 @@ using namespace Unified;
 using namespace Graphics;
 using namespace Graphics2D;
 
-class Draw : public Application
+class Template : public Application
 {
 public:
 
@@ -19,13 +19,10 @@ public:
 
 public:
 
-    Draw() : Application("Unified", VideoMode(800, 600), Window::Resizable),
+    Template() : Application("Unified", VideoMode(800, 600), Window::Resizable),
         vertex_list(PrimitiveType::Polygon), vertex_last({ 0.0, 0.0 }, { 0.1, 0.1, 0.1, 1.0 }), is_mouse_clip(false) {
         set_frame_limit(60);
-        vertex_list.add(Vertex2d {
-            Point2d { 0.0, 0.0 },
-            Color { 0.1, 0.1, 0.1, 1.0 }
-        });
+        vertex_list.add(Vertex2d { { 0.0, 0.0 }, { 0.1, 0.1, 0.1, 1.0 } });
     }
 
     void add_vertex(const Vertex2d &vertex) {
@@ -55,8 +52,8 @@ public:
             Point2i size = get_size();
             Point2d position = get_cursor_position();
             add_vertex(Vertex2d {
-                Point2d { -1.0 + (position.x * 2.0 / (double)size.x), 1.0 - (position.y * 2.0 / (double)size.y) },
-                Color { 0.18, 1.0, 0.0, 1.0 }
+                { -1.0 + (position.x * 2.0 / (double)size.x), 1.0 - (position.y * 2.0 / (double)size.y) },
+                { 0.18, 1.0, 0.0, 1.0 }
             });
         }
 
@@ -67,12 +64,12 @@ public:
     }
 
     virtual void OnEvent(EventDispatcher &dispatcher) override {
-        dispatcher.dispatch<WindowResizeEvent>(BIND_EVENT_FN(&Draw::window_resize_event, this));
-        dispatcher.dispatch<MousePressEvent>(BIND_EVENT_FN(&Draw::mouse_press_event, this));
+        dispatcher.dispatch<WindowResizeEvent>(BIND_EVENT_FN(&Template::window_resize_event, this));
+        dispatcher.dispatch<MousePressEvent>(BIND_EVENT_FN(&Template::mouse_press_event, this));
     }
 
 };
 
 Application *Unified::CreateApplication() {
-    return new Draw();
+    return new Template();
 }
