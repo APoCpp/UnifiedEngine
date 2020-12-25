@@ -10,7 +10,7 @@ RenderTarget::RenderTarget() {
         throw Exceptions::initialization_failed("failed to initialize glad");
 }
 
-void RenderTarget::clear(Color const &color) {
+void RenderTarget::clear(const Color &color) {
     glClearColor(color.r / 255.f, color.g / 255.f, color.b / 255.f, color.a / 255.f);
     glClear(GL_COLOR_BUFFER_BIT);
 }

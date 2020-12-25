@@ -42,10 +42,9 @@ void Buffer::reallocate(u32 size) {
     if (old_size > size)
         throw Exceptions::misbehavior("impossible to reallocate less memory than already allocated. possible data loss");
 
-    s8 *old_data = new s8[old_size];
+    s8 old_data[old_size];
     glGetBufferSubData(GL_ARRAY_BUFFER, 0, old_size, (void*)old_data);
     glBufferData(GL_ARRAY_BUFFER, size, (void*)old_data, usage_to_glenum(_usage));
-    delete[] old_data;
 
     return;
 }

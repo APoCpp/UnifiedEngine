@@ -17,20 +17,9 @@ Texture::Texture(string image) {
     if (!buffer)
         throw Exceptions::misbehavior("failed to load image");
 
-    glGenTextures(1, &_id);
-
-    bind(this);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, _width, _height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+    generate_texture(_id, 1, buffer);
 
     stbi_image_free(buffer);
-
-    unbind();
 }
 
 Texture::Texture(u8 *data, u32 size) {
@@ -41,20 +30,9 @@ Texture::Texture(u8 *data, u32 size) {
     if (!buffer)
         throw Exceptions::misbehavior("failed to load image");
 
-    glGenTextures(1, &_id);
-
-    bind(this);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, _width, _height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+    generate_texture(_id, 1, buffer);
 
     stbi_image_free(buffer);
-
-    unbind();
 }
 
 Texture::~Texture() {
@@ -96,6 +74,21 @@ Texture::ScopeBind::~ScopeBind() {
         bind(_prev);
         current = _prev;
     }
+}
+
+Texture::HandleType Texture::generate_texture(HandleType &id, u32 size, u8 *buffer) {
+    glGenTextures(static_cast<GLsizei>(size), &id);
+
+    Texture::ScopeBind texture_bind(this);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, _width, _height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+
+    return id;
 }
 
 UNIFIED_GRAPHICS_END_NAMESPACE

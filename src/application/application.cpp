@@ -4,7 +4,8 @@
 
 UNIFIED_BEGIN_NAMESPACE
 
-Application::Application(string title, VideoMode video_mode, u32 style) : Window(title, video_mode, style), _frame_limit(0), _frame_clock(), _frame_duration(0) {
+Application::Application(string title, VideoMode video_mode, u32 style)
+    : Window(title, video_mode, style), _frame_limit(0), _frame_clock(), _frame_duration(0), _layers() {
     set_event_callback(BIND_EVENT_FN(&Application::OnEvent, this));
 }
 
@@ -36,6 +37,28 @@ void Application::set_frame_limit(u32 limit) {
     }
 }
 
-void Application::OnEvent(EventDispatcher&) { }
+void Application::update_layers() {
+    for (Layer *layer : _layers)
+        layer->OnUpdate(_frame_clock.get_elapsed_time());
+}
+
+void Application::push_layer(Layer *layer) {
+    _layers.push_back(layer->set_application_context(this));
+}
+
+void Application::pop_layer() {
+    auto layer = _layers.back();
+    _layers.pop_back();
+    delete layer;
+}
+
+void Application::layers_dispatch(EventDispatcher &dispatcher) {
+    for (Layer *layer : _layers)
+        layer->OnEvent(dispatcher);
+}
+
+void Application::OnEvent(EventDispatcher &dispatcher) {
+    layers_dispatch(dispatcher);
+}
 
 UNIFIED_END_NAMESPACE

@@ -8,7 +8,7 @@ using namespace Unified;
 using namespace Graphics;
 using namespace Graphics2D;
 
-class Template : public Application
+class TextureLayer : public Layer
 {
 public:
 
@@ -16,8 +16,7 @@ public:
 
 public:
 
-    Template() : Application("Unified", VideoMode(800, 600), Window::Resizable), texture("image.png") {
-        set_frame_limit(60);
+    TextureLayer() : Layer(), texture("image.png") {
         Vertex2d vertex[] = {
             { {  0.5,  0.5 }, { 1.0, 1.0 } },
             { {  0.5, -0.5 }, { 1.0, 0.0 } },
@@ -25,6 +24,20 @@ public:
             { { -0.5,  0.5 }, { 0.0, 1.0 } }
         };
         texture.write(vertex, sizeof(vertex));
+    }
+
+    virtual void OnUpdate(Time) override {
+        application->draw(texture);
+    }
+
+};
+
+class Template : public Application
+{
+public:
+
+    Template() : Application("Unified", VideoMode(800, 600), Window::Resizable) {
+        push_layer(new TextureLayer());
     }
 
     void window_resize_event(const WindowResizeEvent &event) {
@@ -35,15 +48,14 @@ public:
 
     virtual bool OnUpdate(Time&) override {
         clear();
-
-        draw(texture);
-
+        update_layers();
         swap_buffers();
         return poll_events();
     }
 
     virtual void OnEvent(EventDispatcher &dispatcher) override {
         dispatcher.dispatch<WindowResizeEvent>(BIND_EVENT_FN(&Template::window_resize_event, this));
+        layers_dispatch(dispatcher);
     }
 
 };
