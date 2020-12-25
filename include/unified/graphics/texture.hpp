@@ -45,6 +45,8 @@ public:
 
 protected:
 
+    HandleType generate_texture(HandleType &id, u32 size, u8 *buffer);
+
     HandleType _id;
 
     int _width, _height, _channels;

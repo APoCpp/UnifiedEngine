@@ -13,7 +13,7 @@ public:
 
     RenderTarget();
 
-    void clear(Color const &color = Color(0, 0, 0, 255));
+    void clear(const Color &color = Color(0, 0, 0, 1.f));
 
     void draw(const Drawable &object) const;
 
