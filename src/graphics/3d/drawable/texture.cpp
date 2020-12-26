@@ -7,7 +7,7 @@ using namespace Unified::Graphics;
 UNIFIED_BEGIN_NAMESPACE
 UNIFIED_GRAPHICS_3D_BEGIN_NAMESPACE
 
-Texture::Texture(string texture, Graphics::Buffer::Usage usage) : Graphics::Texture(texture), _buffer(usage) { }
+Texture::Texture(string texture, bool flip, Graphics::Buffer::Usage usage) : Graphics::Texture(texture, flip), _buffer(usage) { }
 
 void Texture::draw(const Graphics::RenderTarget&) const {
     Buffer::ScopeBind buffer_bind(&_buffer);

@@ -15,7 +15,7 @@ class Texture : public Graphics::Texture, public Graphics::Drawable
 {
 public:
 
-    Texture(string texture, Graphics::Buffer::Usage usage = Graphics::Buffer::Usage::Static);
+    Texture(string texture, bool flip = false, Graphics::Buffer::Usage usage = Graphics::Buffer::Usage::Static);
 
     virtual void draw(const Graphics::RenderTarget &target) const override;
 

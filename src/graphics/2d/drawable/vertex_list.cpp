@@ -15,7 +15,9 @@ void VertexList::draw(const RenderTarget&) const {
     if (!_vertices_count)
         return;
 
-    GLint buffer_size = static_cast<u32>(_buffer.size());
+    GLint buffer_size = static_cast<GLint>(_buffer.size());
+
+    Buffer::ScopeBind buffer_bind(&_buffer);
 
     glVertexAttribPointer(0, 2, GL_DOUBLE, GL_FALSE,
         buffer_size / _vertices_count, (void*)0);

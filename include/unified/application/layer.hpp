@@ -4,6 +4,8 @@
 # include <unified/defines.hpp>
 # include <unified/core/time.hpp>
 
+# include <utility>
+
 UNIFIED_BEGIN_NAMESPACE
 
 class Application;
@@ -11,16 +13,13 @@ class EventDispatcher;
 
 class Layer
 {
-public:
+protected:
 
-    Application *application;
-
-    Layer *set_application_context(Application*);
+    friend class Application;
 
     virtual ~Layer() { }
 
     virtual void OnUpdate(Time) = 0;
-
     virtual void OnEvent(EventDispatcher&) { }
 
 };

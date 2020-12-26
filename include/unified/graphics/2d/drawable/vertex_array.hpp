@@ -17,7 +17,7 @@ public:
 
     VertexArray(Graphics::PrimitiveType type, u32 vertices_count, Graphics::Buffer::Usage usage = Graphics::Buffer::Usage::Static);
 
-    virtual ~VertexArray() = default;
+    virtual ~VertexArray() { }
 
     virtual void draw(const Graphics::RenderTarget &target) const override;
 
