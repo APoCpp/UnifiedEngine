@@ -18,7 +18,7 @@ public:
 
     VertexList(Graphics::PrimitiveType type, Graphics::Buffer::Usage usage = Graphics::Buffer::Usage::Static);
 
-    virtual ~VertexList() = default;
+    virtual ~VertexList() { }
 
     virtual void draw(const Graphics::RenderTarget &target) const override;
 

@@ -4,13 +4,15 @@
 # include <unified/core/math/matrix_fwd.hpp>
 # include <unified/core/math/point_fwd.hpp>
 
+# include <fmt/format.h>
+
 # include <initializer_list>
 # include <memory>
 
 UNIFIED_BEGIN_NAMESPACE
 
 template <class _type, u32 _rows, u32 _columns>
-class Matrix
+        class Matrix
 {
 public:
 
@@ -70,24 +72,27 @@ typedef Matrix<float,    4, 4> Matrix4x4f;
 typedef Matrix<double,   4, 4> Matrix4x4d;
 
 template <class _type, uint32_t _rows, uint32_t _columns>
-UNIFIED_CONSTEXPR Point<_type, _columns> operator*(Matrix<_type, _rows, _columns> const &l, const Point<_type, _columns>&r) {
+UNIFIED_CONSTEXPR Point<_type, _columns> operator*(const Matrix<_type, _rows, _columns> &l, const Point<_type, _columns> &r) {
     Point<_type, _columns> result;
-    for (u32 col = 0; col < l.columns(); col++) {
-        for (u32 row = 0; row < l.rows(); row++) {
-            result[col] += l(col, row) * r[row];
+    for (u32 row = 0; row < l.rows(); row++) {
+        for (u32 col = 0; col < l.columns(); col++) {
+            result[row] += l(row, col) * r[col];
         }
     }
     return result;
 }
 
-template <class _type, uint32_t _rows, uint32_t _columns>
-UNIFIED_CONSTEXPR Matrix<_type, _rows, _columns> operator*(Matrix<_type, _rows, _columns> l, const Matrix<_type, _rows, _columns> &r) {
-    for (u32 col = 0; col < l.columns(); col++) {
-        for (u32 row = 0; row < l.rows(); row++) {
-            l(col, row) *= r(col, row);
+template <class _type, uint32_t _rows_1, uint32_t _rows_2, uint32_t _columns>
+UNIFIED_CONSTEXPR Matrix<_type, _rows_1, _rows_2> operator*(const Matrix<_type, _rows_1, _rows_2> &l, const Matrix<_type, _rows_2, _columns> &r) {
+    Matrix<_type, _rows_1, _rows_2> result;
+    for (u32 row = 0; row < l.rows(); row++) {
+        for (u32 col2 = 0; col2 < r.columns(); col2++) {
+            for (u32 col = 0; col < l.columns(); col++) {
+                result(row, col2) += l(row, col) * r(col, col2);
+            }
         }
     }
-    return l;
+    return result;
 }
 
 UNIFIED_END_NAMESPACE

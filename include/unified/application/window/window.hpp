@@ -41,9 +41,9 @@ public:
 
     Window(string title, VideoMode mode, u32 style);
 
-    virtual ~Window() = default;
+    virtual ~Window() { }
 
-    bool poll_events();
+    bool poll_events() const;
 
     UNIFIED_NODISCARD Point2i get_size() const;
     void set_size(Point2i size);
@@ -54,10 +54,10 @@ public:
     UNIFIED_NODISCARD bool get_vsync() const;
     void set_vsync(bool enabled);
 
-    void swap_buffers();
+    void swap_buffers() const;
 
-    Keyboard::Action get_key_action(Keyboard::Code code);
-    Point2d get_cursor_position();
+    Keyboard::Action get_key_action(Keyboard::Code code) const;
+    Point2d get_cursor_position() const;
 
     void set_event_callback(const event_callback_fn &callback);
 

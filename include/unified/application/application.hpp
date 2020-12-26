@@ -6,6 +6,7 @@
 # include <unified/application/layer.hpp>
 # include <unified/core/clock.hpp>
 
+# include <utility>
 # include <deque>
 
 # define BIND_EVENT_FN(method, object) std::bind(method, object, std::placeholders::_1)
@@ -18,7 +19,7 @@ public:
 
     Application(string title = "Unified", VideoMode video_mode = VideoMode(800, 600), u32 style = Window::Resizable);
 
-    virtual ~Application() = default;
+    virtual ~Application() { }
 
     void run();
 
@@ -33,14 +34,20 @@ public:
 
     void update_layers();
 
-    void push_layer(Layer *layer);
+    template <class _layer, class... _args>
+    _layer *push_layer(_args&&... args) {
+        _layer *new_layer = new _layer(std::forward<_args>(args)...);
+        _layers.push_back(dynamic_cast<Layer*>(new_layer));
+        return new_layer;
+    }
+
     void pop_layer();
 
-    void layers_dispatch(EventDispatcher &dispatcher);
+    void dispatch_layers(EventDispatcher &dispatcher);
 
 protected:
 
-    virtual bool OnUpdate(Time&) = 0;
+    virtual bool OnUpdate(Time) = 0;
     virtual void OnEvent(EventDispatcher &dispatcher);
 
 private:

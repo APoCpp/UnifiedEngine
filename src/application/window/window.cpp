@@ -80,7 +80,7 @@ Window::Window(string title, VideoMode video_mode, u32 style) : _title(title), _
     });
 }
 
-bool Window::poll_events() {
+bool Window::poll_events() const {
     glfwPollEvents();
     return !glfwWindowShouldClose(_window->glfw_handle);
 }
@@ -112,15 +112,15 @@ void Window::set_vsync(bool enabled) {
     glfwSwapInterval(_vsync = enabled);
 }
 
-void Window::swap_buffers() {
+void Window::swap_buffers() const {
     glfwSwapBuffers(_window->glfw_handle);
 }
 
-Keyboard::Action Window::get_key_action(Keyboard::Code code) {
+Keyboard::Action Window::get_key_action(Keyboard::Code code) const {
     return (Keyboard::Action)glfwGetKey(_window->glfw_handle, (int)code);
 }
 
-Point2d Window::get_cursor_position() {
+Point2d Window::get_cursor_position() const {
     Point2d point;
     glfwGetCursorPos(_window->glfw_handle, &point.x, &point.y);
     return point;

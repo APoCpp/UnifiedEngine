@@ -1,29 +1,25 @@
 #include <unified.hpp>
 
 #include <unified/graphics/2d/drawable/texture.hpp>
-#include <unified/graphics/2d/vertex.hpp>
 
 using namespace Unified;
-
-using namespace Graphics;
-using namespace Graphics2D;
+using namespace Unified::Graphics;
 
 class TextureLayer : public Layer
 {
 public:
 
+    const Application *application;
+
     Graphics2D::Texture texture;
 
-public:
-
-    TextureLayer() : Layer(), texture("image.png") {
-        Vertex2d vertex[] = {
-            { {  0.5,  0.5 }, { 1.0, 1.0 } },
-            { {  0.5, -0.5 }, { 1.0, 0.0 } },
-            { { -0.5, -0.5 }, { 0.0, 0.0 } },
-            { { -0.5,  0.5 }, { 0.0, 1.0 } }
-        };
-        texture.write(vertex, sizeof(vertex));
+    TextureLayer(Application *application) : application(application), texture("image.png")  {
+        Graphics::Vertex2d quad_vertices[] =
+        { { { -0.8, -0.8 }, { 1.0, 1.0 } },
+          { { -0.8,  0.8 }, { 1.0, 0.0 } },
+          { {  0.8,  0.8 }, { 0.0, 0.0 } },
+          { {  0.8, -0.8 }, { 0.0, 1.0 } } };
+        texture.write(quad_vertices, sizeof(quad_vertices));
     }
 
     virtual void OnUpdate(Time) override {
@@ -32,13 +28,9 @@ public:
 
 };
 
-class Template : public Application
+class ExampleLayers : public Application
 {
 public:
-
-    Template() : Application("Unified", VideoMode(800, 600), Window::Resizable) {
-        push_layer(new TextureLayer());
-    }
 
     void window_resize_event(const WindowResizeEvent &event) {
         set_viewport(event.size);
@@ -46,7 +38,12 @@ public:
 
 public:
 
-    virtual bool OnUpdate(Time&) override {
+    ExampleLayers() : Application("ExampleTexture") {
+        push_layer<TextureLayer>(this);
+        set_frame_limit(60);
+    }
+
+    virtual bool OnUpdate(Time) override {
         clear();
         update_layers();
         swap_buffers();
@@ -54,12 +51,11 @@ public:
     }
 
     virtual void OnEvent(EventDispatcher &dispatcher) override {
-        dispatcher.dispatch<WindowResizeEvent>(BIND_EVENT_FN(&Template::window_resize_event, this));
-        layers_dispatch(dispatcher);
+        dispatcher.dispatch<WindowResizeEvent>(BIND_EVENT_FN(&ExampleLayers::window_resize_event, this));
     }
 
 };
 
-Application *Unified::CreateApplication() {
-    return new Template();
+Application *UNIFIED_NAMESPACE::CreateApplication() {
+    return new ExampleLayers();
 }

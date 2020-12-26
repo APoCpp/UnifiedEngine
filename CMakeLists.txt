@@ -48,6 +48,16 @@ add_library(glad STATIC
 target_include_directories(glad PUBLIC "${UNIFIED_GLAD_DIR}/include/")
 target_link_libraries(${UNIFIED_PROJECT} PRIVATE glad ${CMAKE_DL_LIBS})
 
+# including the 'imgui' library
+set(UNIFIED_IMGUI_DIR "${UNIFIED_VENDOR_DIR}/imgui")
+file(GLOB UNIFIED_IMGUI_SRC_FILES "${UNIFIED_IMGUI_DIR}/*.cpp")
+file(GLOB UNIFIED_IMGUI_INCLUDE_FILES "${UNIFIED_IMGUI_DIR}/*.h")
+add_definitions(-DIMGUI_IMPL_OPENGL_LOADER_GLAD)
+add_library(imgui STATIC ${UNIFIED_IMGUI_SRC_FILES} ${UNIFIED_IMGUI_INCLUDE_FILES})
+target_link_libraries(imgui PRIVATE glfw ${GLFW_LIBRARIES} glad ${CMAKE_DL_LIBS})
+target_include_directories(${UNIFIED_PROJECT} PRIVATE ${UNIFIED_IMGUI_DIR})
+
+# including the 'stb' library
 set(UNIFIED_STB_DIR "${UNIFIED_VENDOR_DIR}/stb")
 target_include_directories(${UNIFIED_PROJECT} PRIVATE ${UNIFIED_STB_DIR})
 
@@ -56,8 +66,6 @@ option(UNIFORM_BUILD_EXAMPLES "Build the ${UNIFIED_PROJECT} test programs" TRUE)
 if (UNIFORM_BUILD_EXAMPLES)
  message("-- Build the ${UNIFIED_PROJECT} test programs")
  set(UNIFIED_EXAMPLES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/examples")
- add_subdirectory("${UNIFIED_EXAMPLES_DIR}/draw")
- add_subdirectory("${UNIFIED_EXAMPLES_DIR}/library")
- add_subdirectory("${UNIFIED_EXAMPLES_DIR}/minimal")
+ add_subdirectory("${UNIFIED_EXAMPLES_DIR}/layers")
  add_subdirectory("${UNIFIED_EXAMPLES_DIR}/texture")
 endif ()

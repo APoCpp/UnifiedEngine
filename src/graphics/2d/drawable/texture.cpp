@@ -7,12 +7,12 @@ using namespace Unified::Graphics;
 UNIFIED_BEGIN_NAMESPACE
 UNIFIED_GRAPHICS_2D_BEGIN_NAMESPACE
 
-Texture::Texture(string texture, Graphics::Buffer::Usage usage) : Graphics::Texture(texture), _buffer(usage) { }
+Texture::Texture(string texture, bool flip, Graphics::Buffer::Usage usage) : Graphics::Texture(texture, flip), _buffer(usage) { }
 
 void Texture::draw(const Graphics::RenderTarget&) const {
-    Buffer::ScopeBind buffer_bind(&_buffer);
-
     GLint buffer_size = _buffer.size();
+
+    Buffer::ScopeBind buffer_bind(&_buffer);
 
     glVertexAttribPointer(0, 2, GL_DOUBLE, GL_FALSE,
         buffer_size / 4, (void*)0);

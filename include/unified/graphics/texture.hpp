@@ -15,8 +15,8 @@ public:
     using HandleType = u32;
     using SlotType = u32;
 
-    Texture(string image);
-    Texture(u8 *data, u32 size);
+    Texture(string image, bool flip = false);
+    Texture(u8 *data, u32 size, bool flip = false);
 
     virtual ~Texture();
 

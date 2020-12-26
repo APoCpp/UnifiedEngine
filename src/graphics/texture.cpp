@@ -9,8 +9,8 @@
 UNIFIED_BEGIN_NAMESPACE
 UNIFIED_GRAPHICS_BEGIN_NAMESPACE
 
-Texture::Texture(string image) {
-    stbi_set_flip_vertically_on_load(1);
+Texture::Texture(string image, bool flip) {
+    stbi_set_flip_vertically_on_load(static_cast<int>(flip));
 
     auto buffer = stbi_load(image.c_str(), &_width, &_height, &_channels, 4);
 
@@ -22,8 +22,8 @@ Texture::Texture(string image) {
     stbi_image_free(buffer);
 }
 
-Texture::Texture(u8 *data, u32 size) {
-    stbi_set_flip_vertically_on_load(1);
+Texture::Texture(u8 *data, u32 size, bool flip) {
+    stbi_set_flip_vertically_on_load(static_cast<int>(flip));
 
     auto buffer = stbi_load_from_memory(data, static_cast<int>(size), &_width, &_height, &_channels, 4);
 

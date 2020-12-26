@@ -42,23 +42,19 @@ void Application::update_layers() {
         layer->OnUpdate(_frame_clock.get_elapsed_time());
 }
 
-void Application::push_layer(Layer *layer) {
-    _layers.push_back(layer->set_application_context(this));
-}
-
 void Application::pop_layer() {
     auto layer = _layers.back();
     _layers.pop_back();
     delete layer;
 }
 
-void Application::layers_dispatch(EventDispatcher &dispatcher) {
+void Application::dispatch_layers(EventDispatcher &dispatcher) {
     for (Layer *layer : _layers)
         layer->OnEvent(dispatcher);
 }
 
 void Application::OnEvent(EventDispatcher &dispatcher) {
-    layers_dispatch(dispatcher);
+    dispatch_layers(dispatcher);
 }
 
 UNIFIED_END_NAMESPACE
