@@ -26,7 +26,7 @@
 # define UNIFIED_GRAPHICS_3D_END_NAMESPACE }
 
 # if __cplusplus >= 201703L
-#  define UNIFIED_NODISCARD [[__nodiscard__]]
+#  define UNIFIED_NODISCARD [[nodiscard]]
 # else
 #  define UNIFIED_NODISCARD
 # endif
