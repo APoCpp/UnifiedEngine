@@ -54,6 +54,8 @@ public:
     UNIFIED_NODISCARD bool get_vsync() const;
     void set_vsync(bool enabled);
 
+    UNIFIED_NODISCARD void *get_native_window() const;
+
     void swap_buffers() const;
 
     Keyboard::Action get_key_action(Keyboard::Code code) const;

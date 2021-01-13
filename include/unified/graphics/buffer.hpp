@@ -12,7 +12,7 @@ public:
 
     using HandleType = u32;
 
-    enum Usage
+    enum class Usage : u32
     {
         Stream,
         Dynamic,
