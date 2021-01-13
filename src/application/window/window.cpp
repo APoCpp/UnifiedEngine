@@ -112,6 +112,10 @@ void Window::set_vsync(bool enabled) {
     glfwSwapInterval(_vsync = enabled);
 }
 
+void *Window::get_native_window() const {
+    return static_cast<void*>(_window->glfw_handle);
+}
+
 void Window::swap_buffers() const {
     glfwSwapBuffers(_window->glfw_handle);
 }

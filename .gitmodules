@@ -7,6 +7,6 @@
 [submodule "vendor/stb"]
 	path = vendor/stb
         url = https://github.com/nothings/stb
-[submodule "vendor/imgui"]
-	path = vendor/imgui
-	url = https://github.com/ocornut/imgui
+[submodule "modules/imgui_layer"]
+	path = modules/imgui_layer
+	url = https://github.com/UnifiedEngine/imgui_layer

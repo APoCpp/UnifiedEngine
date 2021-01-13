@@ -8,16 +8,19 @@ set(UNIFIED_PROJECT ${PROJECT_NAME})
 set(UNIFIED_VERSION ${PROJECT_VERSION})
 
 set(UNIFIED_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
+set(UNIFIED_CMAKE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 set(UNIFIED_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
+set(UNIFIED_MODULES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/modules")
 
 file(GLOB_RECURSE UNIFIED_SRC_FILES "${UNIFIED_SRC_DIR}/*.cpp")
-file(GLOB_RECURSE UNIFIED_INCLUDE_FILES "${UNIFIED_INCLUDE_DIR}/*.hpp")
+
+include("${UNIFIED_CMAKE_DIR}/directories.cmake")
 
 message("-- Building the ${UNIFIED_PROJECT} version ${UNIFIED_VERSION}")
 
 add_library(${UNIFIED_PROJECT} STATIC ${UNIFIED_SRC_FILES})
 set_property(TARGET ${UNIFIED_PROJECT} PROPERTY CXX_STANDARD 17)
-target_include_directories(${UNIFIED_PROJECT} PUBLIC ${UNIFIED_INCLUDE_DIR})
+target_include_directories(${UNIFIED_PROJECT} PUBLIC ${UNIFIED_INCLUDE_DIR} ${UNIFIED_MODULES_DIR})
 
 target_compile_definitions(${UNIFIED_PROJECT} PUBLIC "UNIFIED_GDK")
 target_compile_definitions(${UNIFIED_PROJECT} PRIVATE "$<$<CONFIG:DEBUG>:_DEBUG_>")
@@ -48,24 +51,23 @@ add_library(glad STATIC
 target_include_directories(glad PUBLIC "${UNIFIED_GLAD_DIR}/include/")
 target_link_libraries(${UNIFIED_PROJECT} PRIVATE glad ${CMAKE_DL_LIBS})
 
-# including the 'imgui' library
-set(UNIFIED_IMGUI_DIR "${UNIFIED_VENDOR_DIR}/imgui")
-file(GLOB UNIFIED_IMGUI_SRC_FILES "${UNIFIED_IMGUI_DIR}/*.cpp")
-file(GLOB UNIFIED_IMGUI_INCLUDE_FILES "${UNIFIED_IMGUI_DIR}/*.h")
-add_definitions(-DIMGUI_IMPL_OPENGL_LOADER_GLAD)
-add_library(imgui STATIC ${UNIFIED_IMGUI_SRC_FILES} ${UNIFIED_IMGUI_INCLUDE_FILES})
-target_link_libraries(imgui PRIVATE glfw ${GLFW_LIBRARIES} glad ${CMAKE_DL_LIBS})
-target_include_directories(${UNIFIED_PROJECT} PRIVATE ${UNIFIED_IMGUI_DIR})
-
 # including the 'stb' library
 set(UNIFIED_STB_DIR "${UNIFIED_VENDOR_DIR}/stb")
 target_include_directories(${UNIFIED_PROJECT} PRIVATE ${UNIFIED_STB_DIR})
+
+# include current existing modules
+directories_list(MODULE_DIRECTORIES ${UNIFIED_MODULES_DIR})
+foreach(MODULE_NAME ${MODULE_DIRECTORIES})
+    add_subdirectory("${UNIFIED_MODULES_DIR}/${MODULE_NAME}")
+    target_link_libraries(${UNIFIED_PROJECT} PUBLIC ${MODULE_NAME})
+endforeach()
 
 option(UNIFORM_BUILD_EXAMPLES "Build the ${UNIFIED_PROJECT} test programs" TRUE)
 
 if (UNIFORM_BUILD_EXAMPLES)
  message("-- Build the ${UNIFIED_PROJECT} test programs")
  set(UNIFIED_EXAMPLES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/examples")
+ add_subdirectory("${UNIFIED_EXAMPLES_DIR}/interfaces")
  add_subdirectory("${UNIFIED_EXAMPLES_DIR}/layers")
  add_subdirectory("${UNIFIED_EXAMPLES_DIR}/texture")
 endif ()

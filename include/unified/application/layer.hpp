@@ -19,7 +19,10 @@ protected:
 
     virtual ~Layer() { }
 
+    virtual void OnPreUpdate() { };
     virtual void OnUpdate(Time) = 0;
+    virtual void OnPostUpdate() { };
+
     virtual void OnEvent(EventDispatcher&) { }
 
 };

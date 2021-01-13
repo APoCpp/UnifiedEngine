@@ -38,8 +38,11 @@ void Application::set_frame_limit(u32 limit) {
 }
 
 void Application::update_layers() {
-    for (Layer *layer : _layers)
+    for (Layer* layer : _layers) {
+        layer->OnPreUpdate();
         layer->OnUpdate(_frame_clock.get_elapsed_time());
+        layer->OnPostUpdate();
+    }
 }
 
 void Application::pop_layer() {
