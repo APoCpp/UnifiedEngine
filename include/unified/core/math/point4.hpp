@@ -9,7 +9,7 @@ UNIFIED_BEGIN_NAMESPACE
 template <class _type>
 struct Point<_type, 4>
 {
-    _type x, y, z, w;
+   _type x, y, z, w;
 
     UNIFIED_CONSTEXPR Point() : x(_type()), y(_type()), z(_type()), w(_type()) { }
     UNIFIED_CONSTEXPR Point(_type xyzw) : x(xyzw), y(xyzw), z(xyzw), w(xyzw) { }

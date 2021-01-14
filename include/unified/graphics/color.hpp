@@ -6,7 +6,7 @@
 UNIFIED_BEGIN_NAMESPACE
 UNIFIED_GRAPHICS_BEGIN_NAMESPACE
 
-class Color
+struct Color
 {
 public:
 

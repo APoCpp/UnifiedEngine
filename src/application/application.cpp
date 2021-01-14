@@ -38,22 +38,21 @@ void Application::set_frame_limit(u32 limit) {
 }
 
 void Application::update_layers() {
-    for (Layer* layer : _layers) {
-        layer->OnPreUpdate();
-        layer->OnUpdate(_frame_clock.get_elapsed_time());
-        layer->OnPostUpdate();
+    for (auto it = _layers.begin(); it != _layers.end(); ++it) {
+        (*it)->OnPreUpdate();
+        (*it)->OnUpdate(_frame_clock.get_elapsed_time());
+        (*it)->OnPostUpdate();
     }
 }
 
 void Application::pop_layer() {
-    auto layer = _layers.back();
-    _layers.pop_back();
-    delete layer;
+    delete _layers.front();
+    _layers.pop_front();
 }
 
 void Application::dispatch_layers(EventDispatcher &dispatcher) {
-    for (Layer *layer : _layers)
-        layer->OnEvent(dispatcher);
+    for (auto it = _layers.begin(); it != _layers.end(); ++it)
+        (*it)->OnEvent(dispatcher);
 }
 
 void Application::OnEvent(EventDispatcher &dispatcher) {
