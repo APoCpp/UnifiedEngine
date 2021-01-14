@@ -25,19 +25,14 @@ public:
     }
 
 };
+
 class ImGuiLayer : public Modules::ImGuiLayer
 {
 public:
 
     Graphics::Vertex2d *triangle;
 
-    ImGuiLayer(Application *application, Graphics::Vertex2d *triangle) : triangle(triangle) {
-        Create(application);
-    }
-
-    virtual ~ImGuiLayer() {
-        Destroy();
-    }
+    ImGuiLayer(Application *application, Graphics::Vertex2d *triangle) : triangle(triangle) { }
 
     virtual void OnUpdate(Time) override {
         ImGui::Begin("ExampleInterfaces");
@@ -65,9 +60,16 @@ public:
 public:
 
     ExampleInterfaces() : Application("ExampleInterfaces") {
-        push_layer<TriangleLayer>(this, triangle);
+        Modules::ImGuiLayer::Create(this);
+        
         push_layer<ImGuiLayer>(this, triangle);
+        push_layer<TriangleLayer>(this, triangle);
+
         set_frame_limit(60);
+    }
+
+    virtual ~ExampleInterfaces() {
+        Modules::ImGuiLayer::Destroy();
     }
 
     virtual bool OnUpdate(Time) override {

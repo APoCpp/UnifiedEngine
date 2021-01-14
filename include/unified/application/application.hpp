@@ -7,7 +7,7 @@
 # include <unified/core/clock.hpp>
 
 # include <utility>
-# include <deque>
+# include <forward_list>
 
 # define BIND_EVENT_FN(method, object) std::bind(method, object, std::placeholders::_1)
 
@@ -37,7 +37,7 @@ public:
     template <class _layer, class... _args>
     _layer *push_layer(_args&&... args) {
         _layer *new_layer = new _layer(std::forward<_args>(args)...);
-        _layers.push_back(dynamic_cast<Layer*>(new_layer));
+        _layers.push_front(dynamic_cast<Layer*>(new_layer));
         return new_layer;
     }
 
@@ -57,7 +57,7 @@ private:
     Clock _frame_clock;
     Time _frame_duration;
 
-    std::deque<Layer*> _layers;
+    std::forward_list<Layer*> _layers;
 
 };
 

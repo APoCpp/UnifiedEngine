@@ -12,7 +12,7 @@
 UNIFIED_BEGIN_NAMESPACE
 
 template <class _type, u32 _rows, u32 _columns>
-        class Matrix
+struct Matrix
 {
 public:
 

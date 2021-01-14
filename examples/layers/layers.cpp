@@ -87,9 +87,9 @@ public:
 public:
 
     ExampleLayers() : Application("ExampleLayers") {
-        push_layer<ExampleLayer1>(this);
-        push_layer<ExampleLayer2>(this);
         push_layer<ExampleLayer3>(this);
+        push_layer<ExampleLayer2>(this);
+        push_layer<ExampleLayer1>(this);
         set_frame_limit(60);
     }
 
