@@ -1,6 +1,7 @@
 #include <unified.hpp>
 
 #include <unified/graphics/2d/drawable/vertex_array.hpp>
+#include <unified/core/system/sleep.hpp>
 
 #include <imgui_layer/imgui_layer.hpp>
 
@@ -12,7 +13,7 @@ class TriangleLayer : public Layer
 public:
 
     const Application *application;
-
+    
     Graphics::Vertex2d *triangle;
 
     Graphics2D::VertexArray vertex_array;
@@ -32,13 +33,13 @@ public:
 
     Graphics::Vertex2d *triangle;
 
-    ImGuiLayer(Application *application, Graphics::Vertex2d *triangle) : triangle(triangle) { }
+    ImGuiLayer(Graphics::Vertex2d *triangle) : triangle(triangle) { }
 
     virtual void OnUpdate(Time) override {
         ImGui::Begin("ExampleInterfaces");
         ImGui::ColorEdit3("LD", (float*)(&triangle[0].color));
         ImGui::ColorEdit3("CU", (float*)(&triangle[1].color));
-        ImGui::ColorEdit3("RD", (float*)(&triangle[2].color));
+        ImGui::ColorEdit3("RD", (float*)(&triangle[2].color));  
         ImGui::End();
     }
 
@@ -61,9 +62,9 @@ public:
 
     ExampleInterfaces() : Application("ExampleInterfaces") {
         Modules::ImGuiLayer::Create(this);
-        
-        push_layer<ImGuiLayer>(this, triangle);
+
         push_layer<TriangleLayer>(this, triangle);
+        push_layer<ImGuiLayer>(triangle);
 
         set_frame_limit(60);
     }
@@ -74,7 +75,7 @@ public:
 
     virtual bool OnUpdate(Time) override {
         clear();
-        update_layers();
+        process_layers();
         swap_buffers();
         return poll_events();
     }

@@ -37,22 +37,33 @@ void Application::set_frame_limit(u32 limit) {
     }
 }
 
-void Application::update_layers() {
-    for (auto it = _layers.begin(); it != _layers.end(); ++it) {
-        (*it)->OnPreUpdate();
-        (*it)->OnUpdate(_frame_clock.get_elapsed_time());
-        (*it)->OnPostUpdate();
-    }
+const Application::layers_t &Application::layers() const {
+    return _layers;
 }
 
-void Application::pop_layer() {
-    delete _layers.front();
-    _layers.pop_front();
+Application::layers_t &Application::layers() {
+    return _layers;
+}
+
+void Application::process_layer(Layer *layer) {
+    layer->OnPreUpdate();
+    layer->OnUpdate(_frame_clock.get_elapsed_time());
+    layer->OnPostUpdate();
+}
+
+void Application::process_layers() {
+    for (auto it = _layers.begin(); it != _layers.end(); ++it)
+        if ((*it)->active) {
+            process_layer(*it);
+        } else {
+            delete *it;
+            _layers.erase(it--);
+        }
 }
 
 void Application::dispatch_layers(EventDispatcher &dispatcher) {
-    for (auto it = _layers.begin(); it != _layers.end(); ++it)
-        (*it)->OnEvent(dispatcher);
+    for (Layer *&layer : _layers)
+        layer->OnEvent(dispatcher);
 }
 
 void Application::OnEvent(EventDispatcher &dispatcher) {

@@ -24,8 +24,8 @@ struct Point<_type, 3>
         return this->*accessors[i];
     }
 
-    UNIFIED_CONSTEXPR _type &operator[](u32 i) {
-        UNIFIED_CONSTEXPR _type Point::*accessors[] = {
+    _type &operator[](u32 i) {
+        _type Point::*accessors[] = {
             &Point::x,
             &Point::y,
             &Point::z

@@ -87,15 +87,15 @@ public:
 public:
 
     ExampleLayers() : Application("ExampleLayers") {
-        push_layer<ExampleLayer3>(this);
-        push_layer<ExampleLayer2>(this);
         push_layer<ExampleLayer1>(this);
+        push_layer<ExampleLayer2>(this);
+        push_layer<ExampleLayer3>(this);
         set_frame_limit(60);
     }
 
     virtual bool OnUpdate(Time) override {
         clear();
-        update_layers();
+        process_layers();
         swap_buffers();
         return poll_events();
     }

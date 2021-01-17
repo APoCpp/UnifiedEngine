@@ -25,6 +25,10 @@ protected:
 
     virtual void OnEvent(EventDispatcher&) { }
 
+public:
+
+    bool active = true;
+
 };
 
 UNIFIED_END_NAMESPACE

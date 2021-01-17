@@ -55,6 +55,10 @@ public:
         return reinterpret_cast<_type const*>(_data);
     }
 
+    UNIFIED_FORCE_INLINE _type *data() {
+        return reinterpret_cast<_type*>(_data);
+    }
+
 protected:
 
     _type _data[_rows][_columns];
@@ -71,18 +75,18 @@ typedef Matrix<int,      4, 4> Matrix4x4i;
 typedef Matrix<float,    4, 4> Matrix4x4f;
 typedef Matrix<double,   4, 4> Matrix4x4d;
 
-template <class _type, uint32_t _rows, uint32_t _columns>
-UNIFIED_CONSTEXPR Point<_type, _columns> operator*(const Matrix<_type, _rows, _columns> &l, const Point<_type, _columns> &r) {
-    Point<_type, _columns> result;
+template <class _type, u32 _rows_1, u32 _rows_2>
+UNIFIED_CONSTEXPR Point<_type, _rows_2> operator*(const Matrix<_type, _rows_1, _rows_2> &l, const Point<_type, _rows_2> &r) {
+    Point<_type, _rows_2> result;
     for (u32 row = 0; row < l.rows(); row++) {
         for (u32 col = 0; col < l.columns(); col++) {
-            result[row] += l(row, col) * r[col];
+            result[row] += r[col] * l(row, col);
         }
     }
     return result;
 }
 
-template <class _type, uint32_t _rows_1, uint32_t _rows_2, uint32_t _columns>
+template <class _type, u32 _rows_1, u32 _rows_2, u32 _columns>
 UNIFIED_CONSTEXPR Matrix<_type, _rows_1, _rows_2> operator*(const Matrix<_type, _rows_1, _rows_2> &l, const Matrix<_type, _rows_2, _columns> &r) {
     Matrix<_type, _rows_1, _rows_2> result;
     for (u32 row = 0; row < l.rows(); row++) {
