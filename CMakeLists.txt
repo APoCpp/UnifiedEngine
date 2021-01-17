@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.12)
 
 project(UnifiedEngine VERSION 0.0.3)
 
+set(CMAKE_CXX_STANDARD 17)
+
 set(UNIFIED_PROJECT ${PROJECT_NAME})
 set(UNIFIED_VERSION ${PROJECT_VERSION})
 
