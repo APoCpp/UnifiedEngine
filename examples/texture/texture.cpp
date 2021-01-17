@@ -45,7 +45,7 @@ public:
 
     virtual bool OnUpdate(Time) override {
         clear();
-        update_layers();
+        process_layers();
         swap_buffers();
         return poll_events();
     }

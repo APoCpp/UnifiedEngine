@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 3.12)
 
 project(UnifiedEngine VERSION 0.0.3)
 
-set(CMAKE_CXX_STANDARD 17)
-
 set(UNIFIED_PROJECT ${PROJECT_NAME})
 set(UNIFIED_VERSION ${PROJECT_VERSION})
 
@@ -67,6 +65,7 @@ option(UNIFORM_BUILD_EXAMPLES "Build the ${UNIFIED_PROJECT} test programs" TRUE)
 if (UNIFORM_BUILD_EXAMPLES)
     message("-- Build the ${UNIFIED_PROJECT} test programs")
     set(UNIFIED_EXAMPLES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/examples")
+    add_subdirectory("${UNIFIED_EXAMPLES_DIR}/bounce")
     add_subdirectory("${UNIFIED_EXAMPLES_DIR}/interfaces")
     add_subdirectory("${UNIFIED_EXAMPLES_DIR}/layers")
     add_subdirectory("${UNIFIED_EXAMPLES_DIR}/texture")
