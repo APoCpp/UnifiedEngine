@@ -41,7 +41,7 @@ public:
         }
     }
 
-    virtual ~ExampleBounce() {
+    ~ExampleBounce() {
         Modules::ImGuiLayer::Destroy();
     }
 
