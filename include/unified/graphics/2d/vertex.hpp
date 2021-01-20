@@ -16,6 +16,8 @@ struct Vertex<_type, 2>
 
     UNIFIED_CONSTEXPR Vertex(const Point<_type, 2> &point) : point(point), color(), texture() { }
 
+    UNIFIED_CONSTEXPR Vertex(const Color &color) : point(), color(color), texture() { }
+
     UNIFIED_CONSTEXPR Vertex(const Point<_type, 2> &point, const Color &color) : point(point), color(color), texture() { }
 
     UNIFIED_CONSTEXPR Vertex(const Point<_type, 2> &point, const Point<_type, 2> &vertex) : point(point), color(), texture(vertex) { }
