@@ -43,7 +43,7 @@ public:
 
     void calculate_circle_position() {
         for (u32 i = 0; i < circle_vertices_count; ++i) {
-            double theta = 6.28 * float(i) / circle_vertices_count;
+            double theta = 6.28 * double(i) / circle_vertices_count;
             circle[i].point = { position.x + 0.1 * std::cos(theta), position.y + 0.1 * std::sin(theta) };
         }
     }
@@ -56,7 +56,7 @@ public:
 
 public:
 
-    ExampleBounce() : Application("ExampleBounce", VideoMode(600, 600), Window::Floating) {
+    ExampleBounce() : Application("ExampleBounce", VideoMode(600, 600), !Window::Resizable) {
         push_layer<CubeLayer>(this);
         push_layer<ImGuiLayer>(this);
         set_frame_limit(60);
@@ -65,8 +65,6 @@ public:
     virtual bool OnUpdate(Time elapsed) override {
         clear();
 
-        keyboard_handle();
-
         auto estimated_position = position + camera.get_projection() * velocity * elapsed.asSeconds();
 
         if (estimated_position.x >= 0.9 || estimated_position.x <= -0.9)
@@ -74,7 +72,7 @@ public:
         else if (estimated_position.y >= 0.9 || estimated_position.y <= -0.9)
             velocity.y = -(velocity.y / 2.0);
         else
-            position = estimated_position, calculate_circle_position();
+            position = estimated_position, keyboard_handle(), calculate_circle_position();
 
         calculate_circle_color();
 
