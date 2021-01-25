@@ -66,6 +66,8 @@ public:
         push_layer<TriangleLayer>(this, triangle);
         push_layer<ImGuiLayer>(triangle);
 
+        Icons icons("../texture/image.png");
+
         set_frame_limit(60);
     }
 
