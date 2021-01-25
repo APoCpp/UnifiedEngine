@@ -80,9 +80,21 @@ Window::Window(string title, VideoMode video_mode, u32 style) : _title(title), _
     });
 }
 
+Window::~Window() {
+    delete _window;
+}
+
 bool Window::poll_events() const {
     glfwPollEvents();
     return !glfwWindowShouldClose(_window->glfw_handle);
+}
+
+void Window::set_title(string title) {
+    glfwSetWindowTitle(_window->glfw_handle, (_title = title).c_str());
+}
+
+void Window::set_icons(Icons icons) {
+    glfwSetWindowIcon(_window->glfw_handle, icons.count(), static_cast<GLFWimage*>(icons.data()));
 }
 
 UNIFIED_NODISCARD Point2i Window::get_size() const {

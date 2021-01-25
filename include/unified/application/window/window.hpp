@@ -10,6 +10,8 @@
 # include <unified/application/event/cursor_move.hpp>
 # include <unified/application/event/key_press.hpp>
 
+# include <unified/application/window/icons/icons.hpp>
+
 # include <functional>
 
 UNIFIED_BEGIN_NAMESPACE
@@ -41,9 +43,12 @@ public:
 
     Window(string title, VideoMode mode, u32 style);
 
-    virtual ~Window() { }
+    virtual ~Window();
 
     bool poll_events() const;
+
+    void set_title(string title);
+    void set_icons(Icons icons);
 
     UNIFIED_NODISCARD Point2i get_size() const;
     void set_size(Point2i size);
