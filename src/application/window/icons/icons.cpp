@@ -31,7 +31,8 @@ Icons::~Icons() {
 }
 
 void Icons::add_icon(const string &icon) {
-    GLFWimage image = { .pixels = stbi_load(icon.c_str(), &image.width, &image.height, 0, 4) };
+    GLFWimage image;
+    image.pixels = stbi_load(icon.c_str(), &image.width, &image.height, 0, 4);
     _images->handle.push_back(image);
 }
 
