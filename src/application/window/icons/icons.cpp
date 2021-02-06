@@ -13,8 +13,8 @@ struct Icons::glfw_images_wrapper
 
 Icons::Icons() : _images(new glfw_images_wrapper) { }
 
-Icons::Icons(const string &icon) : _images(new glfw_images_wrapper) {
-    add_icon(icon);
+Icons::Icons(const Unified::string &icons) : _images(new glfw_images_wrapper) {
+    add_icon(icons);
 }
 
 Icons::Icons(std::initializer_list<string> icons) : _images(new glfw_images_wrapper) {
@@ -30,7 +30,7 @@ Icons::~Icons() {
     delete _images;
 }
 
-void Icons::add_icon(const string &icon) {
+void Icons::add_icon(const Unified::string &icon) {
     GLFWimage image;
     image.pixels = stbi_load(icon.c_str(), &image.width, &image.height, 0, 4);
     _images->handle.push_back(image);

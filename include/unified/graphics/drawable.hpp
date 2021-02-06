@@ -7,6 +7,7 @@ UNIFIED_BEGIN_NAMESPACE
 UNIFIED_GRAPHICS_BEGIN_NAMESPACE
 
 class RenderTarget;
+class Shader;
 
 class Drawable
 {
@@ -16,7 +17,7 @@ protected:
 
     virtual ~Drawable();
 
-    virtual void draw(RenderTarget const&) const = 0;
+    virtual void draw(RenderTarget const&, Shader const*) const = 0;
 
 };
 

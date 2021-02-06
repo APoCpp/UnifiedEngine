@@ -17,12 +17,12 @@ protected:
 public:
 
     Icons();
-    Icons(const string &icon);
+    Icons(const Unified::string &icons);
     Icons(std::initializer_list<string> icons);
 
     virtual ~Icons();
 
-    void add_icon(const string &icon);
+    void add_icon(const Unified::string &icon);
 
     u32 count() const;
 

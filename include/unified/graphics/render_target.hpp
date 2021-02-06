@@ -15,7 +15,7 @@ public:
 
     void clear(const Color &color = Color(0.f, 0.f, 0.f, 1.f));
 
-    void draw(const Drawable &object) const;
+    void draw(const Drawable &object, const Shader *shader = 0) const;
 
 };
 

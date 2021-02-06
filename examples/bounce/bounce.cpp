@@ -8,7 +8,7 @@
 using namespace Unified;
 using namespace Unified::Graphics;
 
-class CubeLayer;
+class CircleLayer;
 class ImGuiLayer;
 
 class ExampleBounce : public Application
@@ -57,7 +57,7 @@ public:
 public:
 
     ExampleBounce() : Application("ExampleBounce", VideoMode(600, 600), !Window::Resizable) {
-        push_layer<CubeLayer>(this);
+        push_layer<CircleLayer>(this);
         push_layer<ImGuiLayer>(this);
         set_frame_limit(60);
     }
@@ -87,7 +87,7 @@ public:
 
 };
 
-class CubeLayer : public Layer
+class CircleLayer : public Layer
 {
 public:
 
@@ -95,7 +95,7 @@ public:
 
     Graphics2D::VertexArray vertex_array;
 
-    CubeLayer(ExampleBounce *application) : application(application), vertex_array(PrimitiveType::Polygon, 32) {
+    CircleLayer(ExampleBounce *application) : application(application), vertex_array(PrimitiveType::Polygon, 32) {
         std::fill(application->circle, application->circle + 32, Vertex2d({ 1.f, 0.f, 1.f, 1.f }));
     }
 

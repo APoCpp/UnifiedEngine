@@ -20,7 +20,7 @@ public:
 
     virtual ~VertexList() { }
 
-    virtual void draw(const Graphics::RenderTarget &target) const override;
+    virtual void draw(const Graphics::RenderTarget &target, const Graphics::Shader *shader = 0) const override;
 
     template <class _type>
     void add(Graphics::Vertex<_type, 3> vertex) {
