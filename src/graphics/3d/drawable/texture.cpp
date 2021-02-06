@@ -9,7 +9,7 @@ UNIFIED_GRAPHICS_3D_BEGIN_NAMESPACE
 
 Texture::Texture(string texture, bool flip, Graphics::Buffer::Usage usage) : Graphics::Texture(texture, flip), _buffer(usage) { }
 
-void Texture::draw(const Graphics::RenderTarget&) const {
+void Texture::draw(const Graphics::RenderTarget&, const Graphics::Shader *shader) const {
     Buffer::ScopeBind buffer_bind(&_buffer);
 
     GLint buffer_size = _buffer.size();
@@ -22,14 +22,19 @@ void Texture::draw(const Graphics::RenderTarget&) const {
         buffer_size / 4, (void*)(sizeof(Point3d) + sizeof(Color)));
     glEnableVertexAttribArray(1);
 
-    static Shader shader(
+    static Shader static_shader(
         #include "vertex_texture.vert"
             ,
         #include "vertex_texture.frag"
     );
 
+    if (shader)
+        Shader::ScopeBind shader_bind(shader);
+    else
+        Shader::ScopeBind shader_bind(&static_shader);
+
     Texture::ScopeBind texture_bind(this);
-    Shader::ScopeBind shader_bind(&shader);
+
     glDrawArrays(static_cast<GLenum>(Graphics::PrimitiveType::Quads), 0, 4);
 
     glDisableVertexAttribArray(0);

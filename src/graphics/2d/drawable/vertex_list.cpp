@@ -11,7 +11,7 @@ VertexList::VertexList(PrimitiveType type, Buffer::Usage usage) :
     _buffer(usage), _primitive_type(type), _vertices_count(0) {
 }
 
-void VertexList::draw(const RenderTarget&) const {
+void VertexList::draw(const RenderTarget&, const Graphics::Shader *shader) const {
     if (!_vertices_count)
         return;
 
@@ -27,13 +27,16 @@ void VertexList::draw(const RenderTarget&) const {
         buffer_size / _vertices_count, (void*)(sizeof(Point2d)));
     glEnableVertexAttribArray(1);
 
-    static Shader shader(
+    static Shader static_shader(
         #include "vertex_color.vert"
             ,
         #include "vertex_color.frag"
     );
 
-    Shader::ScopeBind shader_bind(&shader);
+    if (shader)
+        Shader::ScopeBind shader_bind(shader);
+    else
+        Shader::ScopeBind shader_bind(&static_shader);
 
     glDrawArrays(static_cast<GLenum>(_primitive_type), 0, _vertices_count);
 

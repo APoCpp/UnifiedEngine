@@ -14,6 +14,7 @@ struct Point<_type, 3>
     UNIFIED_CONSTEXPR Point() : x(_type()), y(_type()), z(_type()) { }
     UNIFIED_CONSTEXPR Point(_type xyz) : x(xyz), y(xyz), z(xyz) { }
     UNIFIED_CONSTEXPR Point(_type x, _type y, _type z) : x(x), y(y), z(z) { }
+    UNIFIED_CONSTEXPR Point(_type *xyz) : x(xyz[0]), y(xyz[1]), z(xyz[2]) { }
 
     UNIFIED_CONSTEXPR _type operator[](u32 i) const {
         UNIFIED_CONSTEXPR _type Point::*accessors[] = {

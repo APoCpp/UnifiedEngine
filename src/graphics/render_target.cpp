@@ -15,8 +15,8 @@ void RenderTarget::clear(const Color &color) {
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void RenderTarget::draw(const Drawable &object) const {
-    object.draw(*this);
+void RenderTarget::draw(const Drawable &object, const Shader *shader) const {
+    object.draw(*this, shader);
 }
 
 UNIFIED_GRAPHICS_END_NAMESPACE

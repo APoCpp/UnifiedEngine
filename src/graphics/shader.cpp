@@ -36,6 +36,18 @@ void Shader::set_int(const char *name, int value) {
     glUniform1i(glGetUniformLocation(_id, name), value);
 }
 
+void Shader::set_int2(const char *name, const int *value) {
+    glUniform2i(glGetUniformLocation(_id, name), value[0], value[1]);
+}
+
+void Shader::set_int3(const char *name, const int *value) {
+    glUniform3i(glGetUniformLocation(_id, name), value[0], value[1], value[2]);
+}
+
+void Shader::set_int4(const char *name, const int *value) {
+    glUniform4i(glGetUniformLocation(_id, name), value[0], value[1], value[2], value[3]);
+}
+
 void Shader::set_int2(const char *name, const Point<int, 2> &value) {
     glUniform2i(glGetUniformLocation(_id, name), value.x, value.y);
 }
@@ -50,6 +62,18 @@ void Shader::set_int4(const char *name, const Point<int, 4> &value) {
 
 void Shader::set_float(const char *name, float value) {
     glUniform1f(glGetUniformLocation(_id, name), value);
+}
+
+void Shader::set_float2(const char *name, const float *value) {
+    glUniform2f(glGetUniformLocation(_id, name), value[0], value[1]);
+}
+
+void Shader::set_float3(const char *name, const float *value) {
+    glUniform3f(glGetUniformLocation(_id, name), value[0], value[1], value[2]);
+}
+
+void Shader::set_float4(const char *name, const float *value) {
+    glUniform4f(glGetUniformLocation(_id, name), value[0], value[1], value[2], value[3]);
 }
 
 void Shader::set_float2(const char *name, const Point<float, 2> &value) {
@@ -68,6 +92,18 @@ void Shader::set_double(const char *name, double value) {
     glUniform1d(glGetUniformLocation(_id, name), value);
 }
 
+void Shader::set_double2(const char *name, const double *value) {
+    glUniform2d(glGetUniformLocation(_id, name), value[0], value[1]);
+}
+
+void Shader::set_double3(const char *name, const double *value) {
+    glUniform3d(glGetUniformLocation(_id, name), value[0], value[1], value[2]);
+}
+
+void Shader::set_double4(const char *name, const double *value) {
+    glUniform4d(glGetUniformLocation(_id, name), value[0], value[1], value[2], value[3]);
+}
+
 void Shader::set_double2(const char *name, const Point<double, 2> &value) {
     glUniform2d(glGetUniformLocation(_id, name), value.x, value.y);
 }
@@ -80,12 +116,28 @@ void Shader::set_double4(const char *name, const Point<double, 4> &value) {
     glUniform4d(glGetUniformLocation(_id, name), value.x, value.y, value.z, value.w);
 }
 
+void Shader::set_float3x3(const char *name, float *value) {
+    glUniformMatrix3fv(glGetUniformLocation(_id, name), 1, GL_FALSE, value);
+}
+
+void Shader::set_float4x4(const char *name, float *value) {
+    glUniformMatrix4fv(glGetUniformLocation(_id, name), 1, GL_FALSE, value);
+}
+
 void Shader::set_float3x3(const char *name, const Matrix<float, 3, 3> &value) {
     glUniformMatrix3fv(glGetUniformLocation(_id, name), 1, GL_FALSE, value.data());
 }
 
 void Shader::set_float4x4(const char *name, const Matrix<float, 4, 4> &value) {
     glUniformMatrix4fv(glGetUniformLocation(_id, name), 1, GL_FALSE, value.data());
+}
+
+void Shader::set_double3x3(const char *name, const double *value) {
+    glUniformMatrix3dv(glGetUniformLocation(_id, name), 1, GL_FALSE, value);
+}
+
+void Shader::set_double4x4(const char *name, const double *value) {
+    glUniformMatrix4dv(glGetUniformLocation(_id, name), 1, GL_FALSE, value);
 }
 
 void Shader::set_double3x3(const char *name, const Matrix<double, 3, 3> &value) {

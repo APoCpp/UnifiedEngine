@@ -3,6 +3,8 @@
 #include <unified/graphics/2d/drawable/vertex_array.hpp>
 #include <unified/graphics/2d/vertex.hpp>
 
+#include <unified/core/string.hpp>
+
 using namespace Unified;
 using namespace Unified::Graphics;
 

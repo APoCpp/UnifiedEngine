@@ -17,7 +17,7 @@ public:
 
     Texture(string texture, bool flip = false, Graphics::Buffer::Usage usage = Graphics::Buffer::Usage::Static);
 
-    virtual void draw(const Graphics::RenderTarget &target) const override;
+    virtual void draw(const Graphics::RenderTarget &target, const Graphics::Shader *shader = 0) const override;
 
     template <class _type>
     void write(Graphics::Vertex<_type, 2> vertex) {

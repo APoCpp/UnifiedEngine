@@ -25,22 +25,43 @@ public:
     UNIFIED_NODISCARD HandleType handle() const;
 
     void set_int(const char *name, int value);
+
+    void set_int2(const char *name, const int *value);
+    void set_int3(const char *name, const int *value);
+    void set_int4(const char *name, const int *value);
+
     void set_int2(const char *name, const Point<int, 2> &value);
     void set_int3(const char *name, const Point<int, 3> &value);
     void set_int4(const char *name, const Point<int, 4> &value);
 
     void set_float(const char *name, float value);
+
+    void set_float2(const char *name, const float *value);
+    void set_float3(const char *name, const float *value);
+    void set_float4(const char *name, const float *value);
+
     void set_float2(const char *name, const Point<float, 2> &value);
     void set_float3(const char *name, const Point<float, 3> &value);
     void set_float4(const char *name, const Point<float, 4> &value);
 
     void set_double(const char *name, double value);
+
+    void set_double2(const char *name, const double *value);
+    void set_double3(const char *name, const double *value);
+    void set_double4(const char *name, const double *value);
+
     void set_double2(const char *name, const Point<double, 2> &value);
     void set_double3(const char *name, const Point<double, 3> &value);
     void set_double4(const char *name, const Point<double, 4> &value);
 
+    void set_float3x3(const char *name, float *value);
+    void set_float4x4(const char *name, float *value);
+
     void set_float3x3(const char *name, const Matrix<float, 3, 3> &value);
     void set_float4x4(const char *name, const Matrix<float, 4, 4> &value);
+
+    void set_double3x3(const char *name, const double *value);
+    void set_double4x4(const char *name, const double *value);
 
     void set_double3x3(const char *name, const Matrix<double, 3, 3> &value);
     void set_double4x4(const char *name, const Matrix<double, 4, 4> &value);
