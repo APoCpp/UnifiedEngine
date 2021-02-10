@@ -4,11 +4,11 @@ UNIFIED_BEGIN_NAMESPACE
 UNIFIED_GRAPHICS_2D_BEGIN_NAMESPACE
 
 Camera::Camera() :
-    _projection({ { 1.0, 0.0 }, { 0.0, 1.0 } }) { }
+    _projection({ { 1.0, 0.0, 0.0 }, { 0.0, 1.0, 0.0 }, { 0.0, 0.0, 1.0 } }) { }
 
 Camera::Camera(const Projection &projection) : _projection(projection) { }
 
-const Projection &Camera::get_projection() const {
+Projection &Camera::get_projection() {
     return _projection;
 }
 

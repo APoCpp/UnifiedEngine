@@ -35,7 +35,7 @@ public:
 
 public:
 
-    ExampleInterfaces() : Application("ExampleFluid"), start_time(get_current_time()) {
+    ExampleInterfaces() : Application("ExampleFluid", VideoMode(800, 600), Application::Floating), start_time(get_current_time()) {
         push_layer<FluidLayer>(this);
         push_layer<ImGuiLayer>(this);
         set_frame_limit(60);

@@ -17,7 +17,7 @@ public:
 
     virtual ~Camera() { }
 
-    const Projection &get_projection() const;
+    Projection &get_projection();
 
 protected:
 

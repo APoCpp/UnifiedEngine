@@ -1,5 +1,7 @@
 #include <unified.hpp>
 
+#include <unified/core/system/sleep.hpp>
+
 #include <unified/graphics/2d/camera.hpp>
 #include <unified/graphics/2d/drawable/vertex_array.hpp>
 
@@ -39,12 +41,21 @@ public:
 
         if (get_key_action(Keyboard::Code::D) == Keyboard::Action::Press)
             velocity.x += 0.05;
+
+        if (get_key_action(Keyboard::Code::Z) == Keyboard::Action::Press) {
+            camera.get_projection() *= 1.01;
+        }
+
+        if (get_key_action(Keyboard::Code::X) == Keyboard::Action::Press) {
+            camera.get_projection() *= 0.99;
+        }
     }
 
     void calculate_circle_position() {
+        auto projected = camera.get_projection() * position;
         for (u32 i = 0; i < circle_vertices_count; ++i) {
             double theta = 6.28 * double(i) / circle_vertices_count;
-            circle[i].point = { position.x + 0.1 * std::cos(theta), position.y + 0.1 * std::sin(theta) };
+            circle[i].point = { projected.x + camera.get_projection()[0][0] * 0.1 * std::cos(theta), projected.y + camera.get_projection()[1][1] * 0.1 * std::sin(theta) };
         }
     }
 
@@ -65,7 +76,7 @@ public:
     virtual bool OnUpdate(Time elapsed) override {
         clear();
 
-        auto estimated_position = position + camera.get_projection() * velocity * elapsed.asSeconds();
+        auto estimated_position = position + velocity * elapsed.asSeconds();
 
         if (estimated_position.x >= 0.9 || estimated_position.x <= -0.9)
             velocity.x = -(velocity.x / 2.0);
