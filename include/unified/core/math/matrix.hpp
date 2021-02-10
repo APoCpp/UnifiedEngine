@@ -31,12 +31,12 @@ public:
         std::fill(&_data[0][0], &_data[_rows][0], fill);
     }
 
-    UNIFIED_CONSTEXPR _type operator()(u32 row, u32 column) const {
-        return _data[row][column];
+    UNIFIED_CONSTEXPR const _type *operator[](u32 row) const {
+        return _data[row];
     }
 
-    UNIFIED_CONSTEXPR _type &operator()(u32 row, u32 column) {
-        return _data[row][column];
+    UNIFIED_CONSTEXPR _type *operator[](u32 row) {
+        return _data[row];
     }
 
     UNIFIED_FORCE_INLINE u32 rows() const {
@@ -76,14 +76,34 @@ typedef Matrix<float,    4, 4> Matrix4x4f;
 typedef Matrix<double,   4, 4> Matrix4x4d;
 
 template <class _type, u32 _rows_1, u32 _rows_2>
+UNIFIED_CONSTEXPR Matrix<_type, _rows_1, _rows_2> operator*(Matrix<_type, _rows_1, _rows_2> l, const _type &r) {
+    for (u32 row = 0; row < l.rows(); row++) {
+        for (u32 col = 0; col < l.columns(); col++) {
+            l[row][col] *= r;
+        }
+    }
+    return l;
+}
+
+template <class _type, u32 _rows_1, u32 _rows_2>
+UNIFIED_CONSTEXPR Matrix<_type, _rows_1, _rows_2> operator*=(Matrix<_type, _rows_1, _rows_2> &l, const _type &r) {
+    return (l = l * r);
+}
+
+template <class _type, u32 _rows_1, u32 _rows_2>
 UNIFIED_CONSTEXPR Point<_type, _rows_2> operator*(const Matrix<_type, _rows_1, _rows_2> &l, const Point<_type, _rows_2> &r) {
     Point<_type, _rows_2> result;
     for (u32 row = 0; row < l.rows(); row++) {
         for (u32 col = 0; col < l.columns(); col++) {
-            result[row] += r[col] * l(row, col);
+            result[row] += r[col] * l[row][col];
         }
     }
     return result;
+}
+
+template <class _type, u32 _rows_1, u32 _rows_2>
+UNIFIED_CONSTEXPR Point<_type, _rows_2> operator*=(Matrix<_type, _rows_1, _rows_2> &l, const Point<_type, _rows_2> &r) {
+    return (l = l * r);
 }
 
 template <class _type, u32 _rows_1, u32 _rows_2, u32 _columns>
@@ -92,11 +112,16 @@ UNIFIED_CONSTEXPR Matrix<_type, _rows_1, _rows_2> operator*(const Matrix<_type, 
     for (u32 row = 0; row < l.rows(); row++) {
         for (u32 col2 = 0; col2 < r.columns(); col2++) {
             for (u32 col = 0; col < l.columns(); col++) {
-                result(row, col2) += l(row, col) * r(col, col2);
+                result[row][col2] += l[row][col] * r[col][col2];
             }
         }
     }
     return result;
+}
+
+template <class _type, u32 _rows_1, u32 _rows_2, u32 _columns>
+UNIFIED_CONSTEXPR Matrix<_type, _rows_1, _rows_2> operator*=(Matrix<_type, _rows_1, _rows_2> &l, const Matrix<_type, _rows_2, _columns> &r) {
+    return (l = l * r);
 }
 
 UNIFIED_END_NAMESPACE
