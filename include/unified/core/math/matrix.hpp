@@ -20,7 +20,7 @@ struct Matrix
 public:
 
     UNIFIED_CONSTEXPR Matrix() {
-        if UNIFIED_CONSTEXPR (_rows == _columns) {
+        if (_rows == _columns) {
             for (u32 row = 0; row < _rows; row++)
                 for (u32 col = 0; col < _columns; col++)
                     if (row == col) _data[row][col] = _type(1);
@@ -29,7 +29,7 @@ public:
     }
 
     UNIFIED_CONSTEXPR Matrix(const _type &fill)  {
-        if UNIFIED_CONSTEXPR (_rows == _columns) {
+        if (_rows == _columns) {
             for (u32 row = 0; row < _rows; row++)
                 for (u32 col = 0; col < _columns; col++)
                     if (row == col) _data[row][col] = fill;
