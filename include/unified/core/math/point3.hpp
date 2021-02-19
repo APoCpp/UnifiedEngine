@@ -3,6 +3,7 @@
 
 # include <unified/core/math/point_fwd.hpp>
 # include <fmt/format.h>
+# include <cmath>
 
 UNIFIED_BEGIN_NAMESPACE
 
@@ -120,6 +121,19 @@ struct Point<_type, 3>
     UNIFIED_CONSTEXPR Point &operator/=(const Point &r) {
         x /= r.x, y /= r.y, z /= r.z;
         return *this;
+    }
+
+    operator Point<_type, 2>() {
+        return Point<_type, 2>(x, y);
+    }
+
+    operator Point<_type, 4>() {
+        return Point<_type, 4>(x, y, _type(), _type());
+    }
+
+    UNIFIED_CONSTEXPR Point normalize() const {
+          _type length = _type(1) / std::sqrt(x * x + y * y + z * z);
+          return (*this * length);
     }
 
     UNIFIED_FORCE_INLINE u32 size() const {
