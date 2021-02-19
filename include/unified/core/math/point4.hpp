@@ -124,6 +124,19 @@ struct Point<_type, 4>
         return *this;
     }
 
+    operator Point<_type, 2>() {
+        return Point<_type, 2>(x, y);
+    }
+
+    operator Point<_type, 3>() {
+        return Point<_type, 3>(x, y, z);
+    }
+
+    UNIFIED_CONSTEXPR Point normalize() const {
+          _type length = _type(1) / std::sqrt(x * x + y * y + z * z + w * w);
+          return (*this * length);
+    }
+
     UNIFIED_FORCE_INLINE u32 size() const {
         return 4;
     }

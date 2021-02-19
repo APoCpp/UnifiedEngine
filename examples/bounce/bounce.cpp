@@ -1,6 +1,6 @@
 #include <unified.hpp>
 
-#include <unified/core/system/sleep.hpp>
+#include <unified/core/math/point3.hpp>
 
 #include <unified/graphics/2d/camera.hpp>
 #include <unified/graphics/2d/drawable/vertex_array.hpp>
@@ -10,82 +10,96 @@
 using namespace Unified;
 using namespace Unified::Graphics;
 
-class CircleLayer;
+class BallLayer;
 class ImGuiLayer;
 
 class ExampleBounce : public Application
 {
 public:
 
+    Point2d camera_position = { 0.0, 0.0 };
+
+    Point2d ball_position = { 0.0, 0.0 };
+    Point2d ball_velocity = { 0.0, 0.0 };
+
+    Color ball_color = { 0.8f, 0.8f, 0.8f };
+
+    Vertex2d ball_vertices[64];
+    u32 ball_vertices_count = sizeof(ball_vertices) / sizeof(*ball_vertices);
+
     Graphics2D::Camera camera;
+    Graphics2D::VertexArray vertex_array;
 
-    Color color;
-    Point2d position, velocity;
+public:
 
-    Graphics::Vertex2d circle[32];
-    const u32 circle_vertices_count = sizeof(circle) / sizeof(*circle);
+    void keyboard_handle() {
+        if (get_key_action(Keyboard::Code::W) == Keyboard::Action::Press)
+            ball_velocity.y += 0.01;
+
+        if (get_key_action(Keyboard::Code::A) == Keyboard::Action::Press)
+            ball_velocity.x -= 0.01;
+
+        if (get_key_action(Keyboard::Code::S) == Keyboard::Action::Press)
+            ball_velocity.y -= 0.01;
+
+        if (get_key_action(Keyboard::Code::D) == Keyboard::Action::Press)
+            ball_velocity.x += 0.01;
+
+        if (get_key_action(Keyboard::Code::Up) == Keyboard::Action::Press)
+            camera_position.y += 0.01;
+
+        if (get_key_action(Keyboard::Code::Left) == Keyboard::Action::Press)
+            camera_position.x -= 0.01;
+
+        if (get_key_action(Keyboard::Code::Down) == Keyboard::Action::Press)
+            camera_position.y -= 0.01;
+
+        if (get_key_action(Keyboard::Code::Right) == Keyboard::Action::Press)
+            camera_position.x += 0.01;
+    }
+
+    void calculate_ball_position() {
+        for (u32 i = 0; i < ball_vertices_count; ++i) {
+            double theta = 6.28 * double(i) / ball_vertices_count;
+            ball_vertices[i].point = camera.get_projection() * Point3d(ball_position.x + 0.1 * std::cos(theta), ball_position.y + 0.1 * std::sin(theta), 1.0);
+        }
+    }
+
+    void calculate_ball_color() {
+        for (u32 i = 0; i < ball_vertices_count; ++i) {
+            ball_vertices[i].color = ball_color;
+        }
+    }
 
     void window_resize_event(const WindowResizeEvent &event) {
         set_viewport(event.size);
     }
 
-    void keyboard_handle() {
-        if (get_key_action(Keyboard::Code::W) == Keyboard::Action::Press)
-            velocity.y += 0.05;
-
-        if (get_key_action(Keyboard::Code::S) == Keyboard::Action::Press)
-            velocity.y -= 0.05;
-
-        if (get_key_action(Keyboard::Code::A) == Keyboard::Action::Press)
-            velocity.x -= 0.05;
-
-        if (get_key_action(Keyboard::Code::D) == Keyboard::Action::Press)
-            velocity.x += 0.05;
-
-        if (get_key_action(Keyboard::Code::Z) == Keyboard::Action::Press) {
-            camera.get_projection() *= 1.01;
-        }
-
-        if (get_key_action(Keyboard::Code::X) == Keyboard::Action::Press) {
-            camera.get_projection() *= 0.99;
-        }
-    }
-
-    void calculate_circle_position() {
-        auto projected = camera.get_projection() * position;
-        for (u32 i = 0; i < circle_vertices_count; ++i) {
-            double theta = 6.28 * double(i) / circle_vertices_count;
-            circle[i].point = { projected.x + camera.get_projection()[0][0] * 0.1 * std::cos(theta), projected.y + camera.get_projection()[1][1] * 0.1 * std::sin(theta) };
-        }
-    }
-
-    void calculate_circle_color() {
-        for (u32 i = 0; i < circle_vertices_count; ++i) {
-            circle[i].color = color;
-        }
-    }
-
 public:
 
-    ExampleBounce() : Application("ExampleBounce", VideoMode(600, 600), !Window::Resizable) {
-        push_layer<CircleLayer>(this);
+    ExampleBounce() : Application("ExampleBounce", VideoMode(600, 600), !Window::Resizable), camera(camera_position),
+        vertex_array(PrimitiveType::Polygon, 64) {
+        push_layer<BallLayer>(this);
         push_layer<ImGuiLayer>(this);
         set_frame_limit(60);
     }
 
     virtual bool OnUpdate(Time elapsed) override {
-        clear();
+        clear({ 0.15, 0.15, 0.15 });
 
-        auto estimated_position = position + velocity * elapsed.asSeconds();
+        camera.set_position(camera_position);
+
+        auto estimated_position = ball_position + ball_velocity * elapsed.asSeconds();
 
         if (estimated_position.x >= 0.9 || estimated_position.x <= -0.9)
-            velocity.x = -(velocity.x / 2.0);
+            ball_velocity.x = -(ball_velocity.x / 2.0);
         else if (estimated_position.y >= 0.9 || estimated_position.y <= -0.9)
-            velocity.y = -(velocity.y / 2.0);
+            ball_velocity.y = -(ball_velocity.y / 2.0);
         else
-            position = estimated_position, keyboard_handle(), calculate_circle_position();
+            ball_position = estimated_position, keyboard_handle(), calculate_ball_position();
 
-        calculate_circle_color();
+        calculate_ball_color();
+        keyboard_handle();
 
         process_layers();
         swap_buffers();
@@ -98,22 +112,22 @@ public:
 
 };
 
-class CircleLayer : public Layer
+class BallLayer : public Layer
 {
 public:
 
     ExampleBounce *application;
 
-    Graphics2D::VertexArray vertex_array;
-
-    CircleLayer(ExampleBounce *application) : application(application), vertex_array(PrimitiveType::Polygon, 32) {
-        std::fill(application->circle, application->circle + 32, Vertex2d({ 1.f, 0.f, 1.f, 1.f }));
-    }
+    BallLayer(ExampleBounce *application) : application(application), _ball_polygon(PrimitiveType::Polygon, 64) { }
 
     virtual void OnUpdate(Time) override {
-        vertex_array.write(application->circle, sizeof(application->circle));
-        application->draw(vertex_array);
+        _ball_polygon.write(application->ball_vertices, sizeof(application->ball_vertices));
+        application->draw(_ball_polygon);
     }
+
+protected:
+
+    Graphics2D::VertexArray _ball_polygon;
 
 };
 
@@ -129,13 +143,23 @@ public:
 
     virtual void OnUpdate(Time) override {
         ImGui::Begin("ExampleBounce");
-        if (ImGui::CollapsingHeader("Info")) {
-            ImGui::Text("Position: %lf, %lf", application->position.x, application->position.y);
-            ImGui::Text("Velocity: %lf, %lf", application->velocity.x, application->velocity.y);
+
+        if (ImGui::CollapsingHeader("Camera")) {
+            ImGui::Text("Camera position: { %lf, %lf }", application->camera_position.x, application->camera_position.y);
+            if (ImGui::Button("Camera reset")) {
+                application->camera_position = { 0.0, 0.0 };
+            }
         }
-        if (ImGui::CollapsingHeader("Properties")) {
-            ImGui::ColorEdit3("Ball", (float*)&application->color);
+
+        if (ImGui::CollapsingHeader("Ball")) {
+            ImGui::Text("Ball position: { %lf, %lf }", application->ball_position.x, application->ball_position.y);
+            ImGui::Text("Ball velocity: { %lf, %lf }", application->ball_velocity.x, application->ball_velocity.y);
+            if (ImGui::Button("Ball reset")) {
+                application->ball_position = { 0.0, 0.0 };
+                application->ball_velocity = { 0.0, 0.0 };
+            }
         }
+
         ImGui::End();
     }
 
