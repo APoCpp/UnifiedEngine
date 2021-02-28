@@ -1,5 +1,5 @@
-# UnifiedEngine
-[![Build Status](https://travis-ci.org/UnifiedEngine/UnifiedEngine.svg?branch=stabilization)](https://travis-ci.org/UnifiedEngine/UnifiedEngine.svg?branch=stabilization)
+# UnifiedEngine v0.0.4
+[![Build Status](https://travis-ci.org/UnifiedEngine/UnifiedEngine.svg?branch=stable)](https://travis-ci.org/UnifiedEngine/UnifiedEngine.svg?branch=stable)
 
 Simple open source game development kit.
 
